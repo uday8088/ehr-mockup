@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrier Directory - DoKrunch Broker Portal</title>
+<link rel="stylesheet" href="css/broker-portal.css">
+<link rel="stylesheet" href="css/ai-info-dot.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Top Navigation Bar -->
+<header class="top-nav">
+    <div class="logo-container">
+        <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+        <div class="page-title" style="display: flex; align-items: center;">
+            <h1>Carrier Directory</h1>
+            
+            <!-- AI Info Tooltip - moved to top nav next to title -->
+            <div class="ai-tooltip" style="margin-left: 10px;">
+                <div class="ai-info-dot">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="ai-tooltip-content">
+                    <h4 class="ai-tooltip-title">AI-Driven Improvements</h4>
+                    <p class="ai-tooltip-text">The Carrier Directory now features AI-powered search and filtering that learns from your usage patterns to prioritize your most frequently accessed carriers.</p>
+                    <div class="ai-metrics">
+                        <div class="ai-metric-item">
+                            <span class="ai-metric-label">Time Saved:</span>
+                            <span class="ai-metric-value">45%</span>
+                        </div>
+                        <div class="ai-metric-item">
+                            <span class="ai-metric-label">Search Accuracy:</span>
+                            <span class="ai-metric-value">92%</span>
+                        </div>
+                        <div class="ai-metric-item">
+                            <span class="ai-metric-label">Carrier Data Freshness:</span>
+                            <span class="ai-metric-value">Real-time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="user-actions">
+        <div class="search-container">
+            <input type="text" placeholder="Search..." class="search-input">
+            <button class="btn-icon"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="action-icons">
+            <button class="btn-icon" title="Help" id="help-button"><i class="fas fa-question-circle"></i></button>
+            <button class="btn-notification" title="Notifications" id="notification-button">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="theme-selector">
+                <button class="btn-icon" id="theme-toggle" title="Change Theme"><i class="fas fa-palette"></i></button>
+                <div class="theme-dropdown">
+                    <button class="theme-option" data-theme="light">Light</button>
+                    <button class="theme-option" data-theme="dark">Dark</button>
+                    <button class="theme-option" data-theme="financial">Financial</button>
+                </div>
+            </div>
+            <button class="btn-icon" title="Settings" id="settings-button"><i class="fas fa-cog"></i></button>
+            <!-- Logout Button -->
+            <a href="index.html" class="btn-logout" title="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+        <div class="user-profile" id="user-profile-dropdown">
+            <div class="avatar">
+                <span>BA</span>
+            </div>
+            <span>Broker Admin</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+</header>
+
+<div class="main-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="l1-menu">
+                <li>
+                    <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+                </li>
+                <li>
+                    <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+                </li>
+                <li>
+                    <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+                </li>
+                <li class="active">
+                    <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+                </li>
+                <li>
+                    <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="login-info">
+            <div class="login-details">
+                <span>Logged in as:</span>
+                <strong>Broker Admin</strong>
+                <span class="login-time">Last login: Today, 9:45 AM</span>
+                <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+        <!-- L2 Menu -->
+        <div class="l2-menu-container">
+            <nav class="l2-menu">
+                <a href="broker-carrier-directory.html" class="active">Carrier Directory</a>
+                <a href="broker-plans-products.html">Plans & Products</a>
+                <a href="broker-carrier-requirements.html">Requirements</a>
+                <a href="broker-carrier-communications.html">Communications</a>
+                <a href="broker-carrier-contacts.html">Contacts</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="carrier-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Carrier Directory</h2>
+                    <div>
+                        <button class="btn-primary"><i class="fas fa-plus"></i> Add Carrier</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Filter Controls - Horizontally stacked -->
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <span class="filter-label">Status:</span>
+                            <select class="form-control">
+                                <option value="all">All Statuses</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">Type:</span>
+                            <select class="form-control">
+                                <option value="all">All Types</option>
+                                <option value="medical">Medical</option>
+                                <option value="dental">Dental</option>
+                                <option value="vision">Vision</option>
+                                <option value="life">Life</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">Rating:</span>
+                            <select class="form-control">
+                                <option value="all">All Ratings</option>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="3">3+ Stars</option>
+                            </select>
+                        </div>
+                        <button class="btn-secondary">
+                            <i class="fas fa-filter"></i> Apply Filters
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Carrier Name</th>
+                                    <th>Type</th>
+                                    <th>Plans Offered</th>
+                                    <th>Rating</th>
+                                    <th>Status</th>
+                                    <th>Last Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Blue Cross Blue Shield</td>
+                                    <td>Medical, Dental, Vision</td>
+                                    <td>24</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.8</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>May 2, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Aetna</td>
+                                    <td>Medical, Dental</td>
+                                    <td>18</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.5</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>May 1, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>UnitedHealthcare</td>
+                                    <td>Medical, Vision, Life</td>
+                                    <td>32</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.7</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>Apr 28, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cigna</td>
+                                    <td>Medical, Dental, Vision</td>
+                                    <td>21</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.6</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>Apr 25, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Humana</td>
+                                    <td>Medical, Dental</td>
+                                    <td>15</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.4</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>Apr 22, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kaiser Permanente</td>
+                                    <td>Medical</td>
+                                    <td>12</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.9</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>Apr 20, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>MetLife</td>
+                                    <td>Dental, Vision, Life</td>
+                                    <td>18</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.3</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>Apr 18, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Guardian</td>
+                                    <td>Dental, Vision, Life</td>
+                                    <td>14</td>
+                                    <td>
+                                        <div style="display: flex; color: #f59e0b;">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <span style="margin-left: 5px; color: var(--text-color);">4.2</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>Apr 15, 2023</td>
+                                    <td>
+                                        <button class="btn-action">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="js/broker-portal.js"></script>
+</body>
+</html>

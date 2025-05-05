@@ -1,0 +1,232 @@
+/* Top Right Toolbar Styles */
+.top-right-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 15px;
+  height: 100%;
+}
+
+/* Search Bar */
+.search-container {
+  position: relative;
+  flex-grow: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px 8px 35px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+}
+
+.search-container::before {
+  content: "\f002";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 14px;
+}
+
+/* Toolbar Icons */
+.toolbar-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  border: none;
+}
+
+.toolbar-icon:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #1a73e8;
+}
+
+.toolbar-icon i {
+  font-size: 18px;
+}
+
+/* Notification Badge */
+.notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Theme Selector */
+.theme-selector {
+  position: relative;
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  z-index: 1000;
+  display: none;
+  margin-top: 5px;
+}
+
+.theme-selector.active .theme-dropdown {
+  display: block;
+}
+
+.theme-option {
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.theme-option:hover {
+  background-color: #f5f5f5;
+}
+
+/* Font Size Selector */
+.font-size-selector {
+  position: relative;
+}
+
+.font-size-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  z-index: 1000;
+  display: none;
+  margin-top: 5px;
+}
+
+.font-size-selector.active .font-size-dropdown {
+  display: block;
+}
+
+.font-size-option {
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.font-size-option:hover {
+  background-color: #f5f5f5;
+}
+
+.font-size-option i {
+  margin-right: 8px;
+  width: 16px;
+}
+
+/* User Avatar */
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #4169e1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.logout-btn:hover {
+  color: #1a73e8;
+}
+
+.logout-btn i {
+  font-size: 18px;
+}
+
+/* Active state for icons */
+.toolbar-icon.active {
+  color: #1a73e8;
+}
+
+/* Color themes for theme selector */
+.theme-color-preview {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.theme-light .theme-color-preview {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+}
+
+.theme-dark .theme-color-preview {
+  background-color: #333;
+}
+
+.theme-financial .theme-color-preview {
+  background-color: #1e4620;
+}
+
+.theme-colorful .theme-color-preview {
+  background: linear-gradient(45deg, #ff8a00, #e52e71);
+}
+
+.theme-high-contrast .theme-color-preview {
+  background-color: #000;
+  border: 1px solid #fff;
+}

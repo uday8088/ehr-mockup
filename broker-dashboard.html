@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Overview - DoKrunch Broker Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Add this to your head section -->
+<link rel="stylesheet" href="css/top-right-toolbar.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+      <div class="logo-container">
+          <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+          <div class="page-title">
+              <h1>Dashboard Overview</h1>
+          </div>
+      </div>
+<!-- Add this where you want the toolbar to appear (typically in the header) -->
+<div class="top-right-toolbar">
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search loans...">
+  </div>
+  
+  <div class="theme-selector">
+    <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+      <i class="fas fa-palette"></i>
+    </button>
+    <div class="theme-dropdown">
+      <button class="theme-option" data-theme="light">Light</button>
+      <button class="theme-option" data-theme="dark">Dark</button>
+      <button class="theme-option" data-theme="financial">Financial</button>
+      <button class="theme-option" data-theme="colorful">Colorful</button>
+      <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+    </div>
+  </div>
+  
+  <div class="font-size-selector">
+    <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+      <i class="fas fa-text-height"></i>
+    </button>
+    <div class="font-size-dropdown">
+      <button class="font-size-option" data-size="small">
+        <i class="fas fa-font"></i> Small
+      </button>
+      <button class="font-size-option" data-size="medium">
+        <i class="fas fa-font"></i> Medium
+      </button>
+      <button class="font-size-option" data-size="large">
+        <i class="fas fa-font"></i> Large
+      </button>
+    </div>
+  </div>
+  
+  <button class="toolbar-icon" title="Notifications">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+  </button>
+  
+  <div class="user-avatar">
+    SJ
+  </div>
+  
+  <button class="logout-btn" id="logout-btn" title="Logout">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</div>
+  </header>
+
+  <div class="main-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="l1-menu">
+                  <li class="active">
+                      <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+                  </li>
+                  <li>
+                      <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+                  </li>
+                  <li>
+                      <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+                  </li>
+                  <li>
+                      <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+                  </li>
+                  <li>
+                      <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="login-info">
+              <div class="login-details">
+                  <span>Logged in as:</span>
+                  <strong>Broker Admin</strong>
+                  <span class="login-time">Last login: Today, 9:45 AM</span>
+                  <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+              </div>
+          </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+          <!-- L2 Menu -->
+          <div class="l2-menu-container">
+              <nav class="l2-menu">
+                  <a href="broker-dashboard.html" class="active">Overview</a>
+                  <a href="broker-insights.html">Client Insights</a>
+                  <a href="broker-action-items.html">Action Items</a>
+              </nav>
+          </div>
+
+          <!-- Dashboard Content -->
+          <div class="dashboard-content">
+              <!-- Stats Overview -->
+              <div class="stats-container">
+                  <div class="stat-card">
+                      <div class="stat-icon"><i class="fas fa-building"></i></div>
+                      <div class="stat-content">
+                          <h3>Active Clients</h3>
+                          <p class="stat-number">42</p>
+                          <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 8% from last month</p>
+                      </div>
+                  </div>
+                  <div class="stat-card">
+                      <div class="stat-icon"><i class="fas fa-users"></i></div>
+                      <div class="stat-content">
+                          <h3>Active Enrollments</h3>
+                          <p class="stat-number">156</p>
+                          <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 12% from last month</p>
+                      </div>
+                  </div>
+                  <div class="stat-card">
+                      <div class="stat-icon"><i class="fas fa-file-medical"></i></div>
+                      <div class="stat-content">
+                          <h3>Documents Processed</h3>
+                          <p class="stat-number">1,247</p>
+                          <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 23% from last month</p>
+                      </div>
+                  </div>
+                  <div class="stat-card">
+                      <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                      <div class="stat-content">
+                          <h3>Avg. Processing Time</h3>
+                          <p class="stat-number">1.8 min</p>
+                          <p class="stat-change positive"><i class="fas fa-arrow-down"></i> 35% from last month</p>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Two Column Layout for Top Charts -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                  <!-- Enrollment Trends -->
+                  <div class="card">
+                      <div class="card-header">
+                          <h2>Enrollment Trends</h2>
+                          <div>
+                              <button class="btn-secondary" style="margin-right: 0.5rem;">
+                                  <i class="fas fa-download"></i> Export
+                              </button>
+                              <button class="btn-secondary">
+                                  <i class="fas fa-expand"></i> Expand
+                              </button>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                          <div style="height: 250px;">
+                              <canvas id="enrollmentTrendsChart"></canvas>
+                          </div>
+                          <div class="chart-summary" style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                              <div class="summary-item">
+                                  <div style="font-size: 0.875rem; color: var(--text-light);">Total Q2</div>
+                                  <div style="font-size: 1.25rem; font-weight: 600;">324 enrollments</div>
+                              </div>
+                              <div class="summary-item">
+                                  <div style="font-size: 0.875rem; color: var(--text-light);">Projected Q3</div>
+                                  <div style="font-size: 1.25rem; font-weight: 600;">412 enrollments</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Document Processing -->
+                  <div class="card">
+                      <div class="card-header">
+                          <h2>Document Processing</h2>
+                          <div>
+                              <button class="btn-secondary" style="margin-right: 0.5rem;">
+                                  <i class="fas fa-filter"></i> Filter
+                              </button>
+                              <button class="btn-secondary">
+                                  <i class="fas fa-expand"></i> Expand
+                              </button>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                          <div style="height: 250px;">
+                              <canvas id="documentProcessingChart"></canvas>
+                          </div>
+                          <div class="chart-legend" style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem;">
+                              <div class="legend-item" style="display: flex; align-items: center;">
+                                  <span style="display: inline-block; width: 12px; height: 12px; background-color: #4ecdc4; border-radius: 50%; margin-right: 8px;"></span>
+                                  <span>Auto-Processed (68%)</span>
+                              </div>
+                              <div class="legend-item" style="display: flex; align-items: center;">
+                                  <span style="display: inline-block; width: 12px; height: 12px; background-color: #ff7a59; border-radius: 50%; margin-right: 8px;"></span>
+                                  <span>AI-Assisted (22%)</span>
+                              </div>
+                              <div class="legend-item" style="display: flex; align-items: center;">
+                                  <span style="display: inline-block; width: 12px; height: 12px; background-color: #1e4e7a; border-radius: 50%; margin-right: 8px;"></span>
+                                  <span>Manual (10%)</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Two Column Layout for Bottom Charts -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                  <!-- Client Distribution -->
+                  <div class="card">
+                      <div class="card-header">
+                          <h2>Client Distribution</h2>
+                          <div>
+                              <button class="btn-secondary">
+                                  <i class="fas fa-expand"></i> Expand
+                              </button>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                          <div style="height: 250px;">
+                              <canvas id="clientDistributionChart"></canvas>
+                          </div>
+                          <div class="distribution-summary" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+                              <div class="summary-item" style="flex: 1; min-width: 120px;">
+                                  <div style="font-size: 0.875rem; color: var(--text-light);">Healthcare</div>
+                                  <div style="font-size: 1.125rem; font-weight: 600;">12 clients</div>
+                              </div>
+                              <div class="summary-item" style="flex: 1; min-width: 120px;">
+                                  <div style="font-size: 0.875rem; color: var(--text-light);">Technology</div>
+                                  <div style="font-size: 1.125rem; font-weight: 600;">19 clients</div>
+                              </div>
+                              <div class="summary-item" style="flex: 1; min-width: 120px;">
+                                  <div style="font-size: 0.875rem; color: var(--text-light);">Manufacturing</div>
+                                  <div style="font-size: 1.125rem; font-weight: 600;">8 clients</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Processing Efficiency -->
+                  <div class="card">
+                      <div class="card-header">
+                          <h2>Processing Efficiency</h2>
+                          <div>
+                              <button class="btn-secondary">
+                                  <i class="fas fa-expand"></i> Expand
+                              </button>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                          <div style="display: flex; align-items: center; justify-content: space-between;">
+                              <div style="width: 180px; height: 180px; position: relative;">
+                                  <canvas id="efficiencyChart"></canvas>
+                                  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                      <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">75%</div>
+                                      <div style="font-size: 0.875rem; color: var(--text-light);">Auto-Processed</div>
+                                  </div>
+                              </div>
+                              <div style="flex: 1; padding-left: 1.5rem;">
+                                  <div style="margin-bottom: 1rem;">
+                                      <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                          <span style="font-size: 0.875rem;">Auto-Processed</span>
+                                          <span style="font-size: 0.875rem; font-weight: 600;">75%</span>
+                                      </div>
+                                      <div style="height: 6px; background-color: #e9ecef; border-radius: 3px;">
+                                          <div style="height: 100%; width: 75%; background-color: #4ecdc4; border-radius: 3px;"></div>
+                                      </div>
+                                  </div>
+                                  <div style="margin-bottom: 1rem;">
+                                      <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                          <span style="font-size: 0.875rem;">AI-Assisted</span>
+                                          <span style="font-size: 0.875rem; font-weight: 600;">15%</span>
+                                      </div>
+                                      <div style="height: 6px; background-color: #e9ecef; border-radius: 3px;">
+                                          <div style="height: 100%; width: 15%; background-color: #ff7a59; border-radius: 3px;"></div>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                          <span style="font-size: 0.875rem;">Manual Review</span>
+                                          <span style="font-size: 0.875rem; font-weight: 600;">10%</span>
+                                      </div>
+                                      <div style="height: 6px; background-color: #e9ecef; border-radius: 3px;">
+                                          <div style="height: 100%; width: 10%; background-color: #1e4e7a; border-radius: 3px;"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Action Items -->
+              <div class="card">
+                  <div class="card-header">
+                      <h2>Action Items</h2>
+                      <div>
+                          <button class="btn-secondary" style="margin-right: 0.5rem;">
+                              <i class="fas fa-filter"></i> Filter
+                          </button>
+                          <button class="btn-primary">
+                              <i class="fas fa-plus"></i> New Task
+                          </button>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-container">
+                          <table class="data-table">
+                              <thead>
+                                  <tr>
+                                      <th>Priority</th>
+                                      <th>Client</th>
+                                      <th>Task</th>
+                                      <th>Due Date</th>
+                                      <th>Status</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td><span class="status-badge" style="background-color: #dc3545; color: white;">High</span></td>
+                                      <td>Acme Corporation</td>
+                                      <td>Missing dependent information for 3 employees</td>
+                                      <td>Today</td>
+                                      <td><span class="status-badge status-pending">Pending</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Upload Documents"><i class="fas fa-file-upload"></i></button>
+                                              <button class="btn-icon" title="Send Email"><i class="fas fa-envelope"></i></button>
+                                              <button class="btn-icon" title="Mark Complete"><i class="fas fa-check"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge" style="background-color: #ffc107; color: #212529;">Medium</span></td>
+                                      <td>TechStart Inc.</td>
+                                      <td>Review enrollment forms for compliance</td>
+                                      <td>Tomorrow</td>
+                                      <td><span class="status-badge status-pending">Pending</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="View Forms"><i class="fas fa-file-alt"></i></button>
+                                              <button class="btn-icon" title="Send Email"><i class="fas fa-envelope"></i></button>
+                                              <button class="btn-icon" title="Mark Complete"><i class="fas fa-check"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge" style="background-color: #28a745; color: white;">Low</span></td>
+                                      <td>Global Logistics LLC</td>
+                                      <td>Update carrier contact information</td>
+                                      <td>May 10, 2025</td>
+                                      <td><span class="status-badge status-pending">Pending</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Contact"><i class="fas fa-user-edit"></i></button>
+                                              <button class="btn-icon" title="Send Email"><i class="fas fa-envelope"></i></button>
+                                              <button class="btn-icon" title="Mark Complete"><i class="fas fa-check"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge" style="background-color: #dc3545; color: white;">High</span></td>
+                                      <td>Sunshine Bakery</td>
+                                      <td>Enrollment deadline approaching - 5 forms pending</td>
+                                      <td>May 8, 2025</td>
+                                      <td><span class="status-badge status-pending">Pending</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Send Reminder"><i class="fas fa-bell"></i></button>
+                                              <button class="btn-icon" title="View Forms"><i class="fas fa-file-alt"></i></button>
+                                              <button class="btn-icon" title="Mark Complete"><i class="fas fa-check"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge" style="background-color: #ffc107; color: #212529;">Medium</span></td>
+                                      <td>City Hospital</td>
+                                      <td>Verify eligibility for new hires</td>
+                                      <td>May 12, 2025</td>
+                                      <td><span class="status-badge status-pending">Pending</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Verify Eligibility"><i class="fas fa-user-check"></i></button>
+                                              <button class="btn-icon" title="Send Email"><i class="fas fa-envelope"></i></button>
+                                              <button class="btn-icon" title="Mark Complete"><i class="fas fa-check"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Recent Activity -->
+              <div class="card">
+                  <div class="card-header">
+                      <h2>Recent Activity</h2>
+                      <button class="btn-secondary">View All</button>
+                  </div>
+                  <div class="card-body">
+                      <div class="activity-list">
+                          <div class="activity-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(30, 78, 122, 0.1); color: var(--secondary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-file-upload"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>New documents uploaded</strong> for Acme Corporation - 15 employee enrollment forms</p>
+                                  <p style="margin: 0; font-size: 0.8rem; color: var(--text-light);">Today, 10:45 AM</p>
+                              </div>
+                              <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                  <button class="btn-icon" title="View Documents"><i class="fas fa-file-alt"></i></button>
+                                  <button class="btn-icon" title="Process Documents"><i class="fas fa-cogs"></i></button>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Process</button>
+                              </div>
+                          </div>
+                          <div class="activity-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(40, 167, 69, 0.1); color: var(--success-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-check-circle"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Group application approved</strong> for Sunshine Bakery with UnitedHealthcare</p>
+                                  <p style="margin: 0; font-size: 0.8rem; color: var(--text-light);">Today, 9:30 AM</p>
+                              </div>
+                              <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                  <button class="btn-icon" title="View Application"><i class="fas fa-file-contract"></i></button>
+                                  <button class="btn-icon" title="Send Notification"><i class="fas fa-bell"></i></button>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">View</button>
+                              </div>
+                          </div>
+                          <div class="activity-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(220, 53, 69, 0.1); color: var(--danger-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-exclamation-triangle"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Missing information detected</strong> in 3 employee forms for Global Logistics LLC</p>
+                                  <p style="margin: 0; font-size: 0.8rem; color: var(--text-light);">Yesterday, 4:15 PM</p>
+                              </div>
+                              <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                  <button class="btn-icon" title="View Forms"><i class="fas fa-file-alt"></i></button>
+                                  <button class="btn-icon" title="Send Request"><i class="fas fa-paper-plane"></i></button>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Review</button>
+                              </div>
+                          </div>
+                          <div class="activity-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(23, 162, 184, 0.1); color: var(--info-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-robot"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>AI auto-processed</strong> 28 enrollment forms for TechStart Inc.</p>
+                                  <p style="margin: 0; font-size: 0.8rem; color: var(--text-light);">Yesterday, 2:30 PM</p>
+                              </div>
+                              <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                  <button class="btn-icon" title="View Results"><i class="fas fa-eye"></i></button>
+                                  <button class="btn-icon" title="Download Report"><i class="fas fa-download"></i></button>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Verify</button>
+                              </div>
+                          </div>
+                          <div class="activity-item" style="display: flex; align-items: flex-start;">
+                              <div style="background-color: rgba(108, 117, 125, 0.1); color: var(--text-light); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-sync-alt"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Plan renewal initiated</strong> for City Hospital - Medical, Dental, Vision</p>
+                                  <p style="margin: 0; font-size: 0.8rem; color: var(--text-light);">Yesterday, 11:20 AM</p>
+                              </div>
+                              <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                  <button class="btn-icon" title="View Renewal"><i class="fas fa-file-contract"></i></button>
+                                  <button class="btn-icon" title="Edit Details"><i class="fas fa-edit"></i></button>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Continue</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <script src="js/broker-portal.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Enrollment Trends Chart
+        const enrollmentTrendsCtx = document.getElementById('enrollmentTrendsChart');
+        if (enrollmentTrendsCtx) {
+            new Chart(enrollmentTrendsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'New Enrollments',
+                        data: [65, 78, 90, 82, 96, 110],
+                        borderColor: 'rgb(255, 122, 89)',
+                        backgroundColor: 'rgba(255, 122, 89, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: 'Completed Enrollments',
+                        data: [42, 55, 72, 75, 82, 95],
+                        borderColor: 'rgb(30, 78, 122)',
+                        backgroundColor: 'rgba(30, 78, 122, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Document Processing Chart
+        const documentProcessingCtx = document.getElementById('documentProcessingChart');
+        if (documentProcessingCtx) {
+            new Chart(documentProcessingCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Auto-Processed',
+                        data: [124, 145, 132, 156],
+                        backgroundColor: '#4ecdc4'
+                    }, {
+                        label: 'AI-Assisted',
+                        data: [45, 52, 48, 58],
+                        backgroundColor: '#ff7a59'
+                    }, {
+                        label: 'Manual',
+                        data: [18, 22, 20, 25],
+                        backgroundColor: '#1e4e7a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Client Distribution Chart
+        const clientDistributionCtx = document.getElementById('clientDistributionChart');
+        if (clientDistributionCtx) {
+            new Chart(clientDistributionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Healthcare', 'Technology', 'Manufacturing', 'Retail', 'Services'],
+                    datasets: [{
+                        label: 'Clients by Industry',
+                        data: [12, 19, 8, 5, 14],
+                        backgroundColor: [
+                            'rgba(30, 78, 122, 0.7)',
+                            'rgba(255, 122, 89, 0.7)',
+                            'rgba(78, 205, 196, 0.7)',
+                            'rgba(255, 193, 7, 0.7)',
+                            'rgba(108, 117, 125, 0.7)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Efficiency Chart
+        const efficiencyCtx = document.getElementById('efficiencyChart');
+        if (efficiencyCtx) {
+            new Chart(efficiencyCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Auto-Processed', 'AI-Assisted', 'Manual Review'],
+                    datasets: [{
+                        data: [75, 15, 10],
+                        backgroundColor: ['#4ecdc4', '#ff7a59', '#1e4e7a'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+    });
+  </script>
+<!-- Add this before the closing body tag -->
+<script src="js/top-right-toolbar.js"></script>
+</body>
+</html>

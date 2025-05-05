@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Analysis - DoKrunch</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="logo-container">
+            <img src="images/dokrunch-logo.svg" alt="DoKrunch Logo" class="logo">
+            <span class="logo-text">DoKrunch</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="enrollment.html">Enrollment</a></li>
+                <li><a href="document-analysis.html" class="active">Document Analysis</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="btn-notification"><i class="fas fa-bell"></i></button>
+            <div class="user-profile">
+                <img src="images/user-avatar.svg" alt="User Profile" class="avatar">
+                <span>Admin User</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="l1-menu">
+                    <li>
+                        <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-file-medical"></i> Enrollment</a>
+                        <ul class="l2-menu">
+                            <li><a href="enrollment.html">New Enrollment</a></li>
+                            <li><a href="#">Pending Applications</a></li>
+                            <li><a href="#">Completed Enrollments</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#" class="has-submenu"><i class="fas fa-file-alt"></i> Documents</a>
+                        <ul class="l2-menu">
+                            <li class="active"><a href="document-analysis.html">Document Analysis*</a></li>
+                            <li><a href="#">Document Repository</a></li>
+                            <li><a href="#">Form Templates</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">Enrollment Analytics*</a></li>
+                            <li><a href="#">Processing Metrics</a></li>
+                            <li><a href="#">Compliance Reports</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-cog"></i> Settings</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">User Management</a></li>
+                            <li><a href="#">System Configuration</a></li>
+                            <li><a href="#">AI Settings*</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Document Analysis</h1>
+                <div class="action-buttons">
+                    <button class="btn-secondary"><i class="fas fa-upload"></i> Upload Document</button>
+                    <button class="btn-primary"><i class="fas fa-camera"></i> Scan Document</button>
+                </div>
+            </div>
+
+            <!-- Document Analysis Area -->
+            <div class="analysis-container">
+                <div class="document-preview">
+                    <div class="preview-header">
+                        <h2>Document Preview</h2>
+                        <div class="preview-controls">
+                            <button class="btn-icon"><i class="fas fa-search-plus"></i></button>
+                            <button class="btn-icon"><i class="fas fa-search-minus"></i></button>
+                            <button class="btn-icon"><i class="fas fa-sync-alt"></i></button>
+                            <button class="btn-icon"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="document-image-container">
+                        <img src="images/sample-health-form.svg" alt="Health Insurance Form" class="document-image">
+                        <div class="highlight-overlay" id="highlight1" style="top: 15%; left: 20%; width: 30%; height: 5%;"></div>
+                        <div class="highlight-overlay" id="highlight2" style="top: 25%; left: 20%; width: 30%; height: 5%;"></div>
+                        <div class="highlight-overlay" id="highlight3" style="top: 35%; left: 20%; width: 30%; height: 5%;"></div>
+                    </div>
+                </div>
+
+                <div class="analysis-results">
+                    <div class="results-header">
+                        <h2>AI Analysis Results*</h2>
+                        <span class="confidence-score">Confidence: 94%</span>
+                    </div>
+                    
+                    <div class="document-info">
+                        <div class="info-row">
+                            <span class="info-label">Document Type:</span>
+                            <span class="info-value">Employee Enrollment Form</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Insurance Carrier:</span>
+                            <span class="info-value">Blue Cross Blue Shield</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Form Version:</span>
+                            <span class="info-value">2025-01</span>
+                        </div>
+                    </div>
+                    
+                    <div class="extracted-data">
+                        <h3>Extracted Information</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Extracted Value</th>
+                                    <th>Confidence</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="linked-field" data-highlight="highlight1">
+                                    <td>Employee Name</td>
+                                    <td>John A. Smith</td>
+                                    <td><span class="confidence high">98%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                                <tr class="linked-field" data-highlight="highlight2">
+                                    <td>Employee ID</td>
+                                    <td>EMP-10042</td>
+                                    <td><span class="confidence high">99%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                                <tr class="linked-field" data-highlight="highlight3">
+                                    <td>Date of Birth</td>
+                                    <td>05/12/1985</td>
+                                    <td><span class="confidence high">97%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>SSN (Last 4)</td>
+                                    <td>XXXX-XX-4321</td>
+                                    <td><span class="confidence medium">89%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Plan Selection</td>
+                                    <td>Premium PPO Family Plan</td>
+                                    <td><span class="confidence high">95%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Effective Date</td>
+                                    <td>06/01/2025</td>
+                                    <td><span class="confidence high">96%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Dependent Count</td>
+                                    <td>3</td>
+                                    <td><span class="confidence high">99%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Signature Present</td>
+                                    <td>Yes</td>
+                                    <td><span class="confidence high">98%</span></td>
+                                    <td><button class="btn-edit"><i class="fas fa-pen"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="ai-insights">
+                        <h3><i class="fas fa-lightbulb"></i> AI Insights</h3>
+                        <div class="insight-item">
+                            <p><strong>Missing Information:</strong> The form is missing the employee's phone number which is required for enrollment.</p>
+                        </div>
+                        <div class="insight-item">
+                            <p><strong>Potential Issue:</strong> The dependent information section appears to be incomplete. Only 2 of 3 listed dependents have complete information.</p>
+                        </div>
+                        <div class="insight-item">
+                            <p><strong>Recommendation:</strong> Request updated form with complete dependent information before processing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-panel">
+                        <button class="btn-secondary">Reject Document</button>
+                        <button class="btn-secondary">Request More Info</button>
+                        <button class="btn-primary">Create Enrollment <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>

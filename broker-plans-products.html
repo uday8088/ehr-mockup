@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plans & Products - DoKrunch Broker Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="css/ai-info-dot.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Add this to your head section -->
+<link rel="stylesheet" href="css/top-right-toolbar.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="logo-container">
+      <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+      <div class="page-title" style="display: flex; align-items: center;">
+        <h1>Plans & Products</h1>
+        
+        <!-- AI Info Tooltip - in top nav next to title -->
+        <div class="ai-tooltip" style="margin-left: 10px;">
+          <div class="ai-info-dot">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <div class="ai-tooltip-content">
+            <h4 class="ai-tooltip-title">AI-Driven Improvements</h4>
+            <p class="ai-tooltip-text">Our AI now automatically compares plans across carriers to highlight the best options for your clients based on their specific needs and demographics.</p>
+            <div class="ai-metrics">
+              <div class="ai-metric-item">
+                <span class="ai-metric-label">Plan Comparison Speed:</span>
+                <span class="ai-metric-value">78% faster</span>
+              </div>
+              <div class="ai-metric-item">
+                <span class="ai-metric-label">Client Satisfaction:</span>
+                <span class="ai-metric-value">↑ 32%</span>
+              </div>
+              <div class="ai-metric-item">
+                <span class="ai-metric-label">Recommendation Accuracy:</span>
+                <span class="ai-metric-value">94%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Add this where you want the toolbar to appear (typically in the header) -->
+<div class="top-right-toolbar">
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search loans...">
+  </div>
+  
+  <div class="theme-selector">
+    <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+      <i class="fas fa-palette"></i>
+    </button>
+    <div class="theme-dropdown">
+      <button class="theme-option" data-theme="light">Light</button>
+      <button class="theme-option" data-theme="dark">Dark</button>
+      <button class="theme-option" data-theme="financial">Financial</button>
+      <button class="theme-option" data-theme="colorful">Colorful</button>
+      <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+    </div>
+  </div>
+  
+  <div class="font-size-selector">
+    <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+      <i class="fas fa-text-height"></i>
+    </button>
+    <div class="font-size-dropdown">
+      <button class="font-size-option" data-size="small">
+        <i class="fas fa-font"></i> Small
+      </button>
+      <button class="font-size-option" data-size="medium">
+        <i class="fas fa-font"></i> Medium
+      </button>
+      <button class="font-size-option" data-size="large">
+        <i class="fas fa-font"></i> Large
+      </button>
+    </div>
+  </div>
+  
+  <button class="toolbar-icon" title="Notifications">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+  </button>
+  
+  <div class="user-avatar">
+    SJ
+  </div>
+  
+  <button class="logout-btn" id="logout-btn" title="Logout">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</div>
+  </header>
+
+  <div class="main-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <ul class="l1-menu">
+          <li>
+            <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+          </li>
+          <li>
+            <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+          </li>
+          <li>
+            <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+          </li>
+          <li class="active">
+            <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+          </li>
+          <li>
+            <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="login-info">
+        <div class="login-details">
+          <span>Logged in as:</span>
+          <strong>Broker Admin</strong>
+          <span class="login-time">Last login: Today, 9:45 AM</span>
+          <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- L2 Menu -->
+      <div class="l2-menu-container">
+        <nav class="l2-menu">
+          <a href="broker-carrier-directory.html">Carrier Directory</a>
+          <a href="broker-plans-products.html" class="active">Plans & Products</a>
+          <a href="broker-carrier-requirements.html">Requirements</a>
+          <a href="broker-carrier-communications.html">Communications</a>
+          <a href="broker-carrier-contacts.html">Contacts</a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="plans-content">
+        <!-- Plan Type Navigation -->
+        <div class="card" style="margin-bottom: 1.5rem; height: auto;">
+          <div class="card-body" style="padding: 1rem;">
+            <nav class="plan-type-nav">
+              <ul style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem;">
+                <li style="flex: 1;">
+                  <a href="#medical-plans" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--primary-color); height: 100%; text-align: center; background-color: rgba(59, 130, 246, 0.1);">
+                    <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                      <i class="fas fa-heartbeat fa-lg"></i>
+                    </div>
+                    <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Medical</span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Health insurance plans</span>
+                  </a>
+                </li>
+                <li style="flex: 1;">
+                  <a href="#dental-plans" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
+                      <i class="fas fa-tooth fa-lg"></i>
+                    </div>
+                    <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Dental</span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Dental coverage plans</span>
+                  </a>
+                </li>
+                <li style="flex: 1;">
+                  <a href="#vision-plans" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                      <i class="fas fa-eye fa-lg"></i>
+                    </div>
+                    <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Vision</span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Vision care plans</span>
+                  </a>
+                </li>
+                <li style="flex: 1;">
+                  <a href="#life-plans" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(236, 72, 153, 0.1); color: #ec4899;">
+                      <i class="fas fa-shield-alt fa-lg"></i>
+                    </div>
+                    <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Life & Disability</span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Protection plans</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Medical Plans</h2>
+            <div>
+              <button class="btn-primary"><i class="fas fa-plus"></i> Compare Plans</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+              <div class="filter-group">
+                <span class="filter-label">Carrier:</span>
+                <select class="form-control">
+                  <option value="all">All Carriers</option>
+                  <option value="bcbs">Blue Cross Blue Shield</option>
+                  <option value="aetna">Aetna</option>
+                  <option value="uhc">UnitedHealthcare</option>
+                  <option value="cigna">Cigna</option>
+                  <option value="humana">Humana</option>
+                  <option value="kaiser">Kaiser Permanente</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <span class="filter-label">Plan Type:</span>
+                <select class="form-control">
+                  <option value="all">All Types</option>
+                  <option value="ppo">PPO</option>
+                  <option value="hmo">HMO</option>
+                  <option value="hdhp">HDHP</option>
+                  <option value="epo">EPO</option>
+                  <option value="pos">POS</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <span class="filter-label">Deductible:</span>
+                <select class="form-control">
+                  <option value="all">All Deductibles</option>
+                  <option value="0">$0</option>
+                  <option value="500">$500 or less</option>
+                  <option value="1000">$1,000 or less</option>
+                  <option value="2000">$2,000 or less</option>
+                  <option value="5000">$5,000 or less</option>
+                </select>
+              </div>
+              <button class="btn-secondary">
+                <i class="fas fa-filter"></i> Apply Filters
+              </button>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Plan Name</th>
+                    <th>Carrier</th>
+                    <th>Type</th>
+                    <th>Network</th>
+                    <th>Premium Range</th>
+                    <th>Deductible</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Premium PPO 500</td>
+                    <td>Blue Cross Blue Shield</td>
+                    <td>PPO</td>
+                    <td>National</td>
+                    <td>$450-$850</td>
+                    <td>$500</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Value HMO 1000</td>
+                    <td>Aetna</td>
+                    <td>HMO</td>
+                    <td>Regional</td>
+                    <td>$350-$650</td>
+                    <td>$1,000</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>HDHP 3000</td>
+                    <td>UnitedHealthcare</td>
+                    <td>HDHP</td>
+                    <td>National</td>
+                    <td>$300-$550</td>
+                    <td>$3,000</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Select EPO 750</td>
+                    <td>Cigna</td>
+                    <td>EPO</td>
+                    <td>National</td>
+                    <td>$400-$750</td>
+                    <td>$750</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>HSA Silver 2500</td>
+                    <td>Humana</td>
+                    <td>HDHP</td>
+                    <td>National</td>
+                    <td>$380-$680</td>
+                    <td>$2,500</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>HMO Gold 0</td>
+                    <td>Kaiser Permanente</td>
+                    <td>HMO</td>
+                    <td>Regional</td>
+                    <td>$550-$950</td>
+                    <td>$0</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Bronze PPO 5000</td>
+                    <td>Blue Cross Blue Shield</td>
+                    <td>PPO</td>
+                    <td>National</td>
+                    <td>$280-$520</td>
+                    <td>$5,000</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Silver POS 2000</td>
+                    <td>Cigna</td>
+                    <td>POS</td>
+                    <td>National</td>
+                    <td>$380-$700</td>
+                    <td>$2,000</td>
+                    <td><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
+                    <td>
+                      <button class="btn-action">Details</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/broker-portal.js"></script>
+<!-- Add this before the closing body tag -->
+<script src="js/top-right-toolbar.js"></script>
+</body>
+</html>

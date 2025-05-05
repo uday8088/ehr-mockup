@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Directory - DoKrunch Broker Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Add this to your head section -->
+<link rel="stylesheet" href="css/top-right-toolbar.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+      <div class="logo-container">
+          <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+          <div class="page-title">
+              <h1>Client Directory</h1>
+          </div>
+      </div>
+<!-- Add this where you want the toolbar to appear (typically in the header) -->
+<div class="top-right-toolbar">
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search loans...">
+  </div>
+  
+  <div class="theme-selector">
+    <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+      <i class="fas fa-palette"></i>
+    </button>
+    <div class="theme-dropdown">
+      <button class="theme-option" data-theme="light">Light</button>
+      <button class="theme-option" data-theme="dark">Dark</button>
+      <button class="theme-option" data-theme="financial">Financial</button>
+      <button class="theme-option" data-theme="colorful">Colorful</button>
+      <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+    </div>
+  </div>
+  
+  <div class="font-size-selector">
+    <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+      <i class="fas fa-text-height"></i>
+    </button>
+    <div class="font-size-dropdown">
+      <button class="font-size-option" data-size="small">
+        <i class="fas fa-font"></i> Small
+      </button>
+      <button class="font-size-option" data-size="medium">
+        <i class="fas fa-font"></i> Medium
+      </button>
+      <button class="font-size-option" data-size="large">
+        <i class="fas fa-font"></i> Large
+      </button>
+    </div>
+  </div>
+  
+  <button class="toolbar-icon" title="Notifications">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+  </button>
+  
+  <div class="user-avatar">
+    SJ
+  </div>
+  
+  <button class="logout-btn" id="logout-btn" title="Logout">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</div>
+  </header>
+
+  <div class="main-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="l1-menu">
+                  <li>
+                      <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                  </li>
+                  <li class="active">
+                      <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+                  </li>
+                  <li>
+                      <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+                  </li>
+                  <li>
+                      <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+                  </li>
+                  <li>
+                      <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+                  </li>
+                  <li>
+                      <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="login-info">
+              <div class="login-details">
+                  <span>Logged in as:</span>
+                  <strong>Broker Admin</strong>
+                  <span class="login-time">Last login: Today, 9:45 AM</span>
+                  <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+              </div>
+          </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+          <!-- L2 Menu -->
+          <div class="l2-menu-container">
+              <nav class="l2-menu">
+                  <a href="broker-client-directory.html" class="active">Client Directory</a>
+                  <a href="broker-client-setup.html">New Client Setup</a>
+                  <a href="broker-client-management.html">Client Management</a>
+              </nav>
+          </div>
+
+          <!-- Client Directory Content -->
+          <div class="directory-content">
+              <!-- Filter and Actions -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                  <div style="display: flex; gap: 1rem; align-items: center;">
+                      <div>
+                          <label for="client-status" style="margin-right: 0.5rem;">Status:</label>
+                          <select id="client-status" style="padding: 0.5rem; border-radius: var(--border-radius);">
+                              <option value="all">All Clients</option>
+                              <option value="active">Active</option>
+                              <option value="pending">Pending</option>
+                              <option value="inactive">Inactive</option>
+                          </select>
+                      </div>
+                      <div>
+                          <label for="client-size" style="margin-right: 0.5rem;">Size:</label>
+                          <select id="client-size" style="padding: 0.5rem; border-radius: var(--border-radius);">
+                              <option value="all">All Sizes</option>
+                              <option value="small">Small (1-50)</option>
+                              <option value="medium">Medium (51-200)</option>
+                              <option value="large">Large (201-1000)</option>
+                              <option value="enterprise">Enterprise (1000+)</option>
+                          </select>
+                      </div>
+                      <div>
+                          <label for="client-industry" style="margin-right: 0.5rem;">Industry:</label>
+                          <select id="client-industry" style="padding: 0.5rem; border-radius: var(--border-radius);">
+                              <option value="all">All Industries</option>
+                              <option value="healthcare">Healthcare</option>
+                              <option value="technology">Technology</option>
+                              <option value="manufacturing">Manufacturing</option>
+                              <option value="retail">Retail</option>
+                              <option value="services">Professional Services</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div style="display: flex; gap: 0.5rem;">
+                      <button class="btn-secondary"><i class="fas fa-download"></i> Export</button>
+                      <button class="btn-primary"><i class="fas fa-plus"></i> Add New Client</button>
+                  </div>
+              </div>
+
+              <!-- Client List -->
+              <div class="card">
+                  <div class="card-body">
+                      <div class="table-container">
+                          <table class="data-table">
+                              <thead>
+                                  <tr>
+                                      <th>Client Name</th>
+                                      <th>Industry</th>
+                                      <th>Employees</th>
+                                      <th>Location</th>
+                                      <th>Renewal Date</th>
+                                      <th>Status</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #1e4e7a; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>AC</span>
+                                              </div>
+                                              Acme Corporation
+                                          </div>
+                                      </td>
+                                      <td>Technology</td>
+                                      <td>245</td>
+                                      <td>San Francisco, CA</td>
+                                      <td>Jun 1, 2025</td>
+                                      <td><span class="status-badge status-active">Active</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #ff7a59; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>TS</span>
+                                              </div>
+                                              TechStart Inc.
+                                          </div>
+                                      </td>
+                                      <td>Technology</td>
+                                      <td>78</td>
+                                      <td>Austin, TX</td>
+                                      <td>Jul 15, 2025</td>
+                                      <td><span class="status-badge status-active">Active</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #4ecdc4; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>GL</span>
+                                              </div>
+                                              Global Logistics LLC
+                                          </div>
+                                      </td>
+                                      <td>Transportation</td>
+                                      <td>412</td>
+                                      <td>Chicago, IL</td>
+                                      <td>Aug 1, 2025</td>
+                                      <td><span class="status-badge status-active">Active</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #ffc107; color: #212529; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>SB</span>
+                                              </div>
+                                              Sunshine Bakery
+                                          </div>
+                                      </td>
+                                      <td>Food & Beverage</td>
+                                      <td>35</td>
+                                      <td>Portland, OR</td>
+                                      <td>May 15, 2025</td>
+                                      <td><span class="status-badge status-active">Active</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #6c757d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>WC</span>
+                                              </div>
+                                              Westside Consulting
+                                          </div>
+                                      </td>
+                                      <td>Professional Services</td>
+                                      <td>87</td>
+                                      <td>Los Angeles, CA</td>
+                                      <td>Sep 1, 2025</td>
+                                      <td><span class="status-badge status-active">Active</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #dc3545; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>NM</span>
+                                              </div>
+                                              Northern Manufacturing
+                                          </div>
+                                      </td>
+                                      <td>Manufacturing</td>
+                                      <td>156</td>
+                                      <td>Detroit, MI</td>
+                                      <td>Oct 15, 2025</td>
+                                      <td><span class="status-badge status-pending">Pending</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #17a2b8; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>CH</span>
+                                              </div>
+                                              Coastal Healthcare
+                                          </div>
+                                      </td>
+                                      <td>Healthcare</td>
+                                      <td>320</td>
+                                      <td>Miami, FL</td>
+                                      <td>Nov 1, 2025</td>
+                                      <td><span class="status-badge status-active">Active</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div style="display: flex; align-items: center;">
+                                              <div style="width: 32px; height: 32px; background-color: #6c757d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem;">
+                                                  <span>MV</span>
+                                              </div>
+                                              Mountain View Retail
+                                          </div>
+                                      </td>
+                                      <td>Retail</td>
+                                      <td>95</td>
+                                      <td>Denver, CO</td>
+                                      <td>Dec 15, 2025</td>
+                                      <td><span class="status-badge status-inactive">Inactive</span></td>
+                                      <td>
+                                          <div class="action-buttons" style="display: flex; gap: 0.5rem;">
+                                              <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                              <button class="btn-icon" title="Edit Client"><i class="fas fa-edit"></i></button>
+                                              <button class="btn-icon" title="Client Documents"><i class="fas fa-folder"></i></button>
+                                              <button class="btn-icon" title="Client Enrollments"><i class="fas fa-users"></i></button>
+                                              <button class="btn-icon" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      
+                      <!-- Pagination -->
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+                          <div>
+                              <span>Showing 1-8 of 42 clients</span>
+                          </div>
+                          <div style="display: flex; gap: 0.5rem;">
+                              <button class="btn-secondary" disabled><i class="fas fa-chevron-left"></i></button>
+                              <button class="btn-primary">1</button>
+                              <button class="btn-secondary">2</button>
+                              <button class="btn-secondary">3</button>
+                              <button class="btn-secondary">4</button>
+                              <button class="btn-secondary">5</button>
+                              <button class="btn-secondary"><i class="fas fa-chevron-right"></i></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Client Insights -->
+              <div class="card" style="margin-top: 1.5rem;">
+                  <div class="card-header">
+                      <h2>Client Insights</h2>
+                      <button class="btn-secondary"><i class="fas fa-expand"></i> Expand</button>
+                  </div>
+                  <div class="card-body">
+                      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                          <div style="background-color: rgba(30, 78, 122, 0.1); padding: 1.5rem; border-radius: var(--border-radius);">
+                              <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem;">Renewal Focus</h3>
+                              <p style="margin-bottom: 1rem;">5 clients have renewals in the next 60 days</p>
+                              <ul style="list-style: none; padding: 0; margin: 0 0 1rem 0;">
+                                  <li style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                      <span>Sunshine Bakery</span>
+                                      <span>May 15, 2025</span>
+                                  </li>
+                                  <li style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                      <span>Acme Corporation</span>
+                                      <span>Jun 1, 2025</span>
+                                  </li>
+                                  <li style="display: flex; justify-content: space-between;">
+                                      <span>TechStart Inc.</span>
+                                      <span>Jul 15, 2025</span>
+                                  </li>
+                              </ul>
+                              <button class="btn-secondary">View Renewals</button>
+                          </div>
+                          <div style="background-color: rgba(255, 122, 89, 0.1); padding: 1.5rem; border-radius: var(--border-radius);">
+                              <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">Growth Opportunity</h3>
+                              <p style="margin-bottom: 1rem;">3 clients have expanded their workforce by >10%</p>
+                              <ul style="list-style: none; padding: 0; margin: 0 0 1rem 0;">
+                                  <li style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                      <span>TechStart Inc.</span>
+                                      <span>+18%</span>
+                                  </li>
+                                  <li style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                      <span>Coastal Healthcare</span>
+                                      <span>+15%</span>
+                                  </li>
+                                  <li style="display: flex; justify-content: space-between;">
+                                      <span>Global Logistics LLC</span>
+                                      <span>+12%</span>
+                                  </li>
+                              </ul>
+                              <button class="btn-secondary">View Opportunities</button>
+                          </div>
+                          <div style="background-color: rgba(78, 205, 196, 0.1); padding: 1.5rem; border-radius: var(--border-radius);">
+                              <h3 style="color: var(--accent-color); margin-bottom: 0.5rem;">Compliance Alert</h3>
+                              <p style="margin-bottom: 1rem;">2 clients need ACA compliance review</p>
+                              <ul style="list-style: none; padding: 0; margin: 0 0 1rem 0;">
+                                  <li style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                      <span>Acme Corporation</span>
+                                      <span>Due May 15</span>
+                                  </li>
+                                  <li style="display: flex; justify-content: space-between;">
+                                      <span>Coastal Healthcare</span>
+                                      <span>Due May 22</span>
+                                  </li>
+                              </ul>
+                              <button class="btn-secondary">View Alerts</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Client Analytics -->
+              <div class="card" style="margin-top: 1.5rem;">
+                  <div class="card-header">
+                      <h2>Client Analytics</h2>
+                      <div>
+                          <button class="btn-secondary" style="margin-right: 0.5rem;"><i class="fas fa-download"></i> Export</button>
+                          <button class="btn-secondary"><i class="fas fa-expand"></i> Expand</button>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                          <!-- Client Growth Chart -->
+                          <div>
+                              <h3 style="margin-bottom: 1rem;">Client Growth</h3>
+                              <div style="height: 250px;">
+                                  <canvas id="clientGrowthChart"></canvas>
+                              </div>
+                          </div>
+                          <!-- Client Status Distribution -->
+                          <div>
+                              <h3 style="margin-bottom: 1rem;">Client Status Distribution</h3>
+                              <div style="height: 250px;">
+                                  <canvas id="clientStatusChart"></canvas>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <script src="js/broker-portal.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Client Growth Chart
+        const clientGrowthCtx = document.getElementById('clientGrowthChart');
+        if (clientGrowthCtx) {
+            new Chart(clientGrowthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'New Clients',
+                        data: [2, 3, 1, 4, 2, 5, 3, 2, 4, 3, 5, 8],
+                        borderColor: '#ff7a59',
+                        backgroundColor: 'rgba(255, 122, 89, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: 'Total Clients',
+                        data: [20, 23, 24, 28, 30, 35, 38, 40, 44, 47, 52, 60],
+                        borderColor: '#1e4e7a',
+                        backgroundColor: 'rgba(30, 78, 122, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Client Status Chart
+        const clientStatusCtx = document.getElementById('clientStatusChart');
+        if (clientStatusCtx) {
+            new Chart(clientStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Active', 'Pending', 'Inactive'],
+                    datasets: [{
+                        data: [35, 5, 2],
+                        backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+        }
+    });
+  </script>
+<!-- Add this before the closing body tag -->
+<script src="js/top-right-toolbar.js"></script>
+</body>
+</html>

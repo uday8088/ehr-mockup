@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Census Management - DoKrunch Broker Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Add this to your head section -->
+<link rel="stylesheet" href="css/top-right-toolbar.css">
+  <style>
+    /* Census Management Styles */
+    .census-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 1rem;
+    }
+    
+    .census-tab {
+        padding: 0.75rem 1.25rem;
+        font-weight: 500;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+    
+    .census-tab:hover {
+        color: var(--primary-color);
+    }
+    
+    .census-tab.active {
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
+    }
+    
+    .census-tab-icon {
+        margin-right: 0.5rem;
+    }
+    
+    .census-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .census-filters {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    
+    .census-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .validation-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .validation-badge i {
+        margin-right: 0.25rem;
+    }
+    
+    .validation-valid {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+    }
+    
+    .validation-warning {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+    }
+    
+    .validation-error {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+    }
+    
+    .census-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .census-table th {
+        text-align: left;
+        padding: 0.75rem;
+        font-weight: 600;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .census-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--border-color);
+        vertical-align: middle;
+    }
+    
+    .census-table tr:hover {
+        background-color: rgba(var(--primary-rgb), 0.05);
+    }
+    
+    .census-table .actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .census-table .action-btn {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        border: 1px solid var(--border-color);
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .census-table .action-btn:hover {
+        background-color: rgba(var(--primary-rgb), 0.1);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+    
+    .employee-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-right: 0.5rem;
+    }
+    
+    .employee-info {
+        display: flex;
+        align-items: center;
+    }
+    
+    .employee-name {
+        font-weight: 500;
+    }
+    
+    .employee-email {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+    
+    .validation-summary {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .validation-stat {
+        flex: 1;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+        text-align: center;
+    }
+    
+    .validation-stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    
+    .validation-stat-label {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+    }
+    
+    .validation-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+    }
+    
+    .pagination-info {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+    }
+    
+    .pagination-controls {
+        display: flex;
+        gap: 0.25rem;
+    }
+    
+    .pagination-button {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        border: 1px solid var(--border-color);
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .pagination-button:hover {
+        background-color: rgba(var(--primary-rgb), 0.1);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+    
+    .pagination-button.active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+    }
+    
+    .pagination-button.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    /* For smaller screens */
+    @media (max-width: 768px) {
+        .census-tabs {
+            flex-wrap: wrap;
+        }
+        
+        .census-actions {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .census-filters {
+            flex-wrap: wrap;
+        }
+        
+        .validation-summary {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+      <div class="logo-container">
+          <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+          <div class="page-title">
+              <h1>Census Management</h1>
+          </div>
+      </div>
+<!-- Add this where you want the toolbar to appear (typically in the header) -->
+<div class="top-right-toolbar">
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search loans...">
+  </div>
+  
+  <div class="theme-selector">
+    <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+      <i class="fas fa-palette"></i>
+    </button>
+    <div class="theme-dropdown">
+      <button class="theme-option" data-theme="light">Light</button>
+      <button class="theme-option" data-theme="dark">Dark</button>
+      <button class="theme-option" data-theme="financial">Financial</button>
+      <button class="theme-option" data-theme="colorful">Colorful</button>
+      <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+    </div>
+  </div>
+  
+  <div class="font-size-selector">
+    <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+      <i class="fas fa-text-height"></i>
+    </button>
+    <div class="font-size-dropdown">
+      <button class="font-size-option" data-size="small">
+        <i class="fas fa-font"></i> Small
+      </button>
+      <button class="font-size-option" data-size="medium">
+        <i class="fas fa-font"></i> Medium
+      </button>
+      <button class="font-size-option" data-size="large">
+        <i class="fas fa-font"></i> Large
+      </button>
+    </div>
+  </div>
+  
+  <button class="toolbar-icon" title="Notifications">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+  </button>
+  
+  <div class="user-avatar">
+    SJ
+  </div>
+  
+  <button class="logout-btn" id="logout-btn" title="Logout">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</div>  </header>
+
+  <div class="main-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="l1-menu">
+                  <li>
+                      <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+                  </li>
+                  <li class="active">
+                      <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+                  </li>
+                  <li>
+                      <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+                  </li>
+                  <li>
+                      <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+                  </li>
+                  <li>
+                      <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="login-info">
+              <div class="login-details">
+                  <span>Logged in as:</span>
+                  <strong>Broker Admin</strong>
+                  <span class="login-time">Last login: Today, 9:45 AM</span>
+                  <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+              </div>
+          </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+          <!-- L2 Menu -->
+          <div class="l2-menu-container">
+              <nav class="l2-menu">
+                  <a href="broker-active-enrollments.html">Active Enrollments</a>
+                  <a href="broker-census-management.html" class="active">Census Management</a>
+                  <a href="broker-form-processing.html">Form Processing</a>
+                  <a href="broker-waivers.html">Waivers</a>
+              </nav>
+          </div>
+
+          <!-- Census Management Content -->
+          <div class="census-content">
+              <!-- Client Selector -->
+              <div class="card" style="margin-bottom: 1.5rem;">
+                  <div class="card-body">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                          <div style="display: flex; align-items: center; gap: 1rem;">
+                              <label for="client-selector" style="font-weight: 500;">Select Client:</label>
+                              <select id="client-selector" class="form-control" style="min-width: 250px;">
+                                  <option value="acme">Acme Corporation</option>
+                                  <option value="techstart">TechStart Inc.</option>
+                                  <option value="global">Global Logistics LLC</option>
+                                  <option value="sunshine">Sunshine Bakery</option>
+                                  <option value="metro">Metro Healthcare</option>
+                              </select>
+                          </div>
+                          <div>
+                              <button class="btn-secondary" style="margin-right: 0.5rem;"><i class="fas fa-file-import"></i> Import Census</button>
+                              <button class="btn-primary"><i class="fas fa-plus"></i> Add Employee</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Census Management Tabs -->
+              <div class="card">
+                  <div class="card-body">
+                      <div class="census-tabs">
+                          <div class="census-tab active">
+                              <i class="fas fa-users census-tab-icon" style="color: #3b82f6;"></i> All Employees
+                          </div>
+                          <div class="census-tab">
+                              <i class="fas fa-check-circle census-tab-icon" style="color: #10b981;"></i> Valid Records
+                          </div>
+                          <div class="census-tab">
+                              <i class="fas fa-exclamation-triangle census-tab-icon" style="color: #f59e0b;"></i> Warnings
+                          </div>
+                          <div class="census-tab">
+                              <i class="fas fa-times-circle census-tab-icon" style="color: #ef4444;"></i> Errors
+                          </div>
+                          <div class="census-tab">
+                              <i class="fas fa-history census-tab-icon" style="color: #8b5cf6;"></i> Change History
+                          </div>
+                      </div>
+
+                      <!-- Validation Summary -->
+                      <div class="validation-summary">
+                          <div class="validation-stat">
+                              <i class="fas fa-users validation-icon" style="color: #3b82f6;"></i>
+                              <div class="validation-stat-value" style="color: #3b82f6;">245</div>
+                              <div class="validation-stat-label">Total Employees</div>
+                          </div>
+                          <div class="validation-stat">
+                              <i class="fas fa-check-circle validation-icon" style="color: #10b981;"></i>
+                              <div class="validation-stat-value" style="color: #10b981;">218</div>
+                              <div class="validation-stat-label">Valid Records</div>
+                          </div>
+                          <div class="validation-stat">
+                              <i class="fas fa-exclamation-triangle validation-icon" style="color: #f59e0b;"></i>
+                              <div class="validation-stat-value" style="color: #f59e0b;">21</div>
+                              <div class="validation-stat-label">Warnings</div>
+                          </div>
+                          <div class="validation-stat">
+                              <i class="fas fa-times-circle validation-icon" style="color: #ef4444;"></i>
+                              <div class="validation-stat-value" style="color: #ef4444;">6</div>
+                              <div class="validation-stat-label">Errors</div>
+                          </div>
+                      </div>
+
+                      <!-- Census Actions -->
+                      <div class="census-actions">
+                          <div class="census-filters">
+                              <input type="text" placeholder="Search employees..." class="form-control">
+                              <select class="form-control">
+                                  <option value="all">All Departments</option>
+                                  <option value="engineering">Engineering</option>
+                                  <option value="sales">Sales</option>
+                                  <option value="marketing">Marketing</option>
+                                  <option value="hr">Human Resources</option>
+                                  <option value="finance">Finance</option>
+                              </select>
+                              <select class="form-control">
+                                  <option value="all">All Statuses</option>
+                                  <option value="active">Active</option>
+                                  <option value="pending">Pending</option>
+                                  <option value="terminated">Terminated</option>
+                              </select>
+                          </div>
+                          <div class="census-buttons">
+                              <button class="btn-secondary"><i class="fas fa-download"></i> Export</button>
+                              <button class="btn-secondary"><i class="fas fa-magic"></i> Auto-Fix Issues</button>
+                          </div>
+                      </div>
+
+                      <!-- Census Table -->
+                      <div style="overflow-x: auto;">
+                          <table class="census-table">
+                              <thead>
+                                  <tr>
+                                      <th style="width: 30px;"><input type="checkbox"></th>
+                                      <th>Employee</th>
+                                      <th>Employee ID</th>
+                                      <th>Department</th>
+                                      <th>Status</th>
+                                      <th>Hire Date</th>
+                                      <th>Validation</th>
+                                      <th style="width: 100px;">Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td><input type="checkbox"></td>
+                                      <td>
+                                          <div class="employee-info">
+                                              <div class="employee-avatar" style="background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">JD</div>
+                                              <div>
+                                                  <div class="employee-name">John Doe</div>
+                                                  <div class="employee-email">john.doe@acmecorp.com</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>AC-001245</td>
+                                      <td>Engineering</td>
+                                      <td>Active</td>
+                                      <td>Jan 15, 2020</td>
+                                      <td><span class="validation-badge validation-valid"><i class="fas fa-check-circle"></i> Valid</span></td>
+                                      <td>
+                                          <div class="actions">
+                                              <button class="action-btn" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                              <button class="action-btn" title="View History"><i class="fas fa-history"></i></button>
+                                              <button class="action-btn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><input type="checkbox"></td>
+                                      <td>
+                                          <div class="employee-info">
+                                              <div class="employee-avatar" style="background-color: rgba(236, 72, 153, 0.1); color: #ec4899;">JS</div>
+                                              <div>
+                                                  <div class="employee-name">Jane Smith</div>
+                                                  <div class="employee-email">jane.smith@acmecorp.com</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>AC-001246</td>
+                                      <td>Marketing</td>
+                                      <td>Active</td>
+                                      <td>Mar 22, 2021</td>
+                                      <td><span class="validation-badge validation-valid"><i class="fas fa-check-circle"></i> Valid</span></td>
+                                      <td>
+                                          <div class="actions">
+                                              <button class="action-btn" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                              <button class="action-btn" title="View History"><i class="fas fa-history"></i></button>
+                                              <button class="action-btn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><input type="checkbox"></td>
+                                      <td>
+                                          <div class="employee-info">
+                                              <div class="employee-avatar" style="background-color: rgba(16, 185, 129, 0.1); color: #10b981;">RJ</div>
+                                              <div>
+                                                  <div class="employee-name">Robert Johnson</div>
+                                                  <div class="employee-email">robert.johnson@acmecorp.com</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>AC-001247</td>
+                                      <td>Sales</td>
+                                      <td>Active</td>
+                                      <td>Nov 5, 2019</td>
+                                      <td><span class="validation-badge validation-warning"><i class="fas fa-exclamation-triangle"></i> Warning</span></td>
+                                      <td>
+                                          <div class="actions">
+                                              <button class="action-btn" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                              <button class="action-btn" title="View History"><i class="fas fa-history"></i></button>
+                                              <button class="action-btn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><input type="checkbox"></td>
+                                      <td>
+                                          <div class="employee-info">
+                                              <div class="employee-avatar" style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">EW</div>
+                                              <div>
+                                                  <div class="employee-name">Emily Wilson</div>
+                                                  <div class="employee-email">emily.wilson@acmecorp.com</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>AC-001248</td>
+                                      <td>Human Resources</td>
+                                      <td>Active</td>
+                                      <td>Aug 17, 2022</td>
+                                      <td><span class="validation-badge validation-valid"><i class="fas fa-check-circle"></i> Valid</span></td>
+                                      <td>
+                                          <div class="actions">
+                                              <button class="action-btn" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                              <button class="action-btn" title="View History"><i class="fas fa-history"></i></button>
+                                              <button class="action-btn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><input type="checkbox"></td>
+                                      <td>
+                                          <div class="employee-info">
+                                              <div class="employee-avatar" style="background-color: rgba(239, 68, 68, 0.1); color: #ef4444;">MB</div>
+                                              <div>
+                                                  <div class="employee-name">Michael Brown</div>
+                                                  <div class="employee-email">michael.brown@acmecorp.com</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>AC-001249</td>
+                                      <td>Finance</td>
+                                      <td>Active</td>
+                                      <td>Feb 3, 2021</td>
+                                      <td><span class="validation-badge validation-error"><i class="fas fa-times-circle"></i> Error</span></td>
+                                      <td>
+                                          <div class="actions">
+                                              <button class="action-btn" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                              <button class="action-btn" title="View History"><i class="fas fa-history"></i></button>
+                                              <button class="action-btn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><input type="checkbox"></td>
+                                      <td>
+                                          <div class="employee-info">
+                                              <div class="employee-avatar" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">SD</div>
+                                              <div>
+                                                  <div class="employee-name">Sarah Davis</div>
+                                                  <div class="employee-email">sarah.davis@acmecorp.com</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>AC-001250</td>
+                                      <td>Engineering</td>
+                                      <td>Active</td>
+                                      <td>Jun 12, 2020</td>
+                                      <td><span class="validation-badge validation-warning"><i class="fas fa-exclamation-triangle"></i> Warning</span></td>
+                                      <td>
+                                          <div class="actions">
+                                              <button class="action-btn" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                              <button class="action-btn" title="View History"><i class="fas fa-history"></i></button>
+                                              <button class="action-btn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><input type="checkbox"></td>
+                                      <td>
+                                          <div class="employee-info">
+                                              <div class="employee-avatar" style="background-color: rgba(16, 185, 129, 0.1); color: #10b981;">DM</div>
+                                              <div>
+                                                  <div class="employee-name">David Miller</div>
+                                                  <div class="employee-email">david.miller@acmecorp.com</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>AC-001251</td>
+                                      <td>Sales</td>
+                                      <td>Active</td>
+                                      <td>Apr 28, 2022</td>
+                                      <td><span class="validation-badge validation-valid"><i class="fas fa-check-circle"></i> Valid</span></td>
+                                      <td>
+                                          <div class="actions">
+                                              <button class="action-btn" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                              <button class="action-btn" title="View History"><i class="fas fa-history"></i></button>
+                                              <button class="action-btn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+
+                      <!-- Pagination -->
+                      <div class="pagination">
+                          <div class="pagination-info">
+                              Showing 1-7 of 245 employees
+                          </div>
+                          <div class="pagination-controls">
+                              <button class="pagination-button disabled"><i class="fas fa-chevron-left"></i></button>
+                              <button class="pagination-button active">1</button>
+                              <button class="pagination-button">2</button>
+                              <button class="pagination-button">3</button>
+                              <button class="pagination-button">4</button>
+                              <button class="pagination-button">5</button>
+                              <button class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Data Validation Issues -->
+              <div class="card" style="margin-top: 1.5rem;">
+                  <div class="card-header">
+                      <h2><i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> Data Validation Issues</h2>
+                  </div>
+                  <div class="card-body">
+                      <div class="validation-issues">
+                          <div class="issue-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(239, 68, 68, 0.1); color: #ef4444; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-times-circle"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Missing SSN - Michael Brown (AC-001249)</strong></p>
+                                  <p style="margin: 0 0 0.5rem;">Social Security Number is required for enrollment. Please update the employee record.</p>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Edit Employee</button>
+                              </div>
+                          </div>
+                          <div class="issue-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-exclamation-triangle"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Date of Birth Warning - Robert Johnson (AC-001247)</strong></p>
+                                  <p style="margin: 0 0 0.5rem;">Employee's date of birth indicates they are under 18. Please verify this information.</p>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Verify Data</button>
+                              </div>
+                          </div>
+                          <div class="issue-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-exclamation-triangle"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Address Format Warning - Sarah Davis (AC-001250)</strong></p>
+                                  <p style="margin: 0 0 0.5rem;">Employee's address may be incomplete. Please verify the address format.</p>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Verify Address</button>
+                              </div>
+                          </div>
+                          <div class="issue-item" style="display: flex; align-items: flex-start;">
+                              <div style="background-color: rgba(239, 68, 68, 0.1); color: #ef4444; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-times-circle"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Duplicate Employee ID - Thomas Wilson (AC-001252)</strong></p>
+                                  <p style="margin: 0 0 0.5rem;">Employee ID AC-001252 is assigned to multiple employees. Please assign a unique ID.</p>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Resolve Duplicate</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <script src="js/broker-portal.js"></script>
+<!-- Add this before the closing body tag -->
+<script src="js/top-right-toolbar.js"></script>
+</body>
+</html>

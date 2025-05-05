@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoKrunch - Intelligent Document Processing for Healthcare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="logo-container">
+            <img src="images/dokrunch-logo.svg" alt="DoKrunch Logo" class="logo">
+            <span class="logo-text">DoKrunch</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html" class="active">Dashboard</a></li>
+                <li><a href="carrier-documents.html">Carrier Documents</a></li>
+                <li><a href="enrollment.html">Enrollment </a></li>
+                <li><a href="document-processing.html">Document Processing</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="btn-notification"><i class="fas fa-bell"></i></button>
+            <div class="user-profile">
+                <img src="images/user-avatar.svg" alt="User Profile" class="avatar">
+                <span>Broker Admin</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="l1-menu">
+                    <li class="active">
+                        <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-building"></i> Employers</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">New Group Application</a></li>
+                            <li><a href="#">Existing Groups</a></li>
+                            <li><a href="#">Employer Documents</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-users"></i> Employees</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">Enrollment Forms</a></li>
+                            <li><a href="#">Waiver Forms</a></li>
+                            <li><a href="#">Employee Status</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-hospital"></i> Carriers</a>
+                        <ul class="l2-menu">
+                            <li><a href="carrier-documents.html">Carrier Documents</a></li>
+                            <li><a href="#">Medical Carriers (13)</a></li>
+                            <li><a href="#">Other Carriers (35)</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-file-alt"></i> Documents</a>
+                        <ul class="l2-menu">
+                            <li><a href="document-processing.html">Document Processing*</a></li>
+                            <li><a href="#">Document Repository</a></li>
+                            <li><a href="#">Form Templates</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">Enrollment Analytics*</a></li>
+                            <li><a href="#">Processing Metrics</a></li>
+                            <li><a href="#">Compliance Reports</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-cog"></i> Settings</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">User Management</a></li>
+                            <li><a href="#">System Configuration</a></li>
+                            <li><a href="#">AI Settings*</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <div class="date-filter">
+                    <span>Today: May 3, 2025</span>
+                    <button class="btn-filter"><i class="fas fa-calendar"></i> Filter</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                    <div class="stat-content">
+                        <h3>Active Employer Groups</h3>
+                        <p class="stat-number">42</p>
+                        <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 8% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-content">
+                        <h3>Pending Enrollments</h3>
+                        <p class="stat-number">156</p>
+                        <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 12% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-file-medical"></i></div>
+                    <div class="stat-content">
+                        <h3>Documents Processed</h3>
+                        <p class="stat-number">1,247</p>
+                        <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 23% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-content">
+                        <h3>Avg. Processing Time</h3>
+                        <p class="stat-number">1.8 min</p>
+                        <p class="stat-change positive"><i class="fas fa-arrow-down"></i> 35% from last month</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Group Applications -->
+            <div class="section-header">
+                <h2><i class="fas fa-building"></i> New Group Applications</h2>
+                <button class="btn-primary"><i class="fas fa-plus"></i> New Application</button>
+            </div>
+            <div class="applications-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Employer Name</th>
+                            <th>Carrier</th>
+                            <th>Employees</th>
+                            <th>Submitted</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Acme Corporation</td>
+                            <td>Blue Shield of California</td>
+                            <td>24/35</td>
+                            <td>Apr 28, 2025</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Edit Application"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Process Documents"><i class="fas fa-file-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TechStart Inc.</td>
+                            <td>Anthem Blue Cross</td>
+                            <td>18/18</td>
+                            <td>Apr 25, 2025</td>
+                            <td><span class="status submitted">Submitted</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Edit Application"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Process Documents"><i class="fas fa-file-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Global Logistics LLC</td>
+                            <td>Kaiser Permanente</td>
+                            <td>42/50</td>
+                            <td>Apr 22, 2025</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Edit Application"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Process Documents"><i class="fas fa-file-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sunshine Bakery</td>
+                            <td>UnitedHealthcare</td>
+                            <td>12/12</td>
+                            <td>Apr 20, 2025</td>
+                            <td><span class="status approved">Approved</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Edit Application"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Process Documents"><i class="fas fa-file-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Westside Consulting</td>
+                            <td>Cigna</td>
+                            <td>8/15</td>
+                            <td>Apr 18, 2025</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Edit Application"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Process Documents"><i class="fas fa-file-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- AI Insights Section -->
+            <div class="section-header">
+                <h2><i class="fas fa-robot"></i> AI Insights</h2>
+                <button class="btn-refresh"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <div class="insights-container">
+                <div class="insight-card">
+                    <h3>Document Processing Efficiency*</h3>
+                    <div class="chart-container">
+                        <canvas id="efficiencyChart"></canvas>
+                    </div>
+                    <p class="insight-summary">AI-powered document processing has reduced manual review time by 78% this month across all carriers.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Carrier Document Complexity*</h3>
+                    <div class="chart-container">
+                        <canvas id="complexityChart"></canvas>
+                    </div>
+                    <p class="insight-summary">Blue Shield of California forms have the highest completion rate after AI assistance.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Common Enrollment Issues*</h3>
+                    <ul class="issue-list">
+                        <li><span class="issue-count">32%</span> Missing dependent information</li>
+                        <li><span class="issue-count">24%</span> Incomplete medical history</li>
+                        <li><span class="issue-count">18%</span> Signature verification failures</li>
+                        <li><span class="issue-count">14%</span> Incorrect employer information</li>
+                        <li><span class="issue-count">12%</span> Other issues</li>
+                    </ul>
+                </div>
+                <div class="insight-card">
+                    <h3>Processing Time by Carrier*</h3>
+                    <div class="chart-container">
+                        <canvas id="carrierTimeChart"></canvas>
+                    </div>
+                    <p class="insight-summary">Kaiser Permanente forms are processed 35% faster than the average across all carriers.</p>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="section-header">
+                <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="activity-container">
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-file-upload"></i></div>
+                    <div class="activity-content">
+                        <p class="activity-text"><strong>New documents uploaded</strong> for Acme Corporation - 15 employee enrollment forms</p>
+                        <p class="activity-time">Today, 10:45 AM</p>
+                    </div>
+                    <div class="activity-action">
+                        <button class="btn-action">Process</button>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="activity-content">
+                        <p class="activity-text"><strong>Group application approved</strong> for Sunshine Bakery with UnitedHealthcare</p>
+                        <p class="activity-time">Today, 9:30 AM</p>
+                    </div>
+                    <div class="activity-action">
+                        <button class="btn-action">View</button>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="activity-content">
+                        <p class="activity-text"><strong>Missing information detected</strong> in 3 employee forms for Global Logistics LLC</p>
+                        <p class="activity-time">Yesterday, 4:15 PM</p>
+                    </div>
+                    <div class="activity-action">
+                        <button class="btn-action">Review</button>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-robot"></i></div>
+                    <div class="activity-content">
+                        <p class="activity-text"><strong>AI processing completed</strong> for TechStart Inc. - 18 employee forms processed</p>
+                        <p class="activity-time">Yesterday, 2:10 PM</p>
+                    </div>
+                    <div class="activity-action">
+                        <button class="btn-action">View</button>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-file-signature"></i></div>
+                    <div class="activity-content">
+                        <p class="activity-text"><strong>New group application started</strong> for Westside Consulting with Cigna</p>
+                        <p class="activity-time">Yesterday, 11:30 AM</p>
+                    </div>
+                    <div class="activity-action">
+                        <button class="btn-action">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>

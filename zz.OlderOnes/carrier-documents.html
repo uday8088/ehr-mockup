@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrier Documents - DoKrunch</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="logo-container">
+            <img src="images/dokrunch-logo.svg" alt="DoKrunch Logo" class="logo">
+            <span class="logo-text">DoKrunch</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="carrier-documents.html" class="active">Carrier Documents</a></li>
+                <li><a href="document-processing.html">Document Processing</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="btn-notification"><i class="fas fa-bell"></i></button>
+            <div class="user-profile">
+                <img src="images/user-avatar.svg" alt="User Profile" class="avatar">
+                <span>Broker Admin</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="l1-menu">
+                    <li>
+                        <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-building"></i> Employers</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">New Group Application</a></li>
+                            <li><a href="#">Existing Groups</a></li>
+                            <li><a href="#">Employer Documents</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-users"></i> Employees</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">Enrollment Forms</a></li>
+                            <li><a href="#">Waiver Forms</a></li>
+                            <li><a href="#">Employee Status</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#" class="has-submenu"><i class="fas fa-hospital"></i> Carriers</a>
+                        <ul class="l2-menu">
+                            <li class="active"><a href="carrier-documents.html">Carrier Documents</a></li>
+                            <li><a href="#">Medical Carriers (13)</a></li>
+                            <li><a href="#">Other Carriers (35)</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-file-alt"></i> Documents</a>
+                        <ul class="l2-menu">
+                            <li><a href="document-processing.html">Document Processing*</a></li>
+                            <li><a href="#">Document Repository</a></li>
+                            <li><a href="#">Form Templates</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">Enrollment Analytics*</a></li>
+                            <li><a href="#">Processing Metrics</a></li>
+                            <li><a href="#">Compliance Reports</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-submenu"><i class="fas fa-cog"></i> Settings</a>
+                        <ul class="l2-menu">
+                            <li><a href="#">User Management</a></li>
+                            <li><a href="#">System Configuration</a></li>
+                            <li><a href="#">AI Settings*</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Carrier Documents</h1>
+                <div class="search-container">
+                    <input type="text" placeholder="Search carriers or documents..." class="search-input">
+                    <button class="btn-search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <!-- Carrier Filter -->
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label>Carrier Type:</label>
+                    <div class="filter-options">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Medical (13)</button>
+                        <button class="filter-btn">Dental</button>
+                        <button class="filter-btn">Vision</button>
+                        <button class="filter-btn">Life</button>
+                        <button class="filter-btn">Other</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label>Document Type:</label>
+                    <div class="filter-options">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Employer Forms</button>
+                        <button class="filter-btn">Employee Forms</button>
+                        <button class="filter-btn">Waivers</button>
+                        <button class="filter-btn">Applications</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Carrier -->
+            <div class="featured-carrier">
+                <div class="carrier-header">
+                    <img src="images/blue-shield-ca-logo.svg" alt="Blue Shield of California Logo" class="carrier-logo">
+                    <h2>Blue Shield of California</h2>
+                    <span class="carrier-tag">Medical</span>
+                </div>
+                <div class="carrier-stats">
+                    <div class="stat">
+                        <span class="stat-value">24</span>
+                        <span class="stat-label">Required Forms</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">98%</span>
+                        <span class="stat-label">AI Recognition</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">1.5 min</span>
+                        <span class="stat-label">Avg. Processing</span>
+                    </div>
+                </div>
+                <div class="carrier-description">
+                    <p>Blue Shield of California offers a comprehensive range of health plans for employers of all sizes. The enrollment process requires specific documentation for both employers and employees.</p>
+                </div>
+            </div>
+
+            <!-- Document Categories -->
+            <div class="document-categories">
+                <div class="category-tabs">
+                    <button class="tab-btn active">Employer Documents</button>
+                    <button class="tab-btn">Employee Documents</button>
+                    <button class="tab-btn">Reference Materials</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="document-grid">
+                        <div class="document-card">
+                            <div class="document-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="document-info">
+                                <h3>Master Group Application</h3>
+                                <p>Required for all new group applications</p>
+                                <div class="document-meta">
+                                    <span><i class="fas fa-calendar"></i> Updated: Jan 2025</span>
+                                    <span><i class="fas fa-robot"></i> AI Enabled*</span>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" title="Preview"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="btn-icon" title="Process"><i class="fas fa-cogs"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="document-info">
+                                <h3>Employer Application Checklist</h3>
+                                <p>Overview of required documentation</p>
+                                <div class="document-meta">
+                                    <span><i class="fas fa-calendar"></i> Updated: Jan 2025</span>
+                                    <span><i class="fas fa-robot"></i> AI Enabled*</span>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" title="Preview"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="btn-icon" title="Process"><i class="fas fa-cogs"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="document-info">
+                                <h3>Business Verification Form</h3>
+                                <p>Required for all new businesses</p>
+                                <div class="document-meta">
+                                    <span><i class="fas fa-calendar"></i> Updated: Jan 2025</span>
+                                    <span><i class="fas fa-robot"></i> AI Enabled*</span>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" title="Preview"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="btn-icon" title="Process"><i class="fas fa-cogs"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="document-info">
+                                <h3>Employer Contribution Form</h3>
+                                <p>Details employer premium contributions</p>
+                                <div class="document-meta">
+                                    <span><i class="fas fa-calendar"></i> Updated: Jan 2025</span>
+                                    <span><i class="fas fa-robot"></i> AI Enabled*</span>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" title="Preview"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="btn-icon" title="Process"><i class="fas fa-cogs"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="document-info">
+                                <h3>Plan Selection Form</h3>
+                                <p>Employer plan options and selections</p>
+                                <div class="document-meta">
+                                    <span><i class="fas fa-calendar"></i> Updated: Jan 2025</span>
+                                    <span><i class="fas fa-robot"></i> AI Enabled*</span>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" title="Preview"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="btn-icon" title="Process"><i class="fas fa-cogs"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="document-info">
+                                <h3>DE-9C Quarterly Wage Report</h3>
+                                <p>Required for group eligibility verification</p>
+                                <div class="document-meta">
+                                    <span><i class="fas fa-calendar"></i> Updated: Jan 2025</span>
+                                    <span><i class="fas fa-robot"></i> AI Enabled*</span>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" title="Preview"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="btn-icon" title="Process"><i class="fas fa-cogs"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Document Analysis -->
+            <div class="section-header">
+                <h2><i class="fas fa-robot"></i> AI Document Analysis*</h2>
+                <button class="btn-primary"><i class="fas fa-upload"></i> Upload Documents</button>
+            </div>
+            <div class="ai-analysis-container">
+                <div class="ai-analysis-card">
+                    <div class="ai-header">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Document Intelligence</h3>
+                    </div>
+                    <div class="ai-content">
+                        <p>DoKrunch AI has analyzed all Blue Shield of California documents and identified:</p>
+                        <ul class="ai-findings">
+                            <li>24 unique form types with 312 distinct data fields</li>
+                            <li>98.7% field recognition accuracy across all documents</li>
+                            <li>Hyperlinked documents automatically detected and processed</li>
+                            <li>Form variations tracked across quarterly updates</li>
+                        </ul>
+                        <div class="ai-action">
+                            <button class="btn-secondary">View Full Analysis</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-analysis-card">
+                    <div class="ai-header">
+                        <i class="fas fa-magic"></i>
+                        <h3>ProApply Integration</h3>
+                    </div>
+                    <div class="ai-content">
+                        <p>DoKrunch can integrate with your existing ProApply system to:</p>
+                        <ul class="ai-findings">
+                            <li>Automatically extract data from ProApply submissions</li>
+                            <li>Validate form completeness before submission</li>
+                            <li>Reduce duplicate data entry by 94%</li>
+                            <li>Maintain audit trail between systems</li>
+                        </ul>
+                        <div class="ai-action">
+                            <button class="btn-secondary">Configure Integration</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>

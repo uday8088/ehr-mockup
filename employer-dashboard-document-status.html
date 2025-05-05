@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Status - DoKrunch Employer Admin Portal</title>
+  <link rel="stylesheet" href="css/employer-portal.css">
+  <link rel="stylesheet" href="css/ai-info-dot.css">
+  <link rel="stylesheet" href="css/top-right-toolbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="logo-container">
+      <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+      <div class="page-title" style="display: flex; align-items: center;">
+        <h1>Document Status</h1>
+        
+        <!-- AI Info Tooltip - in top nav next to title -->
+        <div class="ai-tooltip" style="margin-left: 10px;">
+          <div class="ai-info-dot">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <div class="ai-tooltip-content">
+            <h4 class="ai-tooltip-title">AI-Driven Improvements</h4>
+            <p class="ai-tooltip-text">Our AI now automatically categorizes and prioritizes documents based on their processing status, helping you focus on critical items first.</p>
+            <div class="ai-metrics">
+              <div class="ai-metric-item">
+                <span class="ai-metric-label">Document Processing Time:</span>
+                <span class="ai-metric-value">↓ 37%</span>
+              </div>
+              <div class="ai-metric-item">
+                <span class="ai-metric-label">Error Detection Rate:</span>
+                <span class="ai-metric-value">↑ 52%</span>
+              </div>
+              <div class="ai-metric-item">
+                <span class="ai-metric-label">Processing Accuracy:</span>
+                <span class="ai-metric-value">99.3%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Top Right Toolbar -->
+    <div class="top-right-toolbar">
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search...">
+      </div>
+      
+      <div class="theme-selector">
+        <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+          <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-dropdown">
+          <button class="theme-option theme-light" data-theme="light">
+            <span class="theme-color-preview"></span>Light
+          </button>
+          <button class="theme-option theme-dark" data-theme="dark">
+            <span class="theme-color-preview"></span>Dark
+          </button>
+          <button class="theme-option theme-financial" data-theme="financial">
+            <span class="theme-color-preview"></span>Financial
+          </button>
+          <button class="theme-option theme-colorful" data-theme="colorful">
+            <span class="theme-color-preview"></span>Colorful
+          </button>
+          <button class="theme-option theme-high-contrast" data-theme="high-contrast">
+            <span class="theme-color-preview"></span>High Contrast
+          </button>
+        </div>
+      </div>
+      
+      <div class="font-size-selector">
+        <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+          <i class="fas fa-text-height"></i>
+        </button>
+        <div class="font-size-dropdown">
+          <button class="font-size-option" data-size="small">
+            <i class="fas fa-font" style="font-size: 12px;"></i> Small
+          </button>
+          <button class="font-size-option" data-size="medium">
+            <i class="fas fa-font" style="font-size: 14px;"></i> Medium
+          </button>
+          <button class="font-size-option" data-size="large">
+            <i class="fas fa-font" style="font-size: 16px;"></i> Large
+          </button>
+        </div>
+      </div>
+      
+      <button class="toolbar-icon" id="notification-btn" title="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="notification-badge">3</span>
+      </button>
+      
+      <div class="user-avatar">
+        EA
+      </div>
+      
+      <button class="logout-btn" id="logout-btn" title="Logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <ul class="l1-menu">
+          <li class="active">
+            <a href="employer-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="employer-document-processing.html"><i class="fas fa-file-alt"></i> Document Processing</a>
+          </li>
+          <li>
+            <a href="employer-enrollment-management.html"><i class="fas fa-users"></i> Enrollment Management</a>
+          </li>
+          <li>
+            <a href="employer-employee-management.html"><i class="fas fa-user-tie"></i> Employee Management</a>
+          </li>
+          <li>
+            <a href="employer-carrier-management.html"><i class="fas fa-hospital"></i> Carrier Management</a>
+          </li>
+          <li>
+            <a href="employer-document-repository.html"><i class="fas fa-archive"></i> Document Repository</a>
+          </li>
+          <li>
+            <a href="employer-analytics-reporting.html"><i class="fas fa-chart-bar"></i> Analytics & Reporting</a>
+          </li>
+          <li>
+            <a href="employer-administration.html"><i class="fas fa-cog"></i> Administration</a>
+          </li>
+          <li>
+            <a href="employer-ai-insights.html"><i class="fas fa-robot"></i> AI Insights</a>
+          </li>
+          <li>
+            <a href="employer-help-support.html"><i class="fas fa-question-circle"></i> Help & Support</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="login-info">
+        <div class="login-details">
+          <span>Logged in as:</span>
+          <strong>Employer Admin</strong>
+          <span class="login-time">Last login: Today, 10:15 AM</span>
+          <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- L2 Menu -->
+      <div class="l2-menu-container">
+        <nav class="l2-menu">
+          <a href="employer-dashboard-overview.html">Overview</a>
+          <a href="employer-dashboard-action-items.html">Action Items</a>
+          <a href="employer-dashboard-document-status.html" class="active">Document Status</a>
+          <a href="employer-dashboard-enrollment-progress.html">Enrollment Progress</a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="document-status-content">
+        <!-- Document Status Summary -->
+        <div class="status-summary">
+          <div class="summary-card">
+            <div class="summary-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="summary-details">
+              <h3>Total Documents</h3>
+              <div class="summary-numbers">
+                <div class="main-number">247</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="summary-details">
+              <h3>Processed</h3>
+              <div class="summary-numbers">
+                <div class="main-number">183</div>
+                <div class="sub-number">74%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="summary-details">
+              <h3>Pending</h3>
+              <div class="summary-numbers">
+                <div class="main-number">41</div>
+                <div class="sub-number">17%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="summary-details">
+              <h3>Exceptions</h3>
+              <div class="summary-numbers">
+                <div class="main-number">23</div>
+                <div class="sub-number">9%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Document Status Table -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Document Status</h2>
+            <div>
+              <button class="btn-secondary"><i class="fas fa-filter"></i> Filter</button>
+              <button class="btn-primary"><i class="fas fa-download"></i> Export</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+              <div class="filter-group">
+                <span class="filter-label">Document Type:</span>
+                <select class="form-control">
+                  <option value="all">All Types</option>
+                  <option value="enrollment">Enrollment Forms</option>
+                  <option value="waiver">Waiver Forms</option>
+                  <option value="dependent">Dependent Verification</option>
+                  <option value="carrier">Carrier Documents</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <span class="filter-label">Status:</span>
+                <select class="form-control">
+                  <option value="all">All Statuses</option>
+                  <option value="processed">Processed</option>
+                  <option value="pending">Pending</option>
+                  <option value="exception">Exception</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <span class="filter-label">Date Range:</span>
+                <select class="form-control">
+                  <option value="all">All Time</option>
+                  <option value="today">Today</option>
+                  <option value="week">This Week</option>
+                  <option value="month">This Month</option>
+                  <option value="custom">Custom Range</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Document ID</th>
+                    <th>Document Name</th>
+                    <th>Type</th>
+                    <th>Employee</th>
+                    <th>Uploaded</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>DOC-2023-1845</td>
+                    <td>Enrollment Form</td>
+                    <td>Enrollment</td>
+                    <td>John Smith</td>
+                    <td>Today, 9:45 AM</td>
+                    <td><span class="status-badge status-processed"><i class="fas fa-circle"></i> Processed</span></td>
+                    <td>
+                      <button class="btn-action">View</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DOC-2023-1844</td>
+                    <td>Dependent Verification</td>
+                    <td>Dependent</td>
+                    <td>Sarah Johnson</td>
+                    <td>Today, 9:30 AM</td>
+                    <td><span class="status-badge status-exception"><i class="fas fa-circle"></i> Exception</span></td>
+                    <td>
+                      <button class="btn-action">Resolve</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DOC-2023-1843</td>
+                    <td>Medical Waiver</td>
+                    <td>Waiver</td>
+                    <td>Michael Rodriguez</td>
+                    <td>Today, 9:15 AM</td>
+                    <td><span class="status-badge status-pending"><i class="fas fa-circle"></i> Pending</span></td>
+                    <td>
+                      <button class="btn-action">Process</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DOC-2023-1842</td>
+                    <td>Enrollment Form</td>
+                    <td>Enrollment</td>
+                    <td>Emily Wilson</td>
+                    <td>Today, 9:00 AM</td>
+                    <td><span class="status-badge status-processed"><i class="fas fa-circle"></i> Processed</span></td>
+                    <td>
+                      <button class="btn-action">View</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DOC-2023-1841</td>
+                    <td>Dental Enrollment</td>
+                    <td>Enrollment</td>
+                    <td>Robert Brown</td>
+                    <td>Yesterday, 4:45 PM</td>
+                    <td><span class="status-badge status-processed"><i class="fas fa-circle"></i> Processed</span></td>
+                    <td>
+                      <button class="btn-action">View</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DOC-2023-1840</td>
+                    <td>Vision Enrollment</td>
+                    <td>Enrollment</td>
+                    <td>Jessica Davis</td>
+                    <td>Yesterday, 4:30 PM</td>
+                    <td><span class="status-badge status-exception"><i class="fas fa-circle"></i> Exception</span></td>
+                    <td>
+                      <button class="btn-action">Resolve</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DOC-2023-1839</td>
+                    <td>Life Insurance Form</td>
+                    <td>Enrollment</td>
+                    <td>David Johnson</td>
+                    <td>Yesterday, 4:15 PM</td>
+                    <td><span class="status-badge status-pending"><i class="fas fa-circle"></i> Pending</span></td>
+                    <td>
+                      <button class="btn-action">Process</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DOC-2023-1838</td>
+                    <td>Dependent Verification</td>
+                    <td>Dependent</td>
+                    <td>Jennifer Lee</td>
+                    <td>Yesterday, 4:00 PM</td>
+                    <td><span class="status-badge status-processed"><i class="fas fa-circle"></i> Processed</span></td>
+                    <td>
+                      <button class="btn-action">View</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="pagination">
+              <button class="pagination-btn"><i class="fas fa-angle-double-left"></i></button>
+              <button class="pagination-btn"><i class="fas fa-angle-left"></i></button>
+              <button class="pagination-btn active">1</button>
+              <button class="pagination-btn">2</button>
+              <button class="pagination-btn">3</button>
+              <button class="pagination-btn"><i class="fas fa-angle-right"></i></button>
+              <button class="pagination-btn"><i class="fas fa-angle-double-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/employer-portal.js"></script>
+  <script src="js/top-right-toolbar.js"></script>
+</body>
+</html>

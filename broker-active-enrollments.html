@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Active Enrollments - DoKrunch Broker Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Add this to your head section -->
+<link rel="stylesheet" href="css/top-right-toolbar.css">
+  <style>
+    /* Enrollment Menu Styles */
+    .enrollment-menu {
+        width: 100%;
+    }
+    
+    .enrollment-menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .enrollment-menu-item {
+        flex: 1;
+    }
+    
+    .enrollment-menu-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        color: var(--text-color);
+        transition: all 0.2s ease;
+        border: 1px solid var(--border-color);
+        height: 100%;
+        text-align: center;
+    }
+    
+    .enrollment-menu-link:hover {
+        background-color: rgba(var(--primary-rgb), 0.05);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .enrollment-menu-item.active .enrollment-menu-link {
+        background-color: rgba(var(--primary-rgb), 0.1);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+    
+    .enrollment-menu-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        margin-bottom: 0.75rem;
+    }
+    
+    .enrollment-menu-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .enrollment-menu-desc {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+    
+    /* Status Badges */
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .status-badge i {
+        margin-right: 0.25rem;
+    }
+    
+    .status-active {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+    }
+    
+    .status-pending {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+    }
+    
+    .status-completed {
+        background-color: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+    }
+    
+    .status-late {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+    }
+    
+    /* Enrollment Cards */
+    .enrollment-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .enrollment-card {
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        transition: all 0.2s ease;
+    }
+    
+    .enrollment-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .enrollment-card-header {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .enrollment-card-title {
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .enrollment-card-body {
+        padding: 1rem;
+    }
+    
+    .enrollment-card-footer {
+        padding: 1rem;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .enrollment-stats {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .enrollment-stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .enrollment-stat-value {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+    
+    .enrollment-stat-label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+    
+    .progress-container {
+        width: 100%;
+        height: 0.5rem;
+        background-color: var(--border-color);
+        border-radius: 1rem;
+        margin: 0.75rem 0;
+        overflow: hidden;
+    }
+    
+    .progress-bar {
+        height: 100%;
+        border-radius: 1rem;
+    }
+    
+    /* Filter Controls */
+    .filter-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .filter-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    
+    /* For smaller screens */
+    @media (max-width: 768px) {
+        .enrollment-menu-list {
+            flex-direction: column;
+        }
+        
+        .enrollment-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+      <div class="logo-container">
+          <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+          <div class="page-title">
+              <h1>Active Enrollments</h1>
+          </div>
+      </div>
+<!-- Add this where you want the toolbar to appear (typically in the header) -->
+<div class="top-right-toolbar">
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search loans...">
+  </div>
+  
+  <div class="theme-selector">
+    <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+      <i class="fas fa-palette"></i>
+    </button>
+    <div class="theme-dropdown">
+      <button class="theme-option" data-theme="light">Light</button>
+      <button class="theme-option" data-theme="dark">Dark</button>
+      <button class="theme-option" data-theme="financial">Financial</button>
+      <button class="theme-option" data-theme="colorful">Colorful</button>
+      <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+    </div>
+  </div>
+  
+  <div class="font-size-selector">
+    <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+      <i class="fas fa-text-height"></i>
+    </button>
+    <div class="font-size-dropdown">
+      <button class="font-size-option" data-size="small">
+        <i class="fas fa-font"></i> Small
+      </button>
+      <button class="font-size-option" data-size="medium">
+        <i class="fas fa-font"></i> Medium
+      </button>
+      <button class="font-size-option" data-size="large">
+        <i class="fas fa-font"></i> Large
+      </button>
+    </div>
+  </div>
+  
+  <button class="toolbar-icon" title="Notifications">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+  </button>
+  
+  <div class="user-avatar">
+    SJ
+  </div>
+  
+  <button class="logout-btn" id="logout-btn" title="Logout">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</div>
+  </header>
+
+  <div class="main-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="l1-menu">
+                  <li>
+                      <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+                  </li>
+                  <li class="active">
+                      <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+                  </li>
+                  <li>
+                      <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+                  </li>
+                  <li>
+                      <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+                  </li>
+                  <li>
+                      <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="login-info">
+              <div class="login-details">
+                  <span>Logged in as:</span>
+                  <strong>Broker Admin</strong>
+                  <span class="login-time">Last login: Today, 9:45 AM</span>
+                  <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+              </div>
+          </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+          <!-- L2 Menu -->
+          <div class="l2-menu-container">
+              <nav class="l2-menu">
+                  <a href="broker-active-enrollments.html" class="active">Active Enrollments</a>
+                  <a href="broker-census-management.html">Census Management</a>
+                  <a href="broker-form-processing.html">Form Processing</a>
+                  <a href="broker-waivers.html">Waivers</a>
+              </nav>
+          </div>
+
+          <!-- Enrollment Content -->
+          <div class="enrollment-content">
+              <!-- Enrollment Navigation -->
+              <div class="card" style="margin-bottom: 1.5rem;">
+                  <div class="card-body">
+                      <nav class="enrollment-menu">
+                          <ul class="enrollment-menu-list">
+                              <li class="enrollment-menu-item active">
+                                  <a href="#all-enrollments" class="enrollment-menu-link">
+                                      <div class="enrollment-menu-icon" style="background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                                          <i class="fas fa-calendar-alt fa-lg"></i>
+                                      </div>
+                                      <span class="enrollment-menu-title">All Enrollments</span>
+                                      <span class="enrollment-menu-desc">View all active periods</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item">
+                                  <a href="#open-enrollment" class="enrollment-menu-link">
+                                      <div class="enrollment-menu-icon" style="background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
+                                          <i class="fas fa-door-open fa-lg"></i>
+                                      </div>
+                                      <span class="enrollment-menu-title">Open Enrollment</span>
+                                      <span class="enrollment-menu-desc">Annual enrollment periods</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item">
+                                  <a href="#new-hires" class="enrollment-menu-link">
+                                      <div class="enrollment-menu-icon" style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                                          <i class="fas fa-user-plus fa-lg"></i>
+                                      </div>
+                                      <span class="enrollment-menu-title">New Hires</span>
+                                      <span class="enrollment-menu-desc">Recently hired employees</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item">
+                                  <a href="#life-events" class="enrollment-menu-link">
+                                      <div class="enrollment-menu-icon" style="background-color: rgba(236, 72, 153, 0.1); color: #ec4899;">
+                                          <i class="fas fa-heart fa-lg"></i>
+                                      </div>
+                                      <span class="enrollment-menu-title">Life Events</span>
+                                      <span class="enrollment-menu-desc">Qualifying life changes</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </nav>
+                  </div>
+              </div>
+
+              <!-- Enrollment Overview -->
+              <div class="card">
+                  <div class="card-header">
+                      <h2>Active Enrollment Periods</h2>
+                      <div>
+                          <button class="btn-primary"><i class="fas fa-plus"></i> New Enrollment</button>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <!-- Filter Controls -->
+                      <div class="filter-controls">
+                          <div class="filter-group">
+                              <span class="filter-label">Status:</span>
+                              <select class="form-control">
+                                  <option value="all">All Statuses</option>
+                                  <option value="active">Active</option>
+                                  <option value="pending">Pending</option>
+                                  <option value="completed">Completed</option>
+                                  <option value="late">Late</option>
+                              </select>
+                          </div>
+                          <div class="filter-group">
+                              <span class="filter-label">Client:</span>
+                              <select class="form-control">
+                                  <option value="all">All Clients</option>
+                                  <option value="acme">Acme Corporation</option>
+                                  <option value="techstart">TechStart Inc.</option>
+                                  <option value="global">Global Logistics LLC</option>
+                                  <option value="sunshine">Sunshine Bakery</option>
+                                  <option value="metro">Metro Healthcare</option>
+                              </select>
+                          </div>
+                          <div class="filter-group">
+                              <span class="filter-label">Type:</span>
+                              <select class="form-control">
+                                  <option value="all">All Types</option>
+                                  <option value="open">Open Enrollment</option>
+                                  <option value="newhire">New Hire</option>
+                                  <option value="life">Life Event</option>
+                              </select>
+                          </div>
+                          <div class="filter-group">
+                              <span class="filter-label">Date Range:</span>
+                              <input type="date" class="form-control">
+                              <span>to</span>
+                              <input type="date" class="form-control">
+                          </div>
+                      </div>
+
+                      <!-- Enrollment Cards -->
+                      <div class="enrollment-cards">
+                          <!-- Acme Corporation -->
+                          <div class="enrollment-card">
+                              <div class="enrollment-card-header">
+                                  <h3 class="enrollment-card-title">Acme Corporation</h3>
+                                  <span class="status-badge status-active">
+                                      <i class="fas fa-circle"></i> Active
+                                  </span>
+                              </div>
+                              <div class="enrollment-card-body">
+                                  <div class="enrollment-details">
+                                      <p><strong>Type:</strong> Open Enrollment</p>
+                                      <p><strong>Period:</strong> May 1 - May 31, 2023</p>
+                                      <p><strong>Eligible Employees:</strong> 245</p>
+                                      
+                                      <div class="progress-container">
+                                          <div class="progress-bar" style="width: 68%; background-color: #10b981;"></div>
+                                      </div>
+                                      <p style="text-align: center; margin: 0; font-size: 0.8rem;">68% Complete (167/245)</p>
+                                      
+                                      <div class="enrollment-stats">
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #10b981;">167</span>
+                                              <span class="enrollment-stat-label">Completed</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #f59e0b;">43</span>
+                                              <span class="enrollment-stat-label">In Progress</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #ef4444;">35</span>
+                                              <span class="enrollment-stat-label">Not Started</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="enrollment-card-footer">
+                                  <span style="font-size: 0.8rem;">Updated: Today, 10:23 AM</span>
+                                  <button class="btn-secondary"><i class="fas fa-arrow-right"></i> Manage</button>
+                              </div>
+                          </div>
+                          
+                          <!-- TechStart Inc. -->
+                          <div class="enrollment-card">
+                              <div class="enrollment-card-header">
+                                  <h3 class="enrollment-card-title">TechStart Inc.</h3>
+                                  <span class="status-badge status-pending">
+                                      <i class="fas fa-circle"></i> Pending
+                                  </span>
+                              </div>
+                              <div class="enrollment-card-body">
+                                  <div class="enrollment-details">
+                                      <p><strong>Type:</strong> Open Enrollment</p>
+                                      <p><strong>Period:</strong> June 1 - June 30, 2023</p>
+                                      <p><strong>Eligible Employees:</strong> 78</p>
+                                      
+                                      <div class="progress-container">
+                                          <div class="progress-bar" style="width: 0%; background-color: #f59e0b;"></div>
+                                      </div>
+                                      <p style="text-align: center; margin: 0; font-size: 0.8rem;">0% Complete (0/78)</p>
+                                      
+                                      <div class="enrollment-stats">
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #10b981;">0</span>
+                                              <span class="enrollment-stat-label">Completed</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #f59e0b;">0</span>
+                                              <span class="enrollment-stat-label">In Progress</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #ef4444;">78</span>
+                                              <span class="enrollment-stat-label">Not Started</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="enrollment-card-footer">
+                                  <span style="font-size: 0.8rem;">Updated: Yesterday, 3:45 PM</span>
+                                  <button class="btn-secondary"><i class="fas fa-arrow-right"></i> Manage</button>
+                              </div>
+                          </div>
+                          
+                          <!-- Global Logistics LLC -->
+                          <div class="enrollment-card">
+                              <div class="enrollment-card-header">
+                                  <h3 class="enrollment-card-title">Global Logistics LLC</h3>
+                                  <span class="status-badge status-active">
+                                      <i class="fas fa-circle"></i> Active
+                                  </span>
+                              </div>
+                              <div class="enrollment-card-body">
+                                  <div class="enrollment-details">
+                                      <p><strong>Type:</strong> New Hire Enrollment</p>
+                                      <p><strong>Period:</strong> Ongoing</p>
+                                      <p><strong>Eligible Employees:</strong> 12</p>
+                                      
+                                      <div class="progress-container">
+                                          <div class="progress-bar" style="width: 33%; background-color: #f59e0b;"></div>
+                                      </div>
+                                      <p style="text-align: center; margin: 0; font-size: 0.8rem;">33% Complete (4/12)</p>
+                                      
+                                      <div class="enrollment-stats">
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #10b981;">4</span>
+                                              <span class="enrollment-stat-label">Completed</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #f59e0b;">5</span>
+                                              <span class="enrollment-stat-label">In Progress</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #ef4444;">3</span>
+                                              <span class="enrollment-stat-label">Not Started</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="enrollment-card-footer">
+                                  <span style="font-size: 0.8rem;">Updated: Today, 9:15 AM</span>
+                                  <button class="btn-secondary"><i class="fas fa-arrow-right"></i> Manage</button>
+                              </div>
+                          </div>
+                          
+                          <!-- Sunshine Bakery -->
+                          <div class="enrollment-card">
+                              <div class="enrollment-card-header">
+                                  <h3 class="enrollment-card-title">Sunshine Bakery</h3>
+                                  <span class="status-badge status-completed">
+                                      <i class="fas fa-circle"></i> Completed
+                                  </span>
+                              </div>
+                              <div class="enrollment-card-body">
+                                  <div class="enrollment-details">
+                                      <p><strong>Type:</strong> Open Enrollment</p>
+                                      <p><strong>Period:</strong> April 1 - April 30, 2023</p>
+                                      <p><strong>Eligible Employees:</strong> 35</p>
+                                      
+                                      <div class="progress-container">
+                                          <div class="progress-bar" style="width: 100%; background-color: #3b82f6;"></div>
+                                      </div>
+                                      <p style="text-align: center; margin: 0; font-size: 0.8rem;">100% Complete (35/35)</p>
+                                      
+                                      <div class="enrollment-stats">
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #10b981;">35</span>
+                                              <span class="enrollment-stat-label">Completed</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #f59e0b;">0</span>
+                                              <span class="enrollment-stat-label">In Progress</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #ef4444;">0</span>
+                                              <span class="enrollment-stat-label">Not Started</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="enrollment-card-footer">
+                                  <span style="font-size: 0.8rem;">Updated: May 2, 2023</span>
+                                  <button class="btn-secondary"><i class="fas fa-arrow-right"></i> View Report</button>
+                              </div>
+                          </div>
+                          
+                          <!-- Metro Healthcare -->
+                          <div class="enrollment-card">
+                              <div class="enrollment-card-header">
+                                  <h3 class="enrollment-card-title">Metro Healthcare</h3>
+                                  <span class="status-badge status-late">
+                                      <i class="fas fa-circle"></i> Late
+                                  </span>
+                              </div>
+                              <div class="enrollment-card-body">
+                                  <div class="enrollment-details">
+                                      <p><strong>Type:</strong> Life Event Enrollment</p>
+                                      <p><strong>Period:</strong> April 15 - May 15, 2023</p>
+                                      <p><strong>Eligible Employees:</strong> 8</p>
+                                      
+                                      <div class="progress-container">
+                                          <div class="progress-bar" style="width: 75%; background-color: #ef4444;"></div>
+                                      </div>
+                                      <p style="text-align: center; margin: 0; font-size: 0.8rem;">75% Complete (6/8)</p>
+                                      
+                                      <div class="enrollment-stats">
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #10b981;">6</span>
+                                              <span class="enrollment-stat-label">Completed</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #f59e0b;">1</span>
+                                              <span class="enrollment-stat-label">In Progress</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #ef4444;">1</span>
+                                              <span class="enrollment-stat-label">Not Started</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="enrollment-card-footer">
+                                  <span style="font-size: 0.8rem;">Updated: Today, 8:30 AM</span>
+                                  <button class="btn-secondary"><i class="fas fa-arrow-right"></i> Manage</button>
+                              </div>
+                          </div>
+                          
+                          <!-- Riverdale School District -->
+                          <div class="enrollment-card">
+                              <div class="enrollment-card-header">
+                                  <h3 class="enrollment-card-title">Riverdale School District</h3>
+                                  <span class="status-badge status-active">
+                                      <i class="fas fa-circle"></i> Active
+                                  </span>
+                              </div>
+                              <div class="enrollment-card-body">
+                                  <div class="enrollment-details">
+                                      <p><strong>Type:</strong> Open Enrollment</p>
+                                      <p><strong>Period:</strong> May 15 - June 15, 2023</p>
+                                      <p><strong>Eligible Employees:</strong> 112</p>
+                                      
+                                      <div class="progress-container">
+                                          <div class="progress-bar" style="width: 45%; background-color: #10b981;"></div>
+                                      </div>
+                                      <p style="text-align: center; margin: 0; font-size: 0.8rem;">45% Complete (50/112)</p>
+                                      
+                                      <div class="enrollment-stats">
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #10b981;">50</span>
+                                              <span class="enrollment-stat-label">Completed</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #f59e0b;">32</span>
+                                              <span class="enrollment-stat-label">In Progress</span>
+                                          </div>
+                                          <div class="enrollment-stat">
+                                              <span class="enrollment-stat-value" style="color: #ef4444;">30</span>
+                                              <span class="enrollment-stat-label">Not Started</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="enrollment-card-footer">
+                                  <span style="font-size: 0.8rem;">Updated: Today, 11:45 AM</span>
+                                  <button class="btn-secondary"><i class="fas fa-arrow-right"></i> Manage</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- AI Insights -->
+              <div class="card" style="margin-top: 1.5rem;">
+                  <div class="card-header">
+                      <h2><i class="fas fa-robot" style="color: #3b82f6;"></i> AI Enrollment Insights</h2>
+                  </div>
+                  <div class="card-body">
+                      <div class="ai-insights">
+                          <div class="insight-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(59, 130, 246, 0.1); color: #3b82f6; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-chart-line"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Enrollment Trend Analysis</strong></p>
+                                  <p style="margin: 0 0 0.5rem;">Acme Corporation's enrollment completion rate is 15% higher than the average for companies of similar size. Their engagement strategy could be applied to other clients.</p>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">View Analysis</button>
+                              </div>
+                          </div>
+                          <div class="insight-item" style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                              <div style="background-color: rgba(239, 68, 68, 0.1); color: #ef4444; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-exclamation-triangle"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>At-Risk Enrollment Alert</strong></p>
+                                  <p style="margin: 0 0 0.5rem;">Metro Healthcare has 2 employees who may miss their enrollment deadline. Consider sending a targeted reminder to these individuals.</p>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Send Reminders</button>
+                              </div>
+                          </div>
+                          <div class="insight-item" style="display: flex; align-items: flex-start;">
+                              <div style="background-color: rgba(16, 185, 129, 0.1); color: #10b981; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                  <i class="fas fa-lightbulb"></i>
+                              </div>
+                              <div style="flex: 1;">
+                                  <p style="margin: 0 0 0.25rem;"><strong>Optimization Opportunity</strong></p>
+                                  <p style="margin: 0 0 0.5rem;">Based on historical data, scheduling TechStart Inc.'s enrollment communications in the morning could increase participation by up to 22%.</p>
+                                  <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Optimize Schedule</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <script src="js/broker-portal.js"></script>
+<!-- Add this before the closing body tag -->
+<script src="js/top-right-toolbar.js"></script>
+</body>
+</html>

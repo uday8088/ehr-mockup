@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Items - DoKrunch Employer Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="css/ai-info-dot.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/top-right-toolbar.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+      <div class="logo-container">
+          <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+          <div class="page-title" style="display: flex; align-items: center;">
+              <h1>Action Items</h1>
+              
+              <!-- AI Info Tooltip - in top nav next to title -->
+              <div class="ai-tooltip" style="margin-left: 10px;">
+                  <div class="ai-info-dot">
+                      <i class="fas fa-lightbulb"></i>
+                  </div>
+                  <div class="ai-tooltip-content">
+                      <h4 class="ai-tooltip-title">AI-Driven Improvements</h4>
+                      <p class="ai-tooltip-text">Our AI now prioritizes action items based on deadlines, dependencies, and business impact, helping you focus on what matters most.</p>
+                      <div class="ai-metrics">
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Task Completion Rate:</span>
+                              <span class="ai-metric-value">↑ 38%</span>
+                          </div>
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Deadline Compliance:</span>
+                              <span class="ai-metric-value">↑ 52%</span>
+                          </div>
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Time Management:</span>
+                              <span class="ai-metric-value">↑ 45%</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Top Right Toolbar -->
+      <div class="top-right-toolbar">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search...">
+        </div>
+        
+        <div class="theme-selector">
+          <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+            <i class="fas fa-palette"></i>
+          </button>
+          <div class="theme-dropdown">
+            <button class="theme-option" data-theme="light">Light</button>
+            <button class="theme-option" data-theme="dark">Dark</button>
+            <button class="theme-option" data-theme="financial">Financial</button>
+            <button class="theme-option" data-theme="colorful">Colorful</button>
+            <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+          </div>
+        </div>
+        
+        <div class="font-size-selector">
+          <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+            <i class="fas fa-text-height"></i>
+          </button>
+          <div class="font-size-dropdown">
+            <button class="font-size-option" data-size="small">
+              <i class="fas fa-font"></i> Small
+            </button>
+            <button class="font-size-option" data-size="medium">
+              <i class="fas fa-font"></i> Medium
+            </button>
+            <button class="font-size-option" data-size="large">
+              <i class="fas fa-font"></i> Large
+            </button>
+          </div>
+        </div>
+        
+        <button class="toolbar-icon" title="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">5</span>
+        </button>
+        
+        <div class="user-avatar">
+          EA
+        </div>
+        
+        <button class="logout-btn" id="logout-btn" title="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+  </header>
+
+  <div class="main-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="l1-menu">
+                  <li class="active">
+                      <a href="employer-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="employer-employees.html"><i class="fas fa-users"></i> Employees</a>
+                  </li>
+                  <li>
+                      <a href="employer-benefits.html"><i class="fas fa-heart"></i> Benefits</a>
+                  </li>
+                  <li>
+                      <a href="employer-documents.html"><i class="fas fa-file-alt"></i> Documents</a>
+                  </li>
+                  <li>
+                      <a href="employer-enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment</a>
+                  </li>
+                  <li>
+                      <a href="employer-reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="login-info">
+              <div class="login-details">
+                  <span>Logged in as:</span>
+                  <strong>Employer Admin</strong>
+                  <span class="login-time">Last login: Today, 10:15 AM</span>
+                  <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+              </div>
+          </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+          <!-- L2 Menu -->
+          <div class="l2-menu-container">
+              <nav class="l2-menu">
+                  <a href="employer-dashboard.html">Overview</a>
+                  <a href="employer-action-items.html" class="active">Action Items</a>
+                  <a href="employer-document-status.html">Document Status</a>
+                  <a href="employer-enrollment-progress.html">Enrollment Progress</a>
+              </nav>
+          </div>
+
+          <!-- Main Content -->
+          <div class="action-items-content">
+              <!-- Action Items Categories -->
+              <div class="card" style="margin-bottom: 1.5rem; height: auto;">
+                  <div class="card-body" style="padding: 1rem;">
+                      <nav class="enrollment-menu">
+                          <ul class="enrollment-menu-list" style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem;">
+                              <li class="enrollment-menu-item active" style="flex: 1;">
+                                  <a href="#all-tasks" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center; background-color: rgba(59, 130, 246, 0.1); border-color: var(--primary-color);">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                                          <i class="fas fa-tasks fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">All Tasks</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">View all action items</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item" style="flex: 1;">
+                                  <a href="#high-priority" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(239, 68, 68, 0.1); color: #ef4444;">
+                                          <i class="fas fa-exclamation-circle fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">High Priority</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">Urgent action required</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item" style="flex: 1;">
+                                  <a href="#upcoming" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                                          <i class="fas fa-calendar-alt fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Upcoming</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">Due in the next 7 days</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item" style="flex: 1;">
+                                  <a href="#completed" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
+                                          <i class="fas fa-check-circle fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Completed</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">Recently finished tasks</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </nav>
+                  </div>
+              </div>
+
+              <!-- Action Items Summary -->
+              <div class="card" style="margin-bottom: 1.5rem; height: auto;">
+                  <div class="card-body">
+                      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                          <!-- Summary Card 1 -->
+                          <div style="background-color: var(--card-bg); border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid var(--border-color);">
+                              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                  <h3 style="margin: 0; font-size: 1rem; color: var(--text-muted);">Total Tasks</h3>
+                                  <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center;">
+                                      <i class="fas fa-clipboard-list" style="color: #3b82f6;"></i>
+                                  </div>
+                              </div>
+                              <div style="font-size: 2rem; font-weight: 700;">24</div>
+                          </div>
+                          
+                          <!-- Summary Card 2 -->
+                          <div style="background-color: var(--card-bg); border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid var(--border-color);">
+                              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                  <h3 style="margin: 0; font-size: 1rem; color: var(--text-muted);">High Priority</h3>
+                                  <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: rgba(239, 68, 68, 0.1); display: flex; align-items: center; justify-content: center;">
+                                      <i class="fas fa-exclamation-circle" style="color: #ef4444;"></i>
+                                  </div>
+                              </div>
+                              <div style="font-size: 2rem; font-weight: 700;">7</div>
+                          </div>
+                          
+                          <!-- Summary Card 3 -->
+                          <div style="background-color: var(--card-bg); border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid var(--border-color);">
+                              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                  <h3 style="margin: 0; font-size: 1rem; color: var(--text-muted);">Due Today</h3>
+                                  <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: rgba(245, 158, 11, 0.1); display: flex; align-items: center; justify-content: center;">
+                                      <i class="fas fa-clock" style="color: #f59e0b;"></i>
+                                  </div>
+                              </div>
+                              <div style="font-size: 2rem; font-weight: 700;">3</div>
+                          </div>
+                          
+                          <!-- Summary Card 4 -->
+                          <div style="background-color: var(--card-bg); border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid var(--border-color);">
+                              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                  <h3 style="margin: 0; font-size: 1rem; color: var(--text-muted);">Completed</h3>
+                                  <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: rgba(16, 185, 129, 0.1); display: flex; align-items: center; justify-content: center;">
+                                      <i class="fas fa-check-circle" style="color: #10b981;"></i>
+                                  </div>
+                              </div>
+                              <div style="font-size: 2rem; font-weight: 700;">12</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Action Items List -->
+              <div class="card">
+                  <div class="card-header">
+                      <h2>Action Items</h2>
+                      <div>
+                          <button class="btn-secondary"><i class="fas fa-filter"></i> Filter</button>
+                          <button class="btn-primary"><i class="fas fa-plus"></i> Add Task</button>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-container">
+                          <table class="data-table">
+                              <thead>
+                                  <tr>
+                                      <th>Priority</th>
+                                      <th>Task</th>
+                                      <th>Category</th>
+                                      <th>Due Date</th>
+                                      <th>Assigned To</th>
+                                      <th>Status</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td><span class="status-badge status-active"><i class="fas fa-circle"></i> High</span></td>
+                                      <td>Review and approve pending enrollment exceptions</td>
+                                      <td>Enrollment</td>
+                                      <td>Nov 15, 2023</td>
+                                      <td>You</td>
+                                      <td>Pending</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-active"><i class="fas fa-circle"></i> High</span></td>
+                                      <td>Sign carrier agreements for new plan year</td>
+                                      <td>Contracts</td>
+                                      <td>Nov 18, 2023</td>
+                                      <td>You</td>
+                                      <td>Pending</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-active"><i class="fas fa-circle"></i> High</span></td>
+                                      <td>Approve final premium allocations</td>
+                                      <td>Finance</td>
+                                      <td>Nov 16, 2023</td>
+                                      <td>You</td>
+                                      <td>Pending</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-pending"><i class="fas fa-circle"></i> Medium</span></td>
+                                      <td>Review employee census data for accuracy</td>
+                                      <td>Data</td>
+                                      <td>Nov 20, 2023</td>
+                                      <td>HR Team</td>
+                                      <td>In Progress</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-pending"><i class="fas fa-circle"></i> Medium</span></td>
+                                      <td>Schedule open enrollment webinar for employees</td>
+                                      <td>Communication</td>
+                                      <td>Nov 22, 2023</td>
+                                      <td>You</td>
+                                      <td>Not Started</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-pending"><i class="fas fa-circle"></i> Medium</span></td>
+                                      <td>Prepare Q&A document for employee questions</td>
+                                      <td>Communication</td>
+                                      <td>Nov 24, 2023</td>
+                                      <td>HR Team</td>
+                                      <td>Not Started</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-pending"><i class="fas fa-circle"></i> Medium</span></td>
+                                      <td>Review and approve benefit summary documents</td>
+                                      <td>Documentation</td>
+                                      <td>Nov 25, 2023</td>
+                                      <td>You</td>
+                                      <td>Not Started</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-inactive"><i class="fas fa-circle"></i> Low</span></td>
+                                      <td>Update employee handbook with new benefits information</td>
+                                      <td>Documentation</td>
+                                      <td>Dec 5, 2023</td>
+                                      <td>HR Team</td>
+                                      <td>Not Started</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-inactive"><i class="fas fa-circle"></i> Low</span></td>
+                                      <td>Schedule benefits review meeting for Q1 2024</td>
+                                      <td>Planning</td>
+                                      <td>Dec 15, 2023</td>
+                                      <td>You</td>
+                                      <td>Not Started</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><span class="status-badge status-inactive"><i class="fas fa-circle"></i> Low</span></td>
+                                      <td>Prepare year-end benefits utilization report</td>
+                                      <td>Reporting</td>
+                                      <td>Dec 20, 2023</td>
+                                      <td>HR Team</td>
+                                      <td>Not Started</td>
+                                      <td>
+                                          <button class="btn-action">View</button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <script src="js/broker-portal.js"></script>
+  <script src="js/top-right-toolbar.js"></script>
+</body>
+</html>

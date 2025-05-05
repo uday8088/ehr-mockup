@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrier Contacts - DoKrunch Broker Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="css/ai-info-dot.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Add this to your head section -->
+<link rel="stylesheet" href="css/top-right-toolbar.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+      <div class="logo-container">
+          <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+          <div class="page-title" style="display: flex; align-items: center;">
+              <h1>Carrier Contacts</h1>
+              
+              <!-- AI Info Tooltip - in top nav next to title -->
+              <div class="ai-tooltip" style="margin-left: 10px;">
+                  <div class="ai-info-dot">
+                      <i class="fas fa-lightbulb"></i>
+                  </div>
+                  <div class="ai-tooltip-content">
+                      <h4 class="ai-tooltip-title">AI-Driven Improvements</h4>
+                      <p class="ai-tooltip-text">Our AI now automatically identifies the most appropriate carrier contacts based on your specific needs and historical interactions, saving you time in finding the right person.</p>
+                      <div class="ai-metrics">
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Contact Search Time:</span>
+                              <span class="ai-metric-value">↓ 72%</span>
+                          </div>
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">First-Contact Resolution:</span>
+                              <span class="ai-metric-value">↑ 58%</span>
+                          </div>
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Contact Data Accuracy:</span>
+                              <span class="ai-metric-value">99.7%</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+<!-- Add this where you want the toolbar to appear (typically in the header) -->
+<div class="top-right-toolbar">
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search loans...">
+  </div>
+  
+  <div class="theme-selector">
+    <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+      <i class="fas fa-palette"></i>
+    </button>
+    <div class="theme-dropdown">
+      <button class="theme-option" data-theme="light">Light</button>
+      <button class="theme-option" data-theme="dark">Dark</button>
+      <button class="theme-option" data-theme="financial">Financial</button>
+      <button class="theme-option" data-theme="colorful">Colorful</button>
+      <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+    </div>
+  </div>
+  
+  <div class="font-size-selector">
+    <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+      <i class="fas fa-text-height"></i>
+    </button>
+    <div class="font-size-dropdown">
+      <button class="font-size-option" data-size="small">
+        <i class="fas fa-font"></i> Small
+      </button>
+      <button class="font-size-option" data-size="medium">
+        <i class="fas fa-font"></i> Medium
+      </button>
+      <button class="font-size-option" data-size="large">
+        <i class="fas fa-font"></i> Large
+      </button>
+    </div>
+  </div>
+  
+  <button class="toolbar-icon" title="Notifications">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+  </button>
+  
+  <div class="user-avatar">
+    SJ
+  </div>
+  
+  <button class="logout-btn" id="logout-btn" title="Logout">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</div>
+  </header>
+
+  <div class="main-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="l1-menu">
+                  <li>
+                      <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+                  </li>
+                  <li>
+                      <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+                  </li>
+                  <li>
+                      <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+                  </li>
+                  <li class="active">
+                      <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+                  </li>
+                  <li>
+                      <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="login-info">
+              <div class="login-details">
+                  <span>Logged in as:</span>
+                  <strong>Broker Admin</strong>
+                  <span class="login-time">Last login: Today, 9:45 AM</span>
+                  <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+              </div>
+          </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+          <!-- L2 Menu -->
+          <div class="l2-menu-container">
+              <nav class="l2-menu">
+                  <a href="broker-carrier-directory.html">Carrier Directory</a>
+                  <a href="broker-plans-products.html">Plans & Products</a>
+                  <a href="broker-carrier-requirements.html">Requirements</a>
+                  <a href="broker-carrier-communications.html">Communications</a>
+                  <a href="broker-carrier-contacts.html" class="active">Contacts</a>
+              </nav>
+          </div>
+
+          <!-- Main Content -->
+          <div class="contacts-content">
+              <!-- Contact Type Navigation -->
+              <div class="card" style="margin-bottom: 1.5rem; height: auto;">
+                  <div class="card-body" style="padding: 1rem;">
+                      <nav class="enrollment-menu">
+                          <ul class="enrollment-menu-list" style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem;">
+                              <li class="enrollment-menu-item active" style="flex: 1;">
+                                  <a href="#all-contacts" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center; background-color: rgba(59, 130, 246, 0.1); border-color: var(--primary-color);">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                                          <i class="fas fa-address-book fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">All Contacts</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">View all carrier contacts</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item" style="flex: 1;">
+                                  <a href="#sales" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
+                                          <i class="fas fa-handshake fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Sales</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">Sales representatives</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item" style="flex: 1;">
+                                  <a href="#service" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                                          <i class="fas fa-headset fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Service</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">Customer service</span>
+                                  </a>
+                              </li>
+                              <li class="enrollment-menu-item" style="flex: 1;">
+                                  <a href="#claims" class="enrollment-menu-link" style="display: flex; flex-direction: column; align-items: center; padding: 1rem; border-radius: 0.5rem; text-decoration: none; color: var(--text-color); border: 1px solid var(--border-color); height: 100%; text-align: center;">
+                                      <div style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: 0.75rem; background-color: rgba(236, 72, 153, 0.1); color: #ec4899;">
+                                          <i class="fas fa-file-invoice-dollar fa-lg"></i>
+                                      </div>
+                                      <span style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem;">Claims</span>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">Claims support</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </nav>
+                  </div>
+              </div>
+
+              <div class="card">
+                  <div class="card-header">
+                      <h2>Carrier Contacts</h2>
+                      <div>
+                          <button class="btn-primary"><i class="fas fa-plus"></i> Add Contact</button>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <!-- Filter Controls -->
+                      <div class="filter-controls">
+                          <div class="filter-group">
+                              <span class="filter-label">Carrier:</span>
+                              <select class="form-control">
+                                  <option value="all">All Carriers</option>
+                                  <option value="bcbs">Blue Cross Blue Shield</option>
+                                  <option value="aetna">Aetna</option>
+                                  <option value="uhc">UnitedHealthcare</option>
+                                  <option value="cigna">Cigna</option>
+                                  <option value="humana">Humana</option>
+                                  <option value="kaiser">Kaiser Permanente</option>
+                              </select>
+                          </div>
+                          <div class="filter-group">
+                              <span class="filter-label">Department:</span>
+                              <select class="form-control">
+                                  <option value="all">All Departments</option>
+                                  <option value="sales">Sales</option>
+                                  <option value="service">Service</option>
+                                  <option value="claims">Claims</option>
+                                  <option value="underwriting">Underwriting</option>
+                                  <option value="implementation">Implementation</option>
+                              </select>
+                          </div>
+                          <div class="filter-group">
+                              <span class="filter-label">Region:</span>
+                              <select class="form-control">
+                                  <option value="all">All Regions</option>
+                                  <option value="northeast">Northeast</option>
+                                  <option value="southeast">Southeast</option>
+                                  <option value="midwest">Midwest</option>
+                                  <option value="southwest">Southwest</option>
+                                  <option value="west">West</option>
+                                  <option value="national">National</option>
+                              </select>
+                          </div>
+                          <button class="btn-secondary">
+                              <i class="fas fa-filter"></i> Apply Filters
+                          </button>
+                      </div>
+
+                      <div class="table-container">
+                          <table class="data-table">
+                              <thead>
+                                  <tr>
+                                      <th>Name</th>
+                                      <th>Carrier</th>
+                                      <th>Department</th>
+                                      <th>Role</th>
+                                      <th>Email</th>
+                                      <th>Phone</th>
+                                      <th>Region</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>Sarah Johnson</td>
+                                      <td>Blue Cross Blue Shield</td>
+                                      <td>Sales</td>
+                                      <td>Account Executive</td>
+                                      <td>sjohnson@bcbs.com</td>
+                                      <td>(555) 123-4567</td>
+                                      <td>Northeast</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Michael Chen</td>
+                                      <td>Aetna</td>
+                                      <td>Service</td>
+                                      <td>Broker Support Manager</td>
+                                      <td>mchen@aetna.com</td>
+                                      <td>(555) 234-5678</td>
+                                      <td>National</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>David Rodriguez</td>
+                                      <td>UnitedHealthcare</td>
+                                      <td>Sales</td>
+                                      <td>Senior Sales Representative</td>
+                                      <td>drodriguez@uhc.com</td>
+                                      <td>(555) 345-6789</td>
+                                      <td>Southeast</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Jennifer Lee</td>
+                                      <td>Cigna</td>
+                                      <td>Claims</td>
+                                      <td>Claims Resolution Specialist</td>
+                                      <td>jlee@cigna.com</td>
+                                      <td>(555) 456-7890</td>
+                                      <td>West</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Robert Williams</td>
+                                      <td>MetLife</td>
+                                      <td>Underwriting</td>
+                                      <td>Senior Underwriter</td>
+                                      <td>rwilliams@metlife.com</td>
+                                      <td>(555) 567-8901</td>
+                                      <td>Midwest</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Amanda Thompson</td>
+                                      <td>Guardian</td>
+                                      <td>Implementation</td>
+                                      <td>Implementation Manager</td>
+                                      <td>athompson@guardian.com</td>
+                                      <td>(555) 678-9012</td>
+                                      <td>National</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>James Wilson</td>
+                                      <td>Humana</td>
+                                      <td>Sales</td>
+                                      <td>Regional Sales Director</td>
+                                      <td>jwilson@humana.com</td>
+                                      <td>(555) 789-0123</td>
+                                      <td>Southwest</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Lisa Garcia</td>
+                                      <td>Kaiser Permanente</td>
+                                      <td>Service</td>
+                                      <td>Broker Relations Manager</td>
+                                      <td>lgarcia@kp.org</td>
+                                      <td>(555) 890-1234</td>
+                                      <td>West</td>
+                                      <td>
+                                          <button class="btn-action">Contact</button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <script src="js/broker-portal.js"></script>
+<!-- Add this before the closing body tag -->
+<script src="js/top-right-toolbar.js"></script>
+</body>
+</html>
