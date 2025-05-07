@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoKrunch - Welcome</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Base styles */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #dbeafe;
+    --secondary: #64748b;
+    --success: #10b981;
+    --success-light: #d1fae5;
+    --danger: #ef4444;
+    --danger-light: #fee2e2;
+    --warning: #f59e0b;
+    --warning-light: #fef3c7;
+    --info: #3b82f6;
+    --info-light: #dbeafe;
+    --light: #f8fafc;
+    --dark: #1e293b;
+    --gray-50: #f9fafb;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--gray-100);
+    color: var(--gray-800);
+    line-height: 1.5;
+}
+
+/* Theme-specific styles */
+body.light {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --text-primary: #334155;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --accent-color: #3b82f6;
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #f8fafc;
+    --icon-color: #334155;
+    --font-icon-color: #334155;
+}
+
+body.dark {
+    --bg-primary: #1e293b;
+    --bg-secondary: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --border-color: #334155;
+    --accent-color: #60a5fa;
+    --sidebar-bg: #0f172a;
+    --sidebar-text: #f8fafc;
+    --icon-color: #f8fafc;
+    --font-icon-color: #f8fafc;
+}
+
+body.financial {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --text-primary: #334155;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --accent-color: #10b981;
+    --sidebar-bg: #064e3b;
+    --sidebar-text: #f8fafc;
+    --icon-color: #334155;
+    --font-icon-color: #334155;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-700);
+}
+
+.sidebar-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-logo i {
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+.sidebar-menu {
+    padding: 1rem 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.menu-label {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray-400);
+}
+
+/* Special AI Insights label */
+.menu-label.ai-insights {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+.menu-label.ai-insights .beta-tag {
+    font-size: 0.6rem;
+    background-color: rgba(96, 165, 250, 0.2);
+    color: #60a5fa;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+}
+
+.menu-item {
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.menu-item:hover {
+    background-color: var(--gray-800);
+    color: white;
+}
+
+.menu-item.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.menu-item i {
+    margin-right: 0.75rem;
+    font-size: 1rem;
+    width: 1.25rem;
+    text-align: center;
+}
+
+/* AI Insights menu items */
+.menu-item.ai-feature {
+    opacity: 0.7;
+}
+
+.menu-item.ai-feature:hover {
+    opacity: 1;
+}
+
+.menu-item.ai-feature .lock-icon {
+    position: absolute;
+    right: 1rem;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.menu-item.ai-feature.preview-available {
+    border-left: 3px solid #60a5fa;
+}
+
+.menu-item.ai-feature.preview-available .preview-badge {
+    position: absolute;
+    right: 1rem;
+    font-size: 0.6rem;
+    background-color: rgba(96, 165, 250, 0.2);
+    color: #60a5fa;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+}
+
+.sidebar-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--gray-700);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+}
+
+.powered-by {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-top: 0.5rem;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    transition: all 0.3s;
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.header-subtitle {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-input {
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    width: 250px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    font-size: 1.25rem;
+}
+
+.theme-btn i.fa-palette {
+    background: linear-gradient(135deg, #ff5e62, #ff9966, #ffcc33, #33cc99, #3399ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.font-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    font-size: 1.25rem;
+    color: var(--font-icon-color);
+}
+
+.notification-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--danger);
+    color: white;
+    font-size: 0.625rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.user-dropdown-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    margin-right: 0.5rem;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    color: var(--danger);
+}
+
+/* Theme Dropdown */
+.theme-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    width: 150px;
+    z-index: 20;
+    display: none;
+    border: 1px solid var(--border-color);
+}
+
+.theme-dropdown.show {
+    display: block;
+}
+
+.theme-option {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.theme-option:hover {
+    background-color: var(--bg-primary);
+}
+
+.theme-color {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.theme-color.light {
+    background-color: #f8fafc;
+    border: 1px solid var(--gray-300);
+}
+
+.theme-color.dark {
+    background-color: #1e293b;
+}
+
+.theme-color.financial {
+    background-color: #064e3b;
+}
+
+/* Font Size Dropdown */
+.font-size-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    width: 150px;
+    z-index: 20;
+    display: none;
+    border: 1px solid var(--border-color);
+}
+
+.font-size-dropdown.show {
+    display: block;
+}
+
+.font-size-option {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.font-size-option:hover {
+    background-color: var(--bg-primary);
+}
+
+/* Content Area Styles */
+.content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: calc(100vh - 64px); /* Adjust based on header height */
+    overflow-y: auto;
+}
+
+/* Top Banners Row - SIDE BY SIDE */
+.top-banners-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Welcome Banner Styles - REDUCED SIZE */
+.welcome-banner {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.welcome-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.welcome-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.welcome-message {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Fact Banner Styles - ENHANCED WITH THEME SUPPORT */
+.fact-banner {
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    height: 120px;
+    flex: 1;
+}
+
+.fact-icon {
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    color: var(--icon-color); /* Theme-aware icon color */
+}
+
+/* Animated lightbulb */
+.lightbulb-animated {
+    color: #f59e0b;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.95);
+        text-shadow: 0 0 5px rgba(245, 158, 11, 0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+        text-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+    }
+    100% {
+        opacity: 0.5;
+        transform: scale(0.95);
+        text-shadow: 0 0 5px rgba(245, 158, 11, 0);
+    }
+}
+
+/* Animated pointing finger */
+.finger-animated {
+    color: #3b82f6;
+    animation: point 1.5s infinite;
+    display: none; /* Hidden by default, will toggle with JS */
+}
+
+@keyframes point {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.fact-content {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.fact-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.fact-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Form Container - TABLET STYLE */
+.form-container-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 1rem;
+}
+
+.signup-form-container {
+    background-color: var(--bg-secondary);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tablet-like appearance */
+.signup-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 4px;
+    background-color: var(--gray-300);
+    border-radius: 2px;
+}
+
+.form-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.75rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: border-color 0.3s;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    min-height: 100px;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-col {
+    flex: 1;
+}
+
+.phone-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.country-code-select {
+    width: 200px; /* Increased width for country code dropdown */
+    flex-shrink: 0;
+}
+
+.phone-number-input {
+    flex: 1;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.form-note {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Easter egg witty message */
+.easter-egg {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Success message */
+.success-message {
+    display: none;
+    background-color: var(--success-light);
+    color: var(--success);
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Loading spinner */
+.spinner {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Hidden iframe */
+#hidden-iframe {
+    display: none;
+}
+
+/* AI Feature Preview Modal */
+.ai-preview-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-preview-content {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.ai-preview-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.ai-preview-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.ai-preview-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.ai-preview-image {
+    width: 100%;
+    border-radius: 0.375rem;
+    margin-bottom: 1.5rem;
+}
+
+.ai-preview-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.ai-preview-badge {
+    background-color: rgba(96, 165, 250, 0.2);
+    color: #60a5fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.ai-preview-button {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+
+/* Thank You Modal */
+.thank-you-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.thank-you-content {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    text-align: center;
+}
+
+.thank-you-icon {
+    font-size: 3rem;
+    color: var(--success);
+    margin-bottom: 1rem;
+}
+
+.thank-you-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.thank-you-message {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.thank-you-close {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    margin-top: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        transform: translateX(-100%);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar.show {
+        width: 250px;
+        transform: translateX(0);
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-input {
+        width: 200px;
+    }
+    
+    .top-banners-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 640px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-actions {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .welcome-title {
+        font-size: 1.25rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 0.875rem;
+    }
+}
+</style>
+</head>
+<body class="light">
+<div class="layout">
+    <!-- Sidebar (L1 Menu) -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-logo">
+                <img src="client-logo.jpg" alt="Client Logo" height="30" onerror="this.onerror=null; this.src='/placeholder.svg?height=30&width=120&query=company%20logo'; this.alt='Client Logo';">
+            </a>
+            <button class="sidebar-toggle" id="sidebar-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Main</div>
+            <a href="processor-dashboard.html" class="menu-item">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+            <a href="processor-loan-queue.html" class="menu-item active">
+                <i class="fas fa-list"></i>
+                Loan Queue
+            </a>
+            <a href="processor-document-verification.html" class="menu-item">
+                <i class="fas fa-file-alt"></i>
+                Document Verification
+            </a>
+            <a href="processor-data-reconciliation.html" class="menu-item">
+                <i class="fas fa-sync-alt"></i>
+                Data Reconciliation
+            </a>
+            <a href="processor-processing-history.html" class="menu-item">
+                <i class="fas fa-history"></i>
+                Processing History
+            </a>
+            
+            <div class="menu-label">AI Insights (Beta)</div>
+            <a href="dok-demo-signup.html" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                Risk Prediction
+            </a>
+            <a href="dok-demo-signup.html" class="menu-item">
+                <i class="fas fa-exclamation-triangle"></i>
+                Fraud Alerts
+            </a>
+            <a href="dok-demo-signup.html" class="menu-item">
+                <i class="fas fa-users"></i>
+                Borrower Insights
+            </a>
+            <a href="dok-demo-signup.html" class="menu-item">
+                <i class="fas fa-chart-bar"></i>
+                Market Trends
+            </a>
+            
+            <div class="menu-label">Settings</div>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i>
+                Preferences
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-question-circle"></i>
+                Help & Support
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-name">Logged in as Sarah Johnson</div>
+                <div class="user-role">Role: Document Processor</div>
+                <div class="powered-by">Powered by DoKrunch</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-title">Welcome</div>
+                <div class="header-subtitle">Powered by DoKrunch<sup>®</sup></div>
+            </div>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search...">
+                </div>
+                <div class="theme-container" style="position: relative;">
+                    <button class="theme-btn" id="theme-btn" title="Change Theme">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <div class="theme-dropdown" id="theme-dropdown">
+                        <div class="theme-option" onclick="setTheme('light')">
+                            <div class="theme-color light"></div>
+                            <span>Light</span>
+                        </div>
+                        <div class="theme-option" onclick="setTheme('dark')">
+                            <div class="theme-color dark"></div>
+                            <span>Dark</span>
+                        </div>
+                        <div class="theme-option" onclick="setTheme('financial')">
+                            <div class="theme-color financial"></div>
+                            <span>Financial</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="font-container" style="position: relative;">
+                    <button class="font-btn" id="font-btn" title="Change Font Size">
+                        <i class="fas fa-font"></i>
+                    </button>
+                    <div class="font-size-dropdown" id="font-size-dropdown">
+                        <div class="font-size-option" onclick="setFontSize('small')">
+                            <span>Small</span>
+                        </div>
+                        <div class="font-size-option" onclick="setFontSize('medium')">
+                            <span>Medium</span>
+                        </div>
+                        <div class="font-size-option" onclick="setFontSize('large')">
+                            <span>Large</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-dropdown">
+                    <div class="user-dropdown-avatar">SJ</div>
+                </div>
+                <a href="index.html" class="logout-btn" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            <!-- Success Message -->
+            <div id="success-message" class="success-message">
+                <i class="fas fa-check-circle"></i> Thank you for your interest! Your information has been submitted successfully.
+            </div>
+            
+            <!-- Top Banners Row - SIDE BY SIDE -->
+            <div class="top-banners-row">
+                <!-- Section 1: Welcome Banner (Left Side) -->
+                <div class="welcome-banner">
+                    <h1 class="welcome-title">Thank You for Visiting!</h1>
+                    <h2 class="welcome-subtitle">Be Part of Our AI Revolution</h2>
+                    <p class="welcome-message" id="welcome-message">You're among a select few invited to shape the future of AI in loan processing. Your early adoption and feedback will directly influence our roadmap.</p>
+                </div>
+                
+                <!-- Section 2: Fact Banner (Right Side) -->
+                <div class="fact-banner" id="fact-banner">
+                    <div class="fact-icon">
+                        <i class="fas fa-lightbulb lightbulb-animated" id="lightbulb-icon"></i>
+                        <i class="fas fa-hand-point-right finger-animated" id="finger-icon"></i>
+                    </div>
+                    <div class="fact-content">
+                        <div class="fact-title" id="fact-title">Did You Know?</div>
+                        <div class="fact-text" id="fact-text">Loading interesting fact...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3: Form Container (Main Focus) -->
+            <div class="form-container-wrapper">
+                <div class="signup-form-container">
+                    <h3 class="form-title">Sign Up for Early Access</h3>
+                    
+                    <form id="signup-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSeqSjyLQQz9IleoKjdF0KaeZHo5Fs2fXwgTcPYg5ETSn1qnwg/formResponse" target="hidden-iframe">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label class="form-label" for="first-name">First Name*</label>
+                                    <input type="text" id="first-name" name="entry.903952458" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label class="form-label" for="last-name">Last Name*</label>
+                                    <input type="text" id="last-name" name="entry.2098114527" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address*</label>
+                            <input type="email" id="email" name="entry.866399494" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number</label>
+                            <div class="phone-input-group">
+                                <select id="country-code" name="entry.country_code" class="form-select country-code-select">
+                                    <option value="+1" selected>USA (+1)</option>
+                                    <option value="+93">Afghanistan (+93)</option>
+                                    <option value="+355">Albania (+355)</option>
+                                    <option value="+213">Algeria (+213)</option>
+                                    <option value="+376">Andorra (+376)</option>
+                                    <option value="+244">Angola (+244)</option>
+                                    <option value="+1">Antigua (+1)</option>
+                                    <option value="+54">Argentina (+54)</option>
+                                    <option value="+374">Armenia (+374)</option>
+                                    <option value="+61">Australia (+61)</option>
+                                    <option value="+43">Austria (+43)</option>
+                                    <option value="+994">Azerbaijan (+994)</option>
+                                    <option value="+1">Bahamas (+1)</option>
+                                    <option value="+973">Bahrain (+973)</option>
+                                    <option value="+880">Bangladesh (+880)</option>
+                                    <option value="+1">Barbados (+1)</option>
+                                    <option value="+375">Belarus (+375)</option>
+                                    <option value="+32">Belgium (+32)</option>
+                                    <option value="+501">Belize (+501)</option>
+                                    <option value="+229">Benin (+229)</option>
+                                    <option value="+975">Bhutan (+975)</option>
+                                    <option value="+591">Bolivia (+591)</option>
+                                    <option value="+387">Bosnia (+387)</option>
+                                    <option value="+267">Botswana (+267)</option>
+                                    <option value="+55">Brazil (+55)</option>
+                                    <option value="+673">Brunei (+673)</option>
+                                    <option value="+359">Bulgaria (+359)</option>
+                                    <option value="+226">Burkina Faso (+226)</option>
+                                    <option value="+257">Burundi (+257)</option>
+                                    <option value="+855">Cambodia (+855)</option>
+                                    <option value="+237">Cameroon (+237)</option>
+                                    <option value="+1">Canada (+1)</option>
+                                    <option value="+238">Cape Verde (+238)</option>
+                                    <option value="+236">CAR (+236)</option>
+                                    <option value="+235">Chad (+235)</option>
+                                    <option value="+56">Chile (+56)</option>
+                                    <option value="+86">China (+86)</option>
+                                    <option value="+57">Colombia (+57)</option>
+                                    <option value="+269">Comoros (+269)</option>
+                                    <option value="+242">Congo (+242)</option>
+                                    <option value="+506">Costa Rica (+506)</option>
+                                    <option value="+385">Croatia (+385)</option>
+                                    <option value="+53">Cuba (+53)</option>
+                                    <option value="+357">Cyprus (+357)</option>
+                                    <option value="+420">Czech Republic (+420)</option>
+                                    <option value="+45">Denmark (+45)</option>
+                                    <option value="+253">Djibouti (+253)</option>
+                                    <option value="+1">Dominica (+1)</option>
+                                    <option value="+1">Dominican Rep. (+1)</option>
+                                    <option value="+670">East Timor (+670)</option>
+                                    <option value="+593">Ecuador (+593)</option>
+                                    <option value="+20">Egypt (+20)</option>
+                                    <option value="+503">El Salvador (+503)</option>
+                                    <option value="+240">Equatorial Guinea (+240)</option>
+                                    <option value="+291">Eritrea (+291)</option>
+                                    <option value="+372">Estonia (+372)</option>
+                                    <option value="+251">Ethiopia (+251)</option>
+                                    <option value="+679">Fiji (+679)</option>
+                                    <option value="+358">Finland (+358)</option>
+                                    <option value="+33">France (+33)</option>
+                                    <option value="+241">Gabon (+241)</option>
+                                    <option value="+220">Gambia (+220)</option>
+                                    <option value="+995">Georgia (+995)</option>
+                                    <option value="+49">Germany (+49)</option>
+                                    <option value="+233">Ghana (+233)</option>
+                                    <option value="+30">Greece (+30)</option>
+                                    <option value="+1">Grenada (+1)</option>
+                                    <option value="+502">Guatemala (+502)</option>
+                                    <option value="+224">Guinea (+224)</option>
+                                    <option value="+245">Guinea-Bissau (+245)</option>
+                                    <option value="+592">Guyana (+592)</option>
+                                    <option value="+509">Haiti (+509)</option>
+                                    <option value="+504">Honduras (+504)</option>
+                                    <option value="+36">Hungary (+36)</option>
+                                    <option value="+354">Iceland (+354)</option>
+                                    <option value="+91">India (+91)</option>
+                                    <option value="+62">Indonesia (+62)</option>
+                                    <option value="+98">Iran (+98)</option>
+                                    <option value="+964">Iraq (+964)</option>
+                                    <option value="+353">Ireland (+353)</option>
+                                    <option value="+972">Israel (+972)</option>
+                                    <option value="+39">Italy (+39)</option>
+                                    <option value="+1">Jamaica (+1)</option>
+                                    <option value="+81">Japan (+81)</option>
+                                    <option value="+962">Jordan (+962)</option>
+                                    <option value="+7">Kazakhstan (+7)</option>
+                                    <option value="+254">Kenya (+254)</option>
+                                    <option value="+686">Kiribati (+686)</option>
+                                    <option value="+850">North Korea (+850)</option>
+                                    <option value="+82">South Korea (+82)</option>
+                                    <option value="+965">Kuwait (+965)</option>
+                                    <option value="+996">Kyrgyzstan (+996)</option>
+                                    <option value="+856">Laos (+856)</option>
+                                    <option value="+371">Latvia (+371)</option>
+                                    <option value="+961">Lebanon (+961)</option>
+                                    <option value="+266">Lesotho (+266)</option>
+                                    <option value="+231">Liberia (+231)</option>
+                                    <option value="+218">Libya (+218)</option>
+                                    <option value="+423">Liechtenstein (+423)</option>
+                                    <option value="+370">Lithuania (+370)</option>
+                                    <option value="+352">Luxembourg (+352)</option>
+                                    <option value="+389">North Macedonia (+389)</option>
+                                    <option value="+261">Madagascar (+261)</option>
+                                    <option value="+265">Malawi (+265)</option>
+                                    <option value="+60">Malaysia (+60)</option>
+                                    <option value="+960">Maldives (+960)</option>
+                                    <option value="+223">Mali (+223)</option>
+                                    <option value="+356">Malta (+356)</option>
+                                    <option value="+692">Marshall Islands (+692)</option>
+                                    <option value="+222">Mauritania (+222)</option>
+                                    <option value="+230">Mauritius (+230)</option>
+                                    <option value="+52">Mexico (+52)</option>
+                                    <option value="+691">Micronesia (+691)</option>
+                                    <option value="+373">Moldova (+373)</option>
+                                    <option value="+377">Monaco (+377)</option>
+                                    <option value="+976">Mongolia (+976)</option>
+                                    <option value="+382">Montenegro (+382)</option>
+                                    <option value="+212">Morocco (+212)</option>
+                                    <option value="+258">Mozambique (+258)</option>
+                                    <option value="+95">Myanmar (+95)</option>
+                                    <option value="+264">Namibia (+264)</option>
+                                    <option value="+674">Nauru (+674)</option>
+                                    <option value="+977">Nepal (+977)</option>
+                                    <option value="+31">Netherlands (+31)</option>
+                                    <option value="+64">New Zealand (+64)</option>
+                                    <option value="+505">Nicaragua (+505)</option>
+                                    <option value="+227">Niger (+227)</option>
+                                    <option value="+234">Nigeria (+234)</option>
+                                    <option value="+47">Norway (+47)</option>
+                                    <option value="+968">Oman (+968)</option>
+                                    <option value="+92">Pakistan (+92)</option>
+                                    <option value="+680">Palau (+680)</option>
+                                    <option value="+507">Panama (+507)</option>
+                                    <option value="+675">Papua New Guinea (+675)</option>
+                                    <option value="+595">Paraguay (+595)</option>
+                                    <option value="+51">Peru (+51)</option>
+                                    <option value="+63">Philippines (+63)</option>
+                                    <option value="+48">Poland (+48)</option>
+                                    <option value="+351">Portugal (+351)</option>
+                                    <option value="+974">Qatar (+974)</option>
+                                    <option value="+40">Romania (+40)</option>
+                                    <option value="+7">Russia (+7)</option>
+                                    <option value="+250">Rwanda (+250)</option>
+                                    <option value="+1">St. Kitts & Nevis (+1)</option>
+                                    <option value="+1">St. Lucia (+1)</option>
+                                    <option value="+1">St. Vincent (+1)</option>
+                                    <option value="+685">Samoa (+685)</option>
+                                    <option value="+378">San Marino (+378)</option>
+                                    <option value="+239">Sao Tome (+239)</option>
+                                    <option value="+966">Saudi Arabia (+966)</option>
+                                    <option value="+221">Senegal (+221)</option>
+                                    <option value="+381">Serbia (+381)</option>
+                                    <option value="+248">Seychelles (+248)</option>
+                                    <option value="+232">Sierra Leone (+232)</option>
+                                    <option value="+65">Singapore (+65)</option>
+                                    <option value="+421">Slovakia (+421)</option>
+                                    <option value="+386">Slovenia (+386)</option>
+                                    <option value="+677">Solomon Islands (+677)</option>
+                                    <option value="+252">Somalia (+252)</option>
+                                    <option value="+27">South Africa (+27)</option>
+                                    <option value="+211">South Sudan (+211)</option>
+                                    <option value="+34">Spain (+34)</option>
+                                    <option value="+94">Sri Lanka (+94)</option>
+                                    <option value="+249">Sudan (+249)</option>
+                                    <option value="+597">Suriname (+597)</option>
+                                    <option value="+268">Eswatini (+268)</option>
+                                    <option value="+46">Sweden (+46)</option>
+                                    <option value="+41">Switzerland (+41)</option>
+                                    <option value="+963">Syria (+963)</option>
+                                    <option value="+886">Taiwan (+886)</option>
+                                    <option value="+992">Tajikistan (+992)</option>
+                                    <option value="+255">Tanzania (+255)</option>
+                                    <option value="+66">Thailand (+66)</option>
+                                    <option value="+228">Togo (+228)</option>
+                                    <option value="+676">Tonga (+676)</option>
+                                    <option value="+1">Trinidad & Tobago (+1)</option>
+                                    <option value="+216">Tunisia (+216)</option>
+                                    <option value="+90">Turkey (+90)</option>
+                                    <option value="+993">Turkmenistan (+993)</option>
+                                    <option value="+688">Tuvalu (+688)</option>
+                                    <option value="+256">Uganda (+256)</option>
+                                    <option value="+380">Ukraine (+380)</option>
+                                    <option value="+971">UAE (+971)</option>
+                                    <option value="+44">UK (+44)</option>
+                                    <option value="+1">USA (+1)</option>
+                                    <option value="+598">Uruguay (+598)</option>
+                                    <option value="+998">Uzbekistan (+998)</option>
+                                    <option value="+678">Vanuatu (+678)</option>
+                                    <option value="+379">Vatican City (+379)</option>
+                                    <option value="+58">Venezuela (+58)</option>
+                                    <option value="+84">Vietnam (+84)</option>
+                                    <option value="+967">Yemen (+967)</option>
+                                    <option value="+260">Zambia (+260)</option>
+                                    <option value="+263">Zimbabwe (+263)</option>
+                                </select>
+                                <input type="tel" id="phone" name="entry.472790335" class="form-control phone-number-input">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="company">Company/Organization</label>
+                            <input type="text" id="company" name="entry.1807488541" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="role">Role/Position*</label>
+                            <select id="role" name="entry.701708867" class="form-select" required>
+                                <option value="">Select your role</option>
+                                <option value="Loan Officer">Loan Officer</option>
+                                <option value="Loan Processor">Loan Processor</option>
+                                <option value="Underwriter">Underwriter</option>
+                                <option value="Compliance Officer">Compliance Officer</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Executive">Executive</option>
+                                <option value="IT Professional">IT Professional</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="interests">What features are you most interested in?</label>
+                            <textarea id="interests" name="entry.2006999235" class="form-textarea" placeholder="Please share what you're most excited to see in our upcoming release..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="how-heard">How did you hear about us?</label>
+                            <select id="how-heard" name="entry.2034196715" class="form-select">
+                                <option value="">Select an option</option>
+                                <option value="Search Engine">Search Engine</option>
+                                <option value="Social Media">Social Media</option>
+                                <option value="Colleague">Colleague</option>
+                                <option value="Conference">Conference</option>
+                                <option value="Email">Email</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" id="submit-button" class="btn btn-primary btn-block">
+                            <span id="spinner" style="display: none;" class="spinner"></span>
+                            <span id="button-text">Sign Up Now</span>
+                        </button>
+                        
+                        <div class="form-note">
+                            By submitting this form, you agree to our <a href="#">Privacy Policy</a> and consent to be contacted regarding our services.
+                        </div>
+                        
+                        <!-- Easter egg witty message at the bottom of the form -->
+                        <div class="easter-egg" id="easter-egg">
+                            We're brewing something more exciting than your morning coffee. Stay tuned!
+                        </div>
+                    </form>
+                    
+                    <!-- Hidden iframe for form submission -->
+                    <iframe name="hidden-iframe" id="hidden-iframe"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Feature Preview Modals -->
+<div class="ai-preview-modal" id="pattern-detection-preview">
+    <div class="ai-preview-content">
+        <button class="ai-preview-close" onclick="hidePreview('pattern-detection')">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3 class="ai-preview-title">Pattern Detection</h3>
+        <p class="ai-preview-description">
+            Our AI-powered Pattern Detection analyzes thousands of loan applications to identify trends and anomalies that human processors might miss. Early testers report a 43% increase in processing efficiency.
+        </p>
+        <img src="thinking.jpg" height="3" width="300" alt="Pattern Detection Preview" class="ai-preview-image">
+        <div class="ai-preview-footer">
+            <span class="ai-preview-badge">Coming Soon</span>
+            <button class="ai-preview-button" onclick="requestEarlyAccess('pattern-detection')">Request Early Access</button>
+        </div>
+    </div>
+</div>
+
+<div class="ai-preview-modal" id="borrower-insights-preview">
+    <div class="ai-preview-content">
+        <button class="ai-preview-close" onclick="hidePreview('borrower-insights')">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3 class="ai-preview-title">Borrower Insights</h3>
+        <p class="ai-preview-description">
+            Gain deeper understanding of borrower behavior with our AI-driven Borrower Insights. This feature analyzes payment patterns, communication preferences, and financial behaviors to help you provide personalized service.
+        </p>
+        <img src="thinking.jpg" height="3" width="300" alt="Pattern Detection Preview" class="ai-preview-image">
+        <div class="ai-preview-footer">
+            <span class="ai-preview-badge">Coming Soon</span>
+            <button class="ai-preview-button" onclick="requestEarlyAccess('borrower-insights')">Request Early Access</button>
+        </div>
+    </div>
+</div>
+
+<!-- Thank You Modal -->
+<div class="thank-you-modal" id="thank-you-modal">
+    <div class="thank-you-content">
+        <div class="thank-you-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 class="thank-you-title">Thank You for Your Feedback!</h3>
+        <div class="thank-you-message">
+            <p>Your participation is invaluable to us at DoKrunch. As an early adopter, your feedback will directly shape our AI-powered document processing solutions.</p>
+            <p>We're committed to revolutionizing loan processing through innovative AI technology, and your insights will help us create tools that truly address the challenges you face daily.</p>
+            <p>Our team will review your submission and may reach out to you for additional feedback as we refine our platform.</p>
+        </div>
+        <button class="thank-you-close" onclick="closeThankYouModal()">Continue</button>
+    </div>
+</div>
+
+<script>
+    // Define theme-specific background colors - ONLY LIGHT COLORS
+    const lightThemeColors = [
+        "#dbeafe", // Light blue
+        "#d1fae5", // Light green
+        "#fef3c7", // Light yellow
+        "#fee2e2", // Light red
+        "#e0e7ff", // Light indigo
+        "#f5d0fe", // Light purple
+        "#fce7f3", // Light pink
+        "#f3f4f6", // Light gray
+        "#e6fffb", // Light teal
+        "#fff7ed"  // Light orange
+    ];
+
+    // Define fact title colors - ONLY DARK COLORS
+    const factTitleColors = [
+        "#000000", // Black
+        "#1e3a8a", // Dark blue
+        "#064e3b"  // Dark green
+    ];
+
+    // Define text colors for better contrast with background
+    const factTextColors = {
+        "#dbeafe": "#1e3a8a", // Dark blue text on light blue background
+        "#d1fae5": "#064e3b", // Dark green text on light green background
+        "#fef3c7": "#92400e", // Dark yellow/brown text on light yellow background
+        "#fee2e2": "#991b1b", // Dark red text on light red background
+        "#e0e7ff": "#4338ca", // Dark indigo text on light indigo background
+        "#f5d0fe": "#7e22ce", // Dark purple text on light purple background
+        "#fce7f3": "#be185d", // Dark pink text on light pink background
+        "#f3f4f6": "#374151", // Dark gray text on light gray background
+        "#e6fffb": "#155e75", // Dark teal text on light teal background
+        "#fff7ed": "#7c2d12"  // Dark orange text on light orange background
+    };
+
+    // Function to get colors based on current theme
+    function getThemeColors() {
+        return lightThemeColors; // Always use light colors for the banner
+    }
+
+    // Update fact banner color based on current theme
+    function updateFactBannerColor() {
+        const factBanner = document.getElementById('fact-banner');
+        const factTitle = document.getElementById('fact-title');
+        const factText = document.getElementById('fact-text');
+        
+        const themeColors = getThemeColors();
+        const randomColorIndex = Math.floor(Math.random() * themeColors.length);
+        const backgroundColor = themeColors[randomColorIndex];
+        factBanner.style.backgroundColor = backgroundColor;
+        
+        // Set fact title to one of the dark colors
+        const randomTitleColorIndex = Math.floor(Math.random() * factTitleColors.length);
+        factTitle.style.color = factTitleColors[randomTitleColorIndex];
+        
+        // Set fact text color based on background for better contrast
+        factText.style.color = factTextColors[backgroundColor];
+    }
+    
+    // Format phone number for USA only (xxx) xxx xxxx
+    function formatUSAPhoneNumber(input) {
+        // Strip all non-numeric characters
+        let phoneNumber = input.value.replace(/\D/g, '');
+        
+        // Check if this is a USA number
+        const countryCode = document.getElementById('country-code').value;
+        if (countryCode === '+1') {
+            // Format as (xxx) xxx xxxx
+            if (phoneNumber.length > 0) {
+                if (phoneNumber.length <= 3) {
+                    phoneNumber = '(' + phoneNumber;
+                } else if (phoneNumber.length <= 6) {
+                    phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3);
+                } else {
+                    phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + ' ' + phoneNumber.substring(6, 10);
+                }
+            }
+            input.value = phoneNumber;
+        }
+    }
+    
+    // Combine country code and phone number for form submission
+    function combinePhoneNumber() {
+        const countryCode = document.getElementById('country-code').value;
+        const phoneNumber = document.getElementById('phone').value;
+        
+        // Create a hidden input to store the combined value
+        let hiddenInput = document.getElementById('combined-phone');
+        if (!hiddenInput) {
+            hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.id = 'combined-phone';
+            hiddenInput.name = 'entry.472790335';
+            document.getElementById('signup-form').appendChild(hiddenInput);
+        }
+        
+        // Combine with a space between country code and phone number
+        hiddenInput.value = countryCode + ' ' + phoneNumber;
+        
+        // Remove the original phone field from form submission
+        document.getElementById('phone').removeAttribute('name');
+    }
+    
+    // Witty messages array for easter egg
+    const wittyMessages = [
+        "We're brewing something more exciting than your morning coffee. Stay tuned!",
+        "Our developers are typing furiously to bring you something amazing. No keyboards were harmed in the process.",
+        "We're putting the final touches on something that will make your document processing feel like magic.",
+        "If patience is a virtue, consider this your chance to become extraordinarily virtuous.",
+        "We're crossing our t's, dotting our i's, and making sure our AI doesn't develop a sense of humor.",
+        "Our team is working around the clock (and sometimes around the calendar) to bring you something special.",
+        "We're in stealth mode, but not the kind where we wear all black and sneak around. That would be weird.",
+        "Good things come to those who wait. Great things come to those who sign up for early access.",
+        "We're so close to launch that our countdown clock is getting nervous.",
+        "Our new features are like a surprise party – we can't tell you what's coming, but we promise it'll be worth the wait."
+    ];
+    
+    // Interesting facts array
+    const interestingFacts = [
+        "Organizations using AI-powered document processing reduce manual data entry by up to 80%, according to a 2023 study by Forrester Research.",
+        "The average knowledge worker spends 50% of their time searching for information across various documents and systems, a challenge that modern document automation directly addresses.",
+        "Document automation can reduce processing time for complex financial documents from hours to minutes, with some systems achieving 99.5% accuracy rates.",
+        "Only 18% of companies have fully digitized their document workflows, despite studies showing that digital document processes can reduce operational costs by up to 40%.",
+        "Advanced document intelligence systems can now understand context and intent in documents, not just extract data, leading to a 65% improvement in processing complex documents.",
+        "The global intelligent document processing market is growing at 30% annually but remains largely untapped in regulated industries like finance and healthcare.",
+        "Natural Language Processing in document automation has advanced to the point where it can now detect subtle contractual risks that human reviewers often miss.",
+        "Document automation reduces compliance risks by 90% in regulated industries by ensuring consistent application of rules and maintaining comprehensive audit trails.",
+        "The carbon footprint of digital document processing is 95% lower than traditional paper-based workflows, making it not just efficient but environmentally responsible.",
+        "Intelligent document processing systems can now learn from user corrections, with each interaction improving accuracy by approximately 0.5%, leading to continuous improvement over time."
+    ];
+    
+    // Display random witty message and fact on page load only
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select random witty message for easter egg
+        const randomWittyIndex = Math.floor(Math.random() * wittyMessages.length);
+        document.getElementById('easter-egg').textContent = wittyMessages[randomWittyIndex];
+        
+        // Select random interesting fact
+        const randomFactIndex = Math.floor(Math.random() * interestingFacts.length);
+        document.getElementById('fact-text').textContent = interestingFacts[randomFactIndex];
+        
+        // Set initial background color for fact banner based on theme
+        updateFactBannerColor();
+        
+        // Toggle between lightbulb and finger icon every 5 seconds
+        setInterval(function() {
+            const lightbulb = document.getElementById('lightbulb-icon');
+            const finger = document.getElementById('finger-icon');
+            
+            if (lightbulb.style.display === 'none') {
+                lightbulb.style.display = 'inline-block';
+                finger.style.display = 'none';
+            } else {
+                lightbulb.style.display = 'none';
+                finger.style.display = 'inline-block';
+            }
+        }, 5000);
+        
+        // Add event listener for phone number formatting
+        const phoneInput = document.getElementById('phone');
+        const countryCodeSelect = document.getElementById('country-code');
+        
+        phoneInput.addEventListener('input', function() {
+            if (countryCodeSelect.value === '+1') {
+                formatUSAPhoneNumber(this);
+            }
+        });
+        
+        countryCodeSelect.addEventListener('change', function() {
+            // Clear phone field when country changes
+            phoneInput.value = '';
+        });
+        
+        // Form submission handling
+        const form = document.getElementById('signup-form');
+        const submitButton = document.getElementById('submit-button');
+        const spinner = document.getElementById('spinner');
+        const buttonText = document.getElementById('button-text');
+        const successMessage = document.getElementById('success-message');
+        const thankYouModal = document.getElementById('thank-you-modal');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Combine country code and phone number
+            combinePhoneNumber();
+            
+            // Show loading state
+            spinner.style.display = 'inline-block';
+            buttonText.textContent = 'Submitting...';
+            submitButton.disabled = true;
+            
+            // Submit the form to hidden iframe
+            this.submit();
+            
+            // Simulate form submission (replace with actual Google Forms integration)
+            setTimeout(function() {
+                // Hide loading state
+                spinner.style.display = 'none';
+                buttonText.textContent = 'Sign Up Now';
+                submitButton.disabled = false;
+                
+                // Show thank you modal instead of success message
+                thankYouModal.style.display = 'flex';
+                
+                // Reset form
+                form.reset();
+                
+            }, 2000);
+        });
+    });
+    
+    // Close thank you modal
+    function closeThankYouModal() {
+        document.getElementById('thank-you-modal').style.display = 'none';
+    }
+    
+    // Sidebar Toggle
+    document.getElementById('sidebar-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('show');
+        document.getElementById('main-content').style.marginLeft = 
+            document.getElementById('sidebar').classList.contains('show') ? '250px' : '0';
+    });
+
+    // Theme Dropdown Toggle
+    document.getElementById('theme-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('theme-dropdown').classList.toggle('show');
+        document.getElementById('font-size-dropdown').classList.remove('show');
+    });
+
+    // Font Size Dropdown Toggle
+    document.getElementById('font-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('font-size-dropdown').classList.toggle('show');
+        document.getElementById('theme-dropdown').classList.remove('show');
+    });
+
+    // Close dropdowns when clicking elsewhere
+    document.addEventListener('click', function() {
+        document.getElementById('theme-dropdown').classList.remove('show');
+        document.getElementById('font-size-dropdown').classList.remove('show');
+    });
+
+    // Theme preferences
+    function setTheme(theme) {
+        document.body.className = '';
+        document.body.classList.add(theme);
+        localStorage.setItem('themePreference', theme);
+        document.getElementById('theme-dropdown').classList.remove('show');
+        
+        // Update fact banner color when theme changes
+        updateFactBannerColor();
+    }
+
+    // Font size preferences
+    function setFontSize(size) {
+        const root = document.documentElement;
+        switch(size) {
+            case 'small':
+                root.style.fontSize = '14px';
+                localStorage.setItem('fontSizePreference', 'small');
+                break;
+            case 'medium':
+                root.style.fontSize = '16px';
+                localStorage.setItem('fontSizePreference', 'medium');
+                break;
+            case 'large':
+                root.style.fontSize = '18px';
+                localStorage.setItem('fontSizePreference', 'large');
+                break;
+        }
+        document.getElementById('font-size-dropdown').classList.remove('show');
+    }
+
+    // AI Feature Preview functions
+    function showPreview(feature) {
+        document.getElementById(feature + '-preview').style.display = 'flex';
+    }
+
+    function hidePreview(feature) {
+        document.getElementById(feature + '-preview').style.display = 'none';
+    }
+
+    function requestEarlyAccess(feature) {
+        hidePreview(feature);
+        document.getElementById('interests').value += (document.getElementById('interests').value ? '\n\n' : '') + 
+            'I am interested in early access to the ' + feature.replace('-', ' ') + ' feature.';
+        document.getElementById('interests').focus();
+        document.getElementById('signup-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Load preferences on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedFontSize = localStorage.getItem('fontSizePreference') || 'medium';
+        const savedTheme = localStorage.getItem('themePreference') || 'light';
+        setFontSize(savedFontSize);
+        setTheme(savedTheme);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Early Access Signup - DoKrunch Broker Portal</title>
+  <link rel="stylesheet" href="css/broker-portal.css">
+  <link rel="stylesheet" href="css/ai-info-dot.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Add this to your head section -->
+  <link rel="stylesheet" href="css/top-right-toolbar.css">
+  <style>
+    /* Form styles from dokEHR-demo-signup1.html */
+    .form-container-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 1rem;
+    }
+
+    .signup-form-container {
+      background-color: var(--bg-color);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      width: 100%;
+      max-width: 800px;
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    /* Tablet-like appearance */
+    .signup-form-container::before {
+      content: '';
+      position: absolute;
+      top: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 4px;
+      background-color: var(--border-color);
+      border-radius: 2px;
+    }
+
+    .form-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1.75rem;
+      color: var(--text-color);
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: border-color 0.3s;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100px;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-col {
+      flex: 1;
+    }
+
+    .phone-input-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .country-code-select {
+      width: 200px; /* Increased width for country code dropdown */
+      flex-shrink: 0;
+    }
+
+    .phone-number-input {
+      flex: 1;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .form-note {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Easter egg witty message */
+    .easter-egg {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    /* Success message */
+    .success-message {
+      display: none;
+      background-color: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+      padding: 1rem;
+      border-radius: 0.375rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Hidden iframe */
+    #hidden-iframe {
+      display: none;
+    }
+
+    /* Thank You Modal */
+    .thank-you-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thank-you-content {
+      background-color: var(--bg-color);
+      border-radius: 0.5rem;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      text-align: center;
+    }
+
+    .thank-you-icon {
+      font-size: 3rem;
+      color: #10b981;
+      margin-bottom: 1rem;
+    }
+
+    .thank-you-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+
+    .thank-you-message {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .thank-you-close {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      margin-top: 1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+
+    /* Fix for scrolling issues */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+
+    .main-container {
+      display: flex;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      height: calc(100vh - 60px);
+      padding-bottom: 4rem;
+    }
+
+    .early-access-content {
+      padding-bottom: 3rem;
+    }
+
+    /* Ensure the submit button is visible */
+    #submit-button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    /* Style for healthcare-specific witty message */
+    .easter-egg {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      font-style: italic;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+      <div class="logo-container">
+          <img src="images/client-logo.jpg" alt="Client Logo" class="client-logo">
+          <div class="page-title" style="display: flex; align-items: center;">
+              <h1>Early Access Signup</h1>
+              
+              <!-- AI Info Tooltip - in top nav next to title -->
+              <div class="ai-tooltip" style="margin-left: 10px;">
+                  <div class="ai-info-dot">
+                      <i class="fas fa-lightbulb"></i>
+                  </div>
+                  <div class="ai-tooltip-content">
+                      <h4 class="ai-tooltip-title">AI-Driven Improvements</h4>
+                      <p class="ai-tooltip-text">Be among the first to experience our AI-powered broker portal with advanced document processing, automated compliance checks, and intelligent client insights.</p>
+                      <div class="ai-metrics">
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Time Saved:</span>
+                              <span class="ai-metric-value">45%</span>
+                          </div>
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Accuracy:</span>
+                              <span class="ai-metric-value">98%</span>
+                          </div>
+                          <div class="ai-metric-item">
+                              <span class="ai-metric-label">Client Satisfaction:</span>
+                              <span class="ai-metric-value">↑ 37%</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Top Right Toolbar -->
+      <div class="top-right-toolbar">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search loans...">
+        </div>
+        
+        <div class="theme-selector">
+          <button class="toolbar-icon" id="theme-toggle" title="Change Theme">
+            <i class="fas fa-palette"></i>
+          </button>
+          <div class="theme-dropdown">
+            <button class="theme-option" data-theme="light">Light</button>
+            <button class="theme-option" data-theme="dark">Dark</button>
+            <button class="theme-option" data-theme="financial">Financial</button>
+            <button class="theme-option" data-theme="colorful">Colorful</button>
+            <button class="theme-option" data-theme="high-contrast">High Contrast</button>
+          </div>
+        </div>
+        
+        <div class="font-size-selector">
+          <button class="toolbar-icon" id="font-size-toggle" title="Adjust Font Size">
+            <i class="fas fa-text-height"></i>
+          </button>
+          <div class="font-size-dropdown">
+            <button class="font-size-option" data-size="small">
+              <i class="fas fa-font"></i> Small
+            </button>
+            <button class="font-size-option" data-size="medium">
+              <i class="fas fa-font"></i> Medium
+            </button>
+            <button class="font-size-option" data-size="large">
+              <i class="fas fa-font"></i> Large
+            </button>
+          </div>
+        </div>
+        
+        <button class="toolbar-icon" title="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        
+        <div class="user-avatar">
+          SJ
+        </div>
+        
+        <button class="logout-btn" id="logout-btn" title="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+  </header>
+
+  <div class="main-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="l1-menu">
+                  <li>
+                      <a href="broker-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="broker-client-directory.html"><i class="fas fa-building"></i> Clients</a>
+                  </li>
+                  <li>
+                      <a href="broker-active-enrollments.html"><i class="fas fa-users"></i> Enrollments</a>
+                  </li>
+                  <li class="active">
+                      <a href="broker-document-analysis.html"><i class="fas fa-file-alt"></i> Documents</a>
+                  </li>
+                  <li>
+                      <a href="broker-carrier-directory.html"><i class="fas fa-hospital"></i> Carriers</a>
+                  </li>
+                  <li>
+                      <a href="broker-enrollment-analytics.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="login-info">
+              <div class="login-details">
+                  <span>Logged in as:</span>
+                  <strong>Broker Admin</strong>
+                  <span class="login-time">Last login: Today, 9:45 AM</span>
+                  <div class="powered-by">Powered by DoKrunch<sup>®</sup></div>
+              </div>
+          </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+          <!-- L2 Menu -->
+          <div class="l2-menu-container">
+          </div>
+          <!-- Main Content -->
+          <div class="early-access-content">
+              <!-- Success Message -->
+              <div id="success-message" class="success-message">
+                  <i class="fas fa-check-circle"></i> Thank you for your interest! Your information has been submitted successfully.
+              </div>
+              
+              <!-- Form Container -->
+              <div class="form-container-wrapper">
+                  <div class="signup-form-container">
+                      <h3 class="form-title">Sign Up for Early Access</h3>
+                      
+                      <form id="signup-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSeqSjyLQQz9IleoKjdF0KaeZHo5Fs2fXwgTcPYg5ETSn1qnwg/formResponse" target="hidden-iframe">
+                          <div class="form-row">
+                              <div class="form-col">
+                                  <div class="form-group">
+                                      <label class="form-label" for="first-name">First Name*</label>
+                                      <input type="text" id="first-name" name="entry.903952458" class="form-control" required>
+                                  </div>
+                              </div>
+                              <div class="form-col">
+                                  <div class="form-group">
+                                      <label class="form-label" for="last-name">Last Name*</label>
+                                      <input type="text" id="last-name" name="entry.2098114527" class="form-control" required>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-label" for="email">Email Address*</label>
+                              <input type="email" id="email" name="entry.866399494" class="form-control" required>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-label" for="phone">Phone Number</label>
+                              <div class="phone-input-group">
+                                  <select id="country-code" name="entry.country_code" class="form-select country-code-select">
+                                      <option value="+1" selected>USA (+1)</option>
+                                      <option value="+93">Afghanistan (+93)</option>
+                                      <option value="+355">Albania (+355)</option>
+                                      <option value="+213">Algeria (+213)</option>
+                                      <option value="+376">Andorra (+376)</option>
+                                      <option value="+244">Angola (+244)</option>
+                                      <option value="+1">Antigua (+1)</option>
+                                      <option value="+54">Argentina (+54)</option>
+                                      <option value="+374">Armenia (+374)</option>
+                                      <option value="+61">Australia (+61)</option>
+                                      <option value="+43">Austria (+43)</option>
+                                      <option value="+994">Azerbaijan (+994)</option>
+                                      <option value="+1">Bahamas (+1)</option>
+                                      <option value="+973">Bahrain (+973)</option>
+                                      <option value="+880">Bangladesh (+880)</option>
+                                      <option value="+1">Barbados (+1)</option>
+                                      <option value="+375">Belarus (+375)</option>
+                                      <option value="+32">Belgium (+32)</option>
+                                      <option value="+501">Belize (+501)</option>
+                                      <option value="+229">Benin (+229)</option>
+                                      <option value="+975">Bhutan (+975)</option>
+                                      <option value="+591">Bolivia (+591)</option>
+                                      <option value="+387">Bosnia (+387)</option>
+                                      <option value="+267">Botswana (+267)</option>
+                                      <option value="+55">Brazil (+55)</option>
+                                      <option value="+673">Brunei (+673)</option>
+                                      <option value="+359">Bulgaria (+359)</option>
+                                      <option value="+226">Burkina Faso (+226)</option>
+                                      <option value="+257">Burundi (+257)</option>
+                                      <option value="+855">Cambodia (+855)</option>
+                                      <option value="+237">Cameroon (+237)</option>
+                                      <option value="+1">Canada (+1)</option>
+                                      <option value="+238">Cape Verde (+238)</option>
+                                      <option value="+236">CAR (+236)</option>
+                                      <option value="+235">Chad (+235)</option>
+                                      <option value="+56">Chile (+56)</option>
+                                      <option value="+86">China (+86)</option>
+                                      <option value="+57">Colombia (+57)</option>
+                                      <option value="+269">Comoros (+269)</option>
+                                      <option value="+242">Congo (+242)</option>
+                                      <option value="+506">Costa Rica (+506)</option>
+                                      <option value="+385">Croatia (+385)</option>
+                                      <option value="+53">Cuba (+53)</option>
+                                      <option value="+357">Cyprus (+357)</option>
+                                      <option value="+420">Czech Republic (+420)</option>
+                                      <option value="+45">Denmark (+45)</option>
+                                      <option value="+253">Djibouti (+253)</option>
+                                      <option value="+1">Dominica (+1)</option>
+                                      <option value="+1">Dominican Rep. (+1)</option>
+                                      <option value="+670">East Timor (+670)</option>
+                                      <option value="+593">Ecuador (+593)</option>
+                                      <option value="+20">Egypt (+20)</option>
+                                      <option value="+503">El Salvador (+503)</option>
+                                      <option value="+240">Equatorial Guinea (+240)</option>
+                                      <option value="+291">Eritrea (+291)</option>
+                                      <option value="+372">Estonia (+372)</option>
+                                      <option value="+251">Ethiopia (+251)</option>
+                                      <option value="+679">Fiji (+679)</option>
+                                      <option value="+358">Finland (+358)</option>
+                                      <option value="+33">France (+33)</option>
+                                      <option value="+241">Gabon (+241)</option>
+                                      <option value="+220">Gambia (+220)</option>
+                                      <option value="+995">Georgia (+995)</option>
+                                      <option value="+49">Germany (+49)</option>
+                                      <option value="+233">Ghana (+233)</option>
+                                      <option value="+30">Greece (+30)</option>
+                                      <option value="+1">Grenada (+1)</option>
+                                      <option value="+502">Guatemala (+502)</option>
+                                      <option value="+224">Guinea (+224)</option>
+                                      <option value="+245">Guinea-Bissau (+245)</option>
+                                      <option value="+592">Guyana (+592)</option>
+                                      <option value="+509">Haiti (+509)</option>
+                                      <option value="+504">Honduras (+504)</option>
+                                      <option value="+36">Hungary (+36)</option>
+                                      <option value="+354">Iceland (+354)</option>
+                                      <option value="+91">India (+91)</option>
+                                      <option value="+62">Indonesia (+62)</option>
+                                      <option value="+98">Iran (+98)</option>
+                                      <option value="+964">Iraq (+964)</option>
+                                      <option value="+353">Ireland (+353)</option>
+                                      <option value="+972">Israel (+972)</option>
+                                      <option value="+39">Italy (+39)</option>
+                                      <option value="+1">Jamaica (+1)</option>
+                                      <option value="+81">Japan (+81)</option>
+                                      <option value="+962">Jordan (+962)</option>
+                                      <option value="+7">Kazakhstan (+7)</option>
+                                      <option value="+254">Kenya (+254)</option>
+                                      <option value="+686">Kiribati (+686)</option>
+                                      <option value="+850">North Korea (+850)</option>
+                                      <option value="+82">South Korea (+82)</option>
+                                      <option value="+965">Kuwait (+965)</option>
+                                      <option value="+996">Kyrgyzstan (+996)</option>
+                                      <option value="+856">Laos (+856)</option>
+                                      <option value="+371">Latvia (+371)</option>
+                                      <option value="+961">Lebanon (+961)</option>
+                                      <option value="+266">Lesotho (+266)</option>
+                                      <option value="+231">Liberia (+231)</option>
+                                      <option value="+218">Libya (+218)</option>
+                                      <option value="+423">Liechtenstein (+423)</option>
+                                      <option value="+370">Lithuania (+370)</option>
+                                      <option value="+352">Luxembourg (+352)</option>
+                                      <option value="+389">North Macedonia (+389)</option>
+                                      <option value="+261">Madagascar (+261)</option>
+                                      <option value="+265">Malawi (+265)</option>
+                                      <option value="+60">Malaysia (+60)</option>
+                                      <option value="+960">Maldives (+960)</option>
+                                      <option value="+223">Mali (+223)</option>
+                                      <option value="+356">Malta (+356)</option>
+                                      <option value="+692">Marshall Islands (+692)</option>
+                                      <option value="+222">Mauritania (+222)</option>
+                                      <option value="+230">Mauritius (+230)</option>
+                                      <option value="+52">Mexico (+52)</option>
+                                      <option value="+691">Micronesia (+691)</option>
+                                      <option value="+373">Moldova (+373)</option>
+                                      <option value="+377">Monaco (+377)</option>
+                                      <option value="+976">Mongolia (+976)</option>
+                                      <option value="+382">Montenegro (+382)</option>
+                                      <option value="+212">Morocco (+212)</option>
+                                      <option value="+258">Mozambique (+258)</option>
+                                      <option value="+95">Myanmar (+95)</option>
+                                      <option value="+264">Namibia (+264)</option>
+                                      <option value="+674">Nauru (+674)</option>
+                                      <option value="+977">Nepal (+977)</option>
+                                      <option value="+31">Netherlands (+31)</option>
+                                      <option value="+64">New Zealand (+64)</option>
+                                      <option value="+505">Nicaragua (+505)</option>
+                                      <option value="+227">Niger (+227)</option>
+                                      <option value="+234">Nigeria (+234)</option>
+                                      <option value="+47">Norway (+47)</option>
+                                      <option value="+968">Oman (+968)</option>
+                                      <option value="+92">Pakistan (+92)</option>
+                                      <option value="+680">Palau (+680)</option>
+                                      <option value="+507">Panama (+507)</option>
+                                      <option value="+675">Papua New Guinea (+675)</option>
+                                      <option value="+595">Paraguay (+595)</option>
+                                      <option value="+51">Peru (+51)</option>
+                                      <option value="+63">Philippines (+63)</option>
+                                      <option value="+48">Poland (+48)</option>
+                                      <option value="+351">Portugal (+351)</option>
+                                      <option value="+974">Qatar (+974)</option>
+                                      <option value="+40">Romania (+40)</option>
+                                      <option value="+7">Russia (+7)</option>
+                                      <option value="+250">Rwanda (+250)</option>
+                                      <option value="+1">St. Kitts & Nevis (+1)</option>
+                                      <option value="+1">St. Lucia (+1)</option>
+                                      <option value="+1">St. Vincent (+1)</option>
+                                      <option value="+685">Samoa (+685)</option>
+                                      <option value="+378">San Marino (+378)</option>
+                                      <option value="+239">Sao Tome (+239)</option>
+                                      <option value="+966">Saudi Arabia (+966)</option>
+                                      <option value="+221">Senegal (+221)</option>
+                                      <option value="+381">Serbia (+381)</option>
+                                      <option value="+248">Seychelles (+248)</option>
+                                      <option value="+232">Sierra Leone (+232)</option>
+                                      <option value="+65">Singapore (+65)</option>
+                                      <option value="+421">Slovakia (+421)</option>
+                                      <option value="+386">Slovenia (+386)</option>
+                                      <option value="+677">Solomon Islands (+677)</option>
+                                      <option value="+252">Somalia (+252)</option>
+                                      <option value="+27">South Africa (+27)</option>
+                                      <option value="+211">South Sudan (+211)</option>
+                                      <option value="+34">Spain (+34)</option>
+                                      <option value="+94">Sri Lanka (+94)</option>
+                                      <option value="+249">Sudan (+249)</option>
+                                      <option value="+597">Suriname (+597)</option>
+                                      <option value="+268">Eswatini (+268)</option>
+                                      <option value="+46">Sweden (+46)</option>
+                                      <option value="+41">Switzerland (+41)</option>
+                                      <option value="+963">Syria (+963)</option>
+                                      <option value="+886">Taiwan (+886)</option>
+                                      <option value="+992">Tajikistan (+992)</option>
+                                      <option value="+255">Tanzania (+255)</option>
+                                      <option value="+66">Thailand (+66)</option>
+                                      <option value="+228">Togo (+228)</option>
+                                      <option value="+676">Tonga (+676)</option>
+                                      <option value="+1">Trinidad & Tobago (+1)</option>
+                                      <option value="+216">Tunisia (+216)</option>
+                                      <option value="+90">Turkey (+90)</option>
+                                      <option value="+993">Turkmenistan (+993)</option>
+                                      <option value="+688">Tuvalu (+688)</option>
+                                      <option value="+256">Uganda (+256)</option>
+                                      <option value="+380">Ukraine (+380)</option>
+                                      <option value="+971">UAE (+971)</option>
+                                      <option value="+44">UK (+44)</option>
+                                      <option value="+1">USA (+1)</option>
+                                      <option value="+598">Uruguay (+598)</option>
+                                      <option value="+998">Uzbekistan (+998)</option>
+                                      <option value="+678">Vanuatu (+678)</option>
+                                      <option value="+379">Vatican City (+379)</option>
+                                      <option value="+58">Venezuela (+58)</option>
+                                      <option value="+84">Vietnam (+84)</option>
+                                      <option value="+967">Yemen (+967)</option>
+                                      <option value="+260">Zambia (+260)</option>
+                                      <option value="+263">Zimbabwe (+263)</option>
+                                  </select>
+                                  <input type="tel" id="phone" name="entry.472790335" class="form-control phone-number-input">
+                              </div>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-label" for="company">Company/Organization</label>
+                              <input type="text" id="company" name="entry.1807488541" class="form-control">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-label" for="role">Role/Position*</label>
+                              <select id="role" name="entry.701708867" class="form-select" required>
+				    <option value="broker-admin" selected>Broker Admin</option>
+				    <option value="employer-admin">Employer Admin</option>
+				    <option value="carrier-admin">Carrier Admin</option>
+				    <option value="employee">Employee</option>
+				    <option value="benefits-manager">Benefits Manager</option>
+				    <option value="hr-specialist">HR Specialist</option>
+				    <option value="platform-admin">Platform Admin</option>
+                              </select>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-label" for="interests">What features are you most interested in?</label>
+                              <textarea id="interests" name="entry.2006999235" class="form-textarea" placeholder="Please share what you're most excited to see in our upcoming release..."></textarea>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-label" for="how-heard">How did you hear about us?</label>
+                              <select id="how-heard" name="entry.2034196715" class="form-select">
+                                  <option value="">Select an option</option>
+                                  <option value="Search Engine">Search Engine</option>
+                                  <option value="Social Media">Social Media</option>
+                                  <option value="Colleague">Colleague</option>
+                                  <option value="Conference">Conference</option>
+                                  <option value="Email">Email</option>
+                                  <option value="Other">Other</option>
+                              </select>
+                          </div>
+                          
+                          <button type="submit" id="submit-button" class="btn btn-primary btn-block">
+                              <span id="spinner" style="display: none;" class="spinner"></span>
+                              <span id="button-text">Sign Up Now</span>
+                          </button>
+                          
+                          <div class="form-note">
+                              By submitting this form, you agree to our <a href="#">Privacy Policy</a> and consent to be contacted regarding our services.
+                          </div>
+                          
+                          <!-- Healthcare-specific witty message at the bottom of the form -->
+                          <div class="easter-egg" id="easter-egg">
+                              We're developing healthcare solutions that work as efficiently as a nurse during a 12-hour shift. No coffee breaks needed!
+                          </div>
+                      </form>
+                      
+                      <!-- Hidden iframe for form submission -->
+                      <iframe name="hidden-iframe" id="hidden-iframe"></iframe>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <!-- Thank You Modal -->
+  <div class="thank-you-modal" id="thank-you-modal">
+      <div class="thank-you-content">
+          <div class="thank-you-icon">
+              <i class="fas fa-check-circle"></i>
+          </div>
+          <h3 class="thank-you-title">Thank You for Your Feedback!</h3>
+          <div class="thank-you-message">
+              <p>Your participation is invaluable to us at DoKrunch. As an early adopter, your feedback will directly shape our AI-powered healthcare document processing solutions.</p>
+              <p>We're committed to revolutionizing healthcare administration through innovative AI technology, and your insights will help us create tools that truly address the challenges you face daily.</p>
+              <p>Our team will review your submission and may reach out to you for additional feedback as we refine our platform.</p>
+          </div>
+          <button class="thank-you-close" onclick="closeThankYouModal()">Continue</button>
+      </div>
+  </div>
+
+  <script>
+      // Format phone number for USA only (xxx) xxx xxxx
+      function formatUSAPhoneNumber(input) {
+          // Strip all non-numeric characters
+          let phoneNumber = input.value.replace(/\D/g, '');
+          
+          // Check if this is a USA number
+          const countryCode = document.getElementById('country-code').value;
+          if (countryCode === '+1') {
+              // Format as (xxx) xxx xxxx
+              if (phoneNumber.length > 0) {
+                  if (phoneNumber.length <= 3) {
+                      phoneNumber = '(' + phoneNumber;
+                  } else if (phoneNumber.length <= 6) {
+                      phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3);
+                  } else {
+                      phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + ' ' + phoneNumber.substring(6, 10);
+                  }
+              }
+              input.value = phoneNumber;
+          }
+      }
+      
+      // Combine country code and phone number for form submission
+      function combinePhoneNumber() {
+          const countryCode = document.getElementById('country-code').value;
+          const phoneNumber = document.getElementById('phone').value;
+          
+          // Create a hidden input to store the combined value
+          let hiddenInput = document.getElementById('combined-phone');
+          if (!hiddenInput) {
+              hiddenInput = document.createElement('input');
+              hiddenInput.type = 'hidden';
+              hiddenInput.id = 'combined-phone';
+              hiddenInput.name = 'entry.472790335';
+              document.getElementById('signup-form').appendChild(hiddenInput);
+          }
+          
+          // Combine with a space between country code and phone number
+          hiddenInput.value = countryCode + ' ' + phoneNumber;
+          
+          // Remove the original phone field from form submission
+          document.getElementById('phone').removeAttribute('name');
+      }
+      
+      // Close thank you modal
+      function closeThankYouModal() {
+          document.getElementById('thank-you-modal').style.display = 'none';
+      }
+      
+      // Document ready function
+      document.addEventListener('DOMContentLoaded', function() {
+          // Add event listener for phone number formatting
+          const phoneInput = document.getElementById('phone');
+          const countryCodeSelect = document.getElementById('country-code');
+          
+          phoneInput.addEventListener('input', function() {
+              if (countryCodeSelect.value === '+1') {
+                  formatUSAPhoneNumber(this);
+              }
+          });
+          
+          countryCodeSelect.addEventListener('change', function() {
+              // Clear phone field when country changes
+              phoneInput.value = '';
+          });
+          
+          // Form submission handling
+          const form = document.getElementById('signup-form');
+          const submitButton = document.getElementById('submit-button');
+          const spinner = document.getElementById('spinner');
+          const buttonText = document.getElementById('button-text');
+          const successMessage = document.getElementById('success-message');
+          const thankYouModal = document.getElementById('thank-you-modal');
+          
+          form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              
+              // Combine country code and phone number
+              combinePhoneNumber();
+              
+              // Show loading state
+              spinner.style.display = 'inline-block';
+              buttonText.textContent = 'Submitting...';
+              submitButton.disabled = true;
+              
+              // Submit the form to hidden iframe
+              this.submit();
+              
+              // Simulate form submission (replace with actual Google Forms integration)
+              setTimeout(function() {
+                  // Hide loading state
+                  spinner.style.display = 'none';
+                  buttonText.textContent = 'Sign Up Now';
+                  submitButton.disabled = false;
+                  
+                  // Show thank you modal instead of success message
+                  thankYouModal.style.display = 'flex';
+                  
+                  // Reset form
+                  form.reset();
+                  
+              }, 2000);
+          });
+      });
+  </script>
+</body>
+</html>
